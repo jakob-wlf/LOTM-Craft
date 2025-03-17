@@ -6,6 +6,7 @@ import de.jakob.lotm.pathways.abilities.AbilityType;
 import de.jakob.lotm.pathways.beyonder.Beyonder;
 import de.jakob.lotm.util.minecraft.LocationProvider;
 import de.jakob.lotm.util.minecraft.ParticleUtil;
+import de.jakob.lotm.util.pathways.TyrantUtil;
 import lombok.NoArgsConstructor;
 import org.bukkit.*;
 import org.bukkit.entity.LivingEntity;
@@ -17,17 +18,18 @@ import java.util.HashMap;
 import java.util.UUID;
 
 @NoArgsConstructor
-public class Tornado extends Ability {
+public class ElectromagneticTornado extends Ability {
 
     private final HashMap<Beyonder, Integer> tornadoCount = new HashMap<>();
 
-    public Tornado(Pathway pathway, int sequence, AbilityType abilityType, String name, Material material, String description, String id) {
-        super(pathway, sequence, abilityType, name, material,description, id);
+    public ElectromagneticTornado(Pathway pathway, int sequence, AbilityType abilityType, String name, Material material, String description, String id) {
+        super(pathway, sequence, abilityType, name, material, description, id);
     }
+
 
     @Override
     public void useAbility(Beyonder beyonder) {
-        if(tornadoCount.containsKey(beyonder) && tornadoCount.get(beyonder) >= 3)
+        if(tornadoCount.containsKey(beyonder) && tornadoCount.get(beyonder) >= 2)
             return;
 
         if(!tornadoCount.containsKey(beyonder))
@@ -45,8 +47,10 @@ public class Tornado extends Ability {
 
         LocationProvider.setLocation(locationUUID, loc);
 
-        BukkitTask tornadoTask = ParticleUtil.spawnParticleTornado(Particle.CLOUD, null, 13.5, .2, 5.5, 20 * 20, 60, 0, locationUUID, 0);
-        BukkitTask tornadoTask2 = ParticleUtil.spawnParticleTornado(Particle.CLOUD, null, 13.5, .2, 5.5, 20 * 20, 60, 0, locationUUID, 5);
+        BukkitTask tornadoTask = ParticleUtil.spawnParticleTornado(Particle.DUST, TyrantUtil.blueDustBig, 22, .6, 8, 20 * 20, 100, 0, locationUUID, 0);
+        BukkitTask tornadoTask2 = ParticleUtil.spawnParticleTornado(Particle.DUST, TyrantUtil.blueDustBig, 22, .6, 8, 20 * 20, 100, 0, locationUUID, 5);
+        BukkitTask tornadoTask3 = ParticleUtil.spawnParticleTornado(Particle.DUST, TyrantUtil.purpleDustBig, 22, .6, 8, 20 * 20, 100, 0, locationUUID, 0);
+        BukkitTask tornadoTask4 = ParticleUtil.spawnParticleTornado(Particle.DUST, TyrantUtil.purpleDustBig, 22, .6, 8, 20 * 20, 100, 0, locationUUID, 5);
 
         new BukkitRunnable() {
 
@@ -83,10 +87,12 @@ public class Tornado extends Ability {
                         cancel();
                         tornadoTask.cancel();
                         tornadoTask2.cancel();
+                        tornadoTask3.cancel();
+                        tornadoTask4.cancel();
                         tornadoCount.replace(beyonder, tornadoCount.get(beyonder) - 1);
                         return;
                     }
-                    damageNearbyEntities(20, beyonder.getCurrentMultiplier(), entity, 2.5, loc, world, false, 0, 20);
+                    damageNearbyEntities(73, beyonder.getCurrentMultiplier(), entity, 3.5, loc, world, false, 0, 20);
                 }
 
                 counter+= 5;
@@ -96,6 +102,6 @@ public class Tornado extends Ability {
 
     @Override
     public boolean shouldUseAbility(Beyonder beyonder) {
-        return !tornadoCount.containsKey(beyonder) || tornadoCount.get(beyonder) < 3;
+        return !tornadoCount.containsKey(beyonder) || tornadoCount.get(beyonder) < 2;
     }
 }

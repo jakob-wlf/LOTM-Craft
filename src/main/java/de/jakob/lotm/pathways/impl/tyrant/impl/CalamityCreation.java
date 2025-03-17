@@ -167,6 +167,7 @@ public class CalamityCreation extends SelectableAbility implements Listener {
             fallingBlock.remove();
             event.setCancelled(true);
             fallingBlock.getWorld().createExplosion(fallingBlock.getLocation(), 7, false, false);
+            magmaBlocksToRemove.remove(fallingBlock);
             return;
         }
 
@@ -177,6 +178,8 @@ public class CalamityCreation extends SelectableAbility implements Listener {
                 event.setCancelled(true);
                 event.getBlock().setType(Material.LAVA);
             }
+
+            magmaBlocksToSetLava.remove(fallingBlock);
         }
     }
 }

@@ -66,6 +66,8 @@ public class LightningTransformation extends ToggleableAbility {
                     counter = 0;
                 }
 
+                player.setFlying(true);
+
                 if(!transformed.contains(beyonder)) {
                     player.setFlySpeed(.2f);
                     player.setFlying(false);

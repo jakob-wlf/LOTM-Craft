@@ -14,8 +14,6 @@ import java.util.Random;
 public class Potions {
 
     private final Pathway pathway;
-    private final List<ItemStack[][]> ingredients = new ArrayList<>(List.<ItemStack[][]>of(new ItemStack[][] {}));
-
     private final ItemStack[] potions = new ItemStack[10];
     private final ItemStack[] potionsWithoutPrevious = new ItemStack[10];
 

@@ -17,7 +17,7 @@ public class Lightning extends Ability {
 
     @Override
     public void useAbility(Beyonder beyonder) {
-        if(!beyonder.removeSpirituality(10))
+        if(!beyonder.removeSpirituality(28))
             return;
 
         Location location = getTargetLocation(beyonder.getEntity(), 18);

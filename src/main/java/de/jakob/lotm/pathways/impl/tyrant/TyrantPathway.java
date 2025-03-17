@@ -58,7 +58,9 @@ public class TyrantPathway extends Pathway {
                         new CalamityCreation(this, 2, AbilityType.SEQUENCE_PROGRESSION, "Calamity Creation", Material.NETHER_BRICK, "Create various calamities. (Use /togglegriefing for destruction)", "calamity_creation")
                 },
                 1, new Ability[] {
-                        new LightningTransformation(this, 1, AbilityType.SEQUENCE_PROGRESSION, "Lightning Transformation", Material.GLOW_INK_SAC, "Transform yourself into Lightning to travel at lightning fast speeds.", "lightning_transformation")
+                        new LightningTransformation(this, 1, AbilityType.SEQUENCE_PROGRESSION, "Lightning Transformation", Material.GLOW_INK_SAC, "Transform yourself into Lightning to travel at lightning fast speeds.", "lightning_transformation"),
+                        new GiantLightningStrike(this, 1, AbilityType.SEQUENCE_PROGRESSION, "Giant Lightning Strike", Material.PURPLE_DYE, "Create an enormous lightning strike.", "giant_lightning_strike"),
+                        new ElectromagneticTornado(this, 1, AbilityType.SEQUENCE_PROGRESSION, "Electromagnetic Tornado", Material.NETHER_STAR, "Create electromagnetic tornados that sweeps acrosas the terrain and does massive damage.", "electromagnetic_tornado")
                 }
         ));
     }

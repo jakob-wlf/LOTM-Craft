@@ -16,6 +16,7 @@ import de.jakob.lotm.pathways.impl.twilight_giant.TwilightGiantPathway;
 import de.jakob.lotm.pathways.impl.tyrant.TyrantPathway;
 import de.jakob.lotm.util.LogUtil;
 import de.jakob.lotm.util.minecraft.ItemsUtil;
+import de.jakob.lotm.util.pathways.TyrantUtil;
 import lombok.Getter;
 import lombok.NonNull;
 import net.citizensnpcs.api.CitizensAPI;
@@ -97,6 +98,8 @@ public final class LOTM extends JavaPlugin {
         registerCommands();
         registerListeners();
         registerRecipes();
+
+        new TyrantUtil();
 
         // Load Beyonders
         BeyonderConfigManager.loadBeyonders();
