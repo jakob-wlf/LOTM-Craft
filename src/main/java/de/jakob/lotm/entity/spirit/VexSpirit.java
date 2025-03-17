@@ -1,8 +1,6 @@
 package de.jakob.lotm.entity.spirit;
 
-import de.jakob.lotm.pathways.abilities.Ability;
 import de.jakob.lotm.pathways.abilities.AbilityType;
-import de.jakob.lotm.pathways.abilities.SpiritAbilities;
 import de.jakob.lotm.pathways.abilities.other_abilities.SpiritBolt;
 import de.jakob.lotm.pathways.beyonder.BeyonderSpirit;
 import org.bukkit.Color;
@@ -10,8 +8,6 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.entity.EntityType;
-
-import java.util.List;
 
 public class VexSpirit extends Spirit{
 

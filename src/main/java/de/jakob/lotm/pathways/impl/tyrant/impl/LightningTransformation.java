@@ -9,7 +9,8 @@ import de.jakob.lotm.pathways.beyonder.BeyonderPlayer;
 import de.jakob.lotm.util.minecraft.ParticleSpawner;
 import de.jakob.lotm.util.pathways.TyrantUtil;
 import lombok.NoArgsConstructor;
-import org.bukkit.*;
+import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 

@@ -1,6 +1,5 @@
 package de.jakob.lotm.commands;
 
-import de.jakob.lotm.entity.*;
 import de.jakob.lotm.entity.spirit.*;
 import org.bukkit.Location;
 import org.bukkit.command.Command;

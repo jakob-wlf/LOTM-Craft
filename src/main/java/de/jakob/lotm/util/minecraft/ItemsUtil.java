@@ -3,7 +3,10 @@ package de.jakob.lotm.util.minecraft;
 import de.jakob.lotm.LOTM;
 import de.jakob.lotm.pathways.Pathway;
 import de.jakob.lotm.util.StringUtils;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.Color;
+import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapelessRecipe;
@@ -17,7 +20,10 @@ import org.bukkit.profile.PlayerTextures;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.UUID;
 
 public class ItemsUtil {
     public static ItemStack getNameLessItem(Material material) {

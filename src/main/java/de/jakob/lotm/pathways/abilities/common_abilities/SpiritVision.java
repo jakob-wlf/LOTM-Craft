@@ -1,20 +1,21 @@
 package de.jakob.lotm.pathways.abilities.common_abilities;
 
 import de.jakob.lotm.LOTM;
+import de.jakob.lotm.pathways.Pathway;
 import de.jakob.lotm.pathways.abilities.Ability;
 import de.jakob.lotm.pathways.abilities.AbilityType;
 import de.jakob.lotm.pathways.beyonder.Beyonder;
-import de.jakob.lotm.pathways.Pathway;
 import de.jakob.lotm.util.minecraft.ParticleUtil;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.*;
 import org.bukkit.entity.*;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 
 public class SpiritVision extends Ability {

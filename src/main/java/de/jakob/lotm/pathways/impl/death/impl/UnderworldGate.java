@@ -2,7 +2,6 @@ package de.jakob.lotm.pathways.impl.death.impl;
 
 import de.jakob.lotm.entity.spirit.*;
 import de.jakob.lotm.pathways.Pathway;
-import de.jakob.lotm.pathways.abilities.Ability;
 import de.jakob.lotm.pathways.abilities.AbilityType;
 import de.jakob.lotm.pathways.abilities.SelectableAbility;
 import de.jakob.lotm.pathways.beyonder.Beyonder;
@@ -11,10 +10,8 @@ import de.jakob.lotm.util.minecraft.EntityUtil;
 import de.jakob.lotm.util.minecraft.ParticleSpawner;
 import de.jakob.lotm.util.minecraft.VectorUtil;
 import de.jakob.lotm.util.pathways.DeathUtil;
-import de.jakob.lotm.util.pathways.DoorUtil;
 import lombok.NoArgsConstructor;
 import org.bukkit.*;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.ItemDisplay;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.potion.PotionEffect;
@@ -22,7 +19,10 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @NoArgsConstructor
 public class UnderworldGate extends SelectableAbility {

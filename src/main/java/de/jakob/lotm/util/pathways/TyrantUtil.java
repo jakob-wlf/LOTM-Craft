@@ -4,7 +4,6 @@ import de.jakob.lotm.util.minecraft.BlockUtil;
 import de.jakob.lotm.util.minecraft.ParticleSpawner;
 import org.bukkit.*;
 import org.bukkit.block.Block;
-import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
 import java.util.Arrays;

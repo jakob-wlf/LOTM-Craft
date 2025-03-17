@@ -5,7 +5,6 @@ import de.jakob.lotm.pathways.Pathway;
 import de.jakob.lotm.pathways.abilities.Ability;
 import de.jakob.lotm.pathways.abilities.AbilityType;
 import de.jakob.lotm.pathways.beyonder.Beyonder;
-import de.jakob.lotm.pathways.beyonder.BeyonderEntity;
 import de.jakob.lotm.util.minecraft.EntityUtil;
 import de.jakob.lotm.util.minecraft.ParticleSpawner;
 import lombok.NoArgsConstructor;
@@ -19,7 +18,6 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 

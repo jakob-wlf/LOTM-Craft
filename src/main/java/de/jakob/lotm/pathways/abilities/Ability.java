@@ -1,9 +1,9 @@
 package de.jakob.lotm.pathways.abilities;
 
 import de.jakob.lotm.LOTM;
+import de.jakob.lotm.pathways.Pathway;
 import de.jakob.lotm.pathways.beyonder.Beyonder;
 import de.jakob.lotm.pathways.beyonder.BeyonderPlayer;
-import de.jakob.lotm.pathways.Pathway;
 import de.jakob.lotm.util.minecraft.EntityUtil;
 import de.jakob.lotm.util.minecraft.ParticleSpawner;
 import lombok.Getter;
@@ -23,7 +23,10 @@ import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Random;
 import java.util.stream.Stream;
 
 @Getter

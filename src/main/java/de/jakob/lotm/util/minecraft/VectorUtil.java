@@ -1,8 +1,6 @@
 package de.jakob.lotm.util.minecraft;
 
 import org.bukkit.Location;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
 
 public class VectorUtil {

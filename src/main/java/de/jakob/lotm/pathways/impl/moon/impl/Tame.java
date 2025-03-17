@@ -1,16 +1,16 @@
 package de.jakob.lotm.pathways.impl.moon.impl;
 
 import de.jakob.lotm.LOTM;
-import de.jakob.lotm.pathways.*;
+import de.jakob.lotm.pathways.Pathway;
 import de.jakob.lotm.pathways.abilities.Ability;
 import de.jakob.lotm.pathways.abilities.AbilityType;
 import de.jakob.lotm.pathways.beyonder.Beyonder;
 import de.jakob.lotm.pathways.beyonder.BeyonderEntity;
-import de.jakob.lotm.util.minecraft.EntityUtil;
 import de.jakob.lotm.util.minecraft.ParticleSpawner;
 import lombok.NoArgsConstructor;
-import org.bukkit.*;
-import org.bukkit.entity.EntityType;
+import org.bukkit.Material;
+import org.bukkit.Particle;
+import org.bukkit.Sound;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 

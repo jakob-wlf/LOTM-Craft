@@ -1,9 +1,9 @@
 package de.jakob.lotm.pathways.impl.tyrant.impl;
 
+import de.jakob.lotm.pathways.Pathway;
 import de.jakob.lotm.pathways.abilities.Ability;
 import de.jakob.lotm.pathways.abilities.AbilityType;
 import de.jakob.lotm.pathways.beyonder.Beyonder;
-import de.jakob.lotm.pathways.Pathway;
 import de.jakob.lotm.util.minecraft.BlockUtil;
 import de.jakob.lotm.util.minecraft.ParticleSpawner;
 import lombok.NoArgsConstructor;
@@ -14,7 +14,10 @@ import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @NoArgsConstructor
 public class Earthquake extends Ability {

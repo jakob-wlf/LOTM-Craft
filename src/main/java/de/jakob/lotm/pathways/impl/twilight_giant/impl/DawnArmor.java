@@ -1,9 +1,9 @@
 package de.jakob.lotm.pathways.impl.twilight_giant.impl;
 
+import de.jakob.lotm.pathways.Pathway;
 import de.jakob.lotm.pathways.abilities.Ability;
 import de.jakob.lotm.pathways.abilities.AbilityType;
 import de.jakob.lotm.pathways.beyonder.Beyonder;
-import de.jakob.lotm.pathways.Pathway;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.Particle;

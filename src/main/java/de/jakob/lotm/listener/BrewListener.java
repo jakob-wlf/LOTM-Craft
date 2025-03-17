@@ -1,9 +1,9 @@
 package de.jakob.lotm.listener;
 
 import de.jakob.lotm.LOTM;
-import de.jakob.lotm.pathways.abilities.Ability;
 import de.jakob.lotm.pathways.Pathway;
 import de.jakob.lotm.pathways.Potions;
+import de.jakob.lotm.pathways.abilities.Ability;
 import de.jakob.lotm.util.minecraft.ItemsUtil;
 import de.jakob.lotm.util.minecraft.ParticleSpawner;
 import de.jakob.lotm.util.minecraft.ParticleUtil;

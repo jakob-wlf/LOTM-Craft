@@ -14,8 +14,6 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
-import java.util.HashMap;
-
 @NoArgsConstructor
 public class SpiritControlling extends Ability {
 

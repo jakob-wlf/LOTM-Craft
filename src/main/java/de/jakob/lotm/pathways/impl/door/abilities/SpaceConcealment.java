@@ -1,7 +1,7 @@
 package de.jakob.lotm.pathways.impl.door.abilities;
 
 import de.jakob.lotm.LOTM;
-import de.jakob.lotm.pathways.*;
+import de.jakob.lotm.pathways.Pathway;
 import de.jakob.lotm.pathways.abilities.Ability;
 import de.jakob.lotm.pathways.abilities.AbilityType;
 import de.jakob.lotm.pathways.beyonder.Beyonder;
@@ -23,7 +23,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 
 @NoArgsConstructor
 public class SpaceConcealment extends Ability {

@@ -1,7 +1,7 @@
 package de.jakob.lotm.pathways.impl.twilight_giant.impl;
 
 import de.jakob.lotm.LOTM;
-import de.jakob.lotm.pathways.*;
+import de.jakob.lotm.pathways.Pathway;
 import de.jakob.lotm.pathways.abilities.Ability;
 import de.jakob.lotm.pathways.abilities.AbilityType;
 import de.jakob.lotm.pathways.beyonder.Beyonder;
@@ -16,7 +16,10 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @NoArgsConstructor
 public class Protection extends Ability {

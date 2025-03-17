@@ -1,7 +1,6 @@
 package de.jakob.lotm.entity.spirit;
 
 import de.jakob.lotm.pathways.abilities.AbilityType;
-import de.jakob.lotm.pathways.abilities.other_abilities.BoneSmash;
 import de.jakob.lotm.pathways.abilities.other_abilities.Dash;
 import de.jakob.lotm.pathways.beyonder.BeyonderSpirit;
 import de.jakob.lotm.pathways.impl.death.impl.PhysicalEnhancements;

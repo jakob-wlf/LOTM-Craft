@@ -1,7 +1,6 @@
 package de.jakob.lotm.entity.spirit;
 
 import de.jakob.lotm.pathways.abilities.AbilityType;
-import de.jakob.lotm.pathways.abilities.other_abilities.EtherealFlame;
 import de.jakob.lotm.pathways.abilities.other_abilities.LifeTree;
 import de.jakob.lotm.pathways.abilities.other_abilities.Restraint;
 import de.jakob.lotm.pathways.beyonder.BeyonderSpirit;

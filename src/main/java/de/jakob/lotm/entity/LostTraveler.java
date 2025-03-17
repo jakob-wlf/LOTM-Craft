@@ -1,7 +1,7 @@
 package de.jakob.lotm.entity;
 
 import de.jakob.lotm.LOTM;
-import de.jakob.lotm.pathways.*;
+import de.jakob.lotm.pathways.Pathway;
 import de.jakob.lotm.pathways.abilities.Ability;
 import de.jakob.lotm.pathways.abilities.PassiveAbility;
 import de.jakob.lotm.pathways.beyonder.BeyonderEntity;

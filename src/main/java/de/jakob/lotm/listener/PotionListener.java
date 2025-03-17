@@ -1,8 +1,8 @@
 package de.jakob.lotm.listener;
 
 import de.jakob.lotm.LOTM;
-import de.jakob.lotm.pathways.beyonder.Beyonder;
 import de.jakob.lotm.pathways.Pathway;
+import de.jakob.lotm.pathways.beyonder.Beyonder;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

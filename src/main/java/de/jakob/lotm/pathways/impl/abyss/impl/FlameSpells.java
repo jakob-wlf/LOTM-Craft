@@ -1,9 +1,9 @@
 package de.jakob.lotm.pathways.impl.abyss.impl;
 
-import de.jakob.lotm.pathways.abilities.AbilityType;
-import de.jakob.lotm.pathways.beyonder.Beyonder;
 import de.jakob.lotm.pathways.Pathway;
+import de.jakob.lotm.pathways.abilities.AbilityType;
 import de.jakob.lotm.pathways.abilities.SelectableAbility;
+import de.jakob.lotm.pathways.beyonder.Beyonder;
 import de.jakob.lotm.util.minecraft.BlockUtil;
 import de.jakob.lotm.util.minecraft.ParticleSpawner;
 import de.jakob.lotm.util.minecraft.VectorUtil;

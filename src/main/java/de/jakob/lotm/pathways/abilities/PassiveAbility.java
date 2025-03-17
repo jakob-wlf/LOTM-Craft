@@ -1,7 +1,7 @@
 package de.jakob.lotm.pathways.abilities;
 
-import de.jakob.lotm.pathways.beyonder.Beyonder;
 import de.jakob.lotm.pathways.Pathway;
+import de.jakob.lotm.pathways.beyonder.Beyonder;
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageEvent;

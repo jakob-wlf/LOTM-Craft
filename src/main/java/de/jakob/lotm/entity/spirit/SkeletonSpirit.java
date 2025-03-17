@@ -9,7 +9,6 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Skeleton;
 import org.bukkit.inventory.ItemStack;
 
 public class SkeletonSpirit extends Spirit{

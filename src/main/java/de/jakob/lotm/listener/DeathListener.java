@@ -1,8 +1,8 @@
 package de.jakob.lotm.listener;
 
 import de.jakob.lotm.LOTM;
-import de.jakob.lotm.pathways.abilities.Ability;
 import de.jakob.lotm.pathways.Pathway;
+import de.jakob.lotm.pathways.abilities.Ability;
 import net.citizensnpcs.api.CitizensAPI;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

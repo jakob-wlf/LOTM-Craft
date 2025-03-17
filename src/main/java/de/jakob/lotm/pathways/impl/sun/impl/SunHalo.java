@@ -32,7 +32,7 @@ public class SunHalo extends ToggleableAbility {
 
     @Override
     protected void impl(Beyonder beyonder) {
-        if(!beyonder.removeSpirituality(4)) {
+        if (!beyonder.removeSpirituality(4)) {
             casting.remove(beyonder);
             return;
         }
@@ -43,13 +43,13 @@ public class SunHalo extends ToggleableAbility {
         LivingEntity entity = beyonder.getEntity();
         ParticleUtil.drawCircle(entity.getEyeLocation().clone().add(0, .35, 0), new Vector(0, 1, 0), .55, Particle.DUST, dust, 20);
 
-        for(LivingEntity e : affected) {
+        for (LivingEntity e : affected) {
             e.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 10, 2, false, false, false));
             e.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 10, 3, false, false, false));
             e.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 10, 3, false, false, false));
 
             Beyonder b = LOTM.getInstance().getBeyonder(e.getUniqueId());
-            if(b != null) {
+            if (b != null) {
                 b.addMultiplierModifier(1.15, 1);
             }
         }

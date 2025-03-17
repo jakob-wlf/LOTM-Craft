@@ -1,15 +1,8 @@
 package de.jakob.lotm.listener;
 
-import de.jakob.lotm.LOTM;
 import de.jakob.lotm.entity.spirit.*;
-import de.jakob.lotm.pathways.abilities.Ability;
-import de.jakob.lotm.pathways.abilities.AbilityType;
-import de.jakob.lotm.pathways.abilities.SpiritAbilities;
-import de.jakob.lotm.pathways.abilities.other_abilities.*;
-import de.jakob.lotm.pathways.beyonder.BeyonderSpirit;
-import org.bukkit.*;
-import org.bukkit.attribute.Attribute;
-import org.bukkit.entity.*;
+import org.bukkit.Location;
+import org.bukkit.entity.Entity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;

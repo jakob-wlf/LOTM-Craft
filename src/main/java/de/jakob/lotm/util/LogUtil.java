@@ -1,8 +1,9 @@
 package de.jakob.lotm.util;
 
+import org.bukkit.plugin.java.JavaPlugin;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.bukkit.plugin.java.JavaPlugin;
 
 public class LogUtil {
     private final Logger logger;

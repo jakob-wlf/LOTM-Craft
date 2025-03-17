@@ -1,8 +1,8 @@
 package de.jakob.lotm.pathways.abilities;
 
+import de.jakob.lotm.pathways.Pathway;
 import de.jakob.lotm.pathways.beyonder.Beyonder;
 import de.jakob.lotm.pathways.beyonder.BeyonderPlayer;
-import de.jakob.lotm.pathways.Pathway;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Material;

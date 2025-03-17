@@ -1,11 +1,10 @@
 package de.jakob.lotm.pathways.impl.abyss;
 
+import de.jakob.lotm.pathways.Pathway;
 import de.jakob.lotm.pathways.abilities.Ability;
 import de.jakob.lotm.pathways.abilities.AbilityType;
-import de.jakob.lotm.pathways.Pathway;
 import de.jakob.lotm.pathways.abilities.common_abilities.Cogitation;
 import de.jakob.lotm.pathways.impl.abyss.impl.*;
-import de.jakob.lotm.pathways.impl.abyss.impl.PhysicalEnhancements;
 import org.bukkit.Color;
 import org.bukkit.Material;
 

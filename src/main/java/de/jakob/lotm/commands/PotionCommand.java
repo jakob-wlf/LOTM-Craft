@@ -2,8 +2,8 @@ package de.jakob.lotm.commands;
 
 import de.jakob.lotm.LOTM;
 import de.jakob.lotm.pathways.Pathway;
-import de.jakob.lotm.util.lotm.ErrorMessageUtil;
 import de.jakob.lotm.util.MathUtil;
+import de.jakob.lotm.util.lotm.ErrorMessageUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

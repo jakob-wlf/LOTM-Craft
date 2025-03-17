@@ -1,8 +1,8 @@
 package de.jakob.lotm.pathways.impl.hunter.abilities;
 
+import de.jakob.lotm.pathways.Pathway;
 import de.jakob.lotm.pathways.abilities.AbilityType;
 import de.jakob.lotm.pathways.abilities.PassiveAbility;
-import de.jakob.lotm.pathways.Pathway;
 import org.bukkit.Material;
 
 public class WeaponTransformation extends PassiveAbility {

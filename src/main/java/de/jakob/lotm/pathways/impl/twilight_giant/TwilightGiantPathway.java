@@ -1,11 +1,10 @@
 package de.jakob.lotm.pathways.impl.twilight_giant;
 
-import de.jakob.lotm.pathways.*;
+import de.jakob.lotm.pathways.Pathway;
 import de.jakob.lotm.pathways.abilities.Ability;
 import de.jakob.lotm.pathways.abilities.AbilityType;
 import de.jakob.lotm.pathways.abilities.common_abilities.Cogitation;
 import de.jakob.lotm.pathways.impl.twilight_giant.impl.*;
-import de.jakob.lotm.pathways.impl.twilight_giant.impl.PhysicalEnhancements;
 import org.bukkit.Color;
 import org.bukkit.Material;
 

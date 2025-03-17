@@ -2,7 +2,7 @@ package de.jakob.lotm;
 
 import de.jakob.lotm.commands.*;
 import de.jakob.lotm.listener.*;
-import de.jakob.lotm.pathways.*;
+import de.jakob.lotm.pathways.Pathway;
 import de.jakob.lotm.pathways.abilities.Ability;
 import de.jakob.lotm.pathways.beyonder.*;
 import de.jakob.lotm.pathways.impl.abyss.AbyssPathway;
@@ -14,8 +14,8 @@ import de.jakob.lotm.pathways.impl.moon.MoonPathway;
 import de.jakob.lotm.pathways.impl.sun.SunPathway;
 import de.jakob.lotm.pathways.impl.twilight_giant.TwilightGiantPathway;
 import de.jakob.lotm.pathways.impl.tyrant.TyrantPathway;
-import de.jakob.lotm.util.minecraft.ItemsUtil;
 import de.jakob.lotm.util.LogUtil;
+import de.jakob.lotm.util.minecraft.ItemsUtil;
 import lombok.Getter;
 import lombok.NonNull;
 import net.citizensnpcs.api.CitizensAPI;

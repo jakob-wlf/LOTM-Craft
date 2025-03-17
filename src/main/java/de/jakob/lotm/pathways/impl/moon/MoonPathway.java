@@ -1,8 +1,8 @@
 package de.jakob.lotm.pathways.impl.moon;
 
+import de.jakob.lotm.pathways.Pathway;
 import de.jakob.lotm.pathways.abilities.Ability;
 import de.jakob.lotm.pathways.abilities.AbilityType;
-import de.jakob.lotm.pathways.Pathway;
 import de.jakob.lotm.pathways.abilities.common_abilities.Cogitation;
 import de.jakob.lotm.pathways.abilities.common_abilities.SpiritVision;
 import de.jakob.lotm.pathways.impl.moon.impl.*;

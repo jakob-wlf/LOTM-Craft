@@ -2,7 +2,6 @@ package de.jakob.lotm.entity.spirit;
 
 import de.jakob.lotm.pathways.abilities.AbilityType;
 import de.jakob.lotm.pathways.abilities.other_abilities.ShadowShard;
-import de.jakob.lotm.pathways.abilities.other_abilities.SpiritBolt;
 import de.jakob.lotm.pathways.beyonder.BeyonderSpirit;
 import org.bukkit.Color;
 import org.bukkit.Location;
