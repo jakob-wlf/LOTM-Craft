@@ -1,0 +1,57 @@
+name: LOTM
+version: '1.0.0'
+main: de.jakob.lotm.LOTM
+api-version: '1.21.4'
+author: Jakob
+description: A Plugin implementing the magic system and other features from the Webnovel Lord of the Mysteries by Cuttlefish that Loves Diving. May contain spoilers for the series.
+softdepend: [Citizens, ProtocolLib]
+commands:
+  beyonder:
+    description: Allows for setting and changing of pathways and abilities.
+    usage: /<command> [set/clear] [player] [pathway] [sequence] [include previous Sequences]
+    permission: lotm.admin
+    permission-message: "You don't have permission to use this command."
+  potion:
+    description: Give yourself the potion corresponding to a pathway and a sequence.
+    usage: /<command> [player] [pathway] [sequence] [include previous Sequences]
+    permission: lotm.admin
+    permission-message: "You don't have permission to use this command."
+  abilities:
+    description: Allows for viewing of all the current abilities.
+    usage: /<command>
+  toggleGriefing:
+    description: Toggle griefing for your Beyonder Abilities
+    usage: /<command>
+  beyonderEntity:
+    description: Allows spawning beyonder entities
+    usage: /<command> [entity_type] [hostile] [pathway] [sequence]
+    permission: lotm.admin
+    permission-message: "You don't have permission to use this command."
+  refreshSpirituality:
+    description: Refresh your spirituality
+    usage: /<command>
+    permission: lotm.admin
+    permission-message: "You don't have permission to use this command."
+  beyonderhelp:
+    description: Display the help menu detailing the commands and plugin functionality.
+    usage: /<command>
+  abilityInfos:
+    description: Display the help menu detailing the abilities and their effects.
+    usage: /<command> [sequence]
+  entity:
+    description: Spawn one of the custom entities.
+    usage: /<command> [entity_id]
+    permission: lotm.admin
+    permission-message: "You don't have permission to use this command."
+  spirit:
+    description: Spawn one of the custom spirits.
+    usage: /<command> [spirit_id]
+    permission: lotm.admin
+    permission-message: "You don't have permission to use this command."
+  book:
+    description: Get the information-book for the plugin.
+    usage: /<command>
+permissions:
+  lotm.admin:
+    description: Allows for usage of Admin Commands in the plugin, allowing for free manipulation of the pathways and abilities.
+    default: op
