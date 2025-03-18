@@ -90,8 +90,7 @@ public class SpaceConcealment extends Ability {
                     }
 
                     blocks.forEach(l -> {
-                        if (!LOTM.getInstance().getBlocksToRemove().contains(l))
-                            LOTM.getInstance().getBlocksToRemove().add(l);
+                        LOTM.getInstance().getBlocksToRemove().add(l);
                     });
 
                     Player[] players = beyonder.getEntity() instanceof Player ? new Player[] {(Player) beyonder.getEntity()} : new Player[0];

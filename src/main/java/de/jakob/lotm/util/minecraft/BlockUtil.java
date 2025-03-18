@@ -4,6 +4,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -77,6 +78,31 @@ public class BlockUtil {
         return locations;
     }
 
+    public static List<Block> getBlocksInLine(Location center, Vector direction, int length, int height, boolean ignoreAir, Material... ignore) {
+        List<Block> blocks = new ArrayList<>();
+        World world = center.getWorld();
+        if (world == null) {
+            return blocks;
+        }
+
+        direction.normalize();
+        Location start = center.clone().subtract(direction.clone().multiply(length / 2));
+
+        for (int i = 0; i < length; i++) {
+            Location point = start.clone().add(direction.clone().multiply(i));
+            for (int y = -height / 2; y <= height / 2; y++) {
+                Block block = world.getBlockAt(point.getBlockX(), point.getBlockY() + y, point.getBlockZ());
+                if ((block.getType() != Material.AIR && block.getType() != Material.CAVE_AIR || !ignoreAir)
+                        && !Arrays.asList(ignore).contains(block.getType())) {
+                    blocks.add(block);
+                }
+            }
+        }
+        return blocks;
+    }
+
+
+
     public static ArrayList<Block> getBlocksInCircleRadius(Block start, int radius, boolean ignoreAir, Material... ignore) {
 
         Location loc = start.getLocation();
@@ -96,5 +122,62 @@ public class BlockUtil {
         }
         return blocks;
     }
+
+    public static List<Block> getBlocksInRectangle(Location corner1, Location corner2, boolean ignoreAir, Material... ignore) {
+        List<Block> blocks = new ArrayList<>();
+        World world = corner1.getWorld();
+        if (world == null || !world.equals(corner2.getWorld())) {
+            throw new IllegalArgumentException("Both locations must be in the same world");
+        }
+
+        int startX = Math.min(corner1.getBlockX(), corner2.getBlockX());
+        int endX = Math.max(corner1.getBlockX(), corner2.getBlockX());
+        int startY = Math.min(corner1.getBlockY(), corner2.getBlockY());
+        int endY = Math.max(corner1.getBlockY(), corner2.getBlockY());
+        int startZ = Math.min(corner1.getBlockZ(), corner2.getBlockZ());
+        int endZ = Math.max(corner1.getBlockZ(), corner2.getBlockZ());
+
+        for (int x = startX; x <= endX; x++) {
+            for (int y = startY; y <= endY; y++) {
+                for (int z = startZ; z <= endZ; z++) {
+                    Block block = world.getBlockAt(x, y, z);
+                    if ((block.getType() != Material.AIR && block.getType() != Material.CAVE_AIR || !ignoreAir)
+                            && !Arrays.asList(ignore).contains(block.getType())) {
+                        blocks.add(block);
+                    }
+                }
+            }
+        }
+        return blocks;
+    }
+
+    public static List<Block> getBlocksInRectangle(Location center, int width, int height, boolean ignoreAir, Material... ignore) {
+        List<Block> blocks = new ArrayList<>();
+        World world = center.getWorld();
+        if (world == null) {
+            return blocks;
+        }
+
+        int startX = center.getBlockX() - width / 2;
+        int endX = center.getBlockX() + width / 2;
+        int startY = center.getBlockY() - height / 2;
+        int endY = center.getBlockY() + height / 2;
+        int startZ = center.getBlockZ() - width / 2;
+        int endZ = center.getBlockZ() + width / 2;
+
+        for (int x = startX; x <= endX; x++) {
+            for (int y = startY; y <= endY; y++) {
+                for (int z = startZ; z <= endZ; z++) {
+                    Block block = world.getBlockAt(x, y, z);
+                    if ((block.getType() != Material.AIR && block.getType() != Material.CAVE_AIR || !ignoreAir)
+                            && !Arrays.asList(ignore).contains(block.getType())) {
+                        blocks.add(block);
+                    }
+                }
+            }
+        }
+        return blocks;
+    }
+
 
 }

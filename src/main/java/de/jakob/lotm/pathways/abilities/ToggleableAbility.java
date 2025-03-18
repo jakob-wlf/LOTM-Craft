@@ -38,8 +38,13 @@ public abstract class ToggleableAbility extends Ability {
 
         new BukkitRunnable() {
 
+            int copyCounter = 0;
+
             @Override
             public void run() {
+                if(abilityType != AbilityType.SEQUENCE_PROGRESSION && copyCounter > ((float) (20 * 28) / tickDelay))
+                    casting.remove(beyonder);
+
                 if(beyonder.getEntity() == null || !beyonder.getEntity().isValid() || beyonder.getCurrentPathway() != pathway || beyonder.getCurrentSequence() > sequence) {
                     casting.remove(beyonder);
                 }
@@ -51,6 +56,10 @@ public abstract class ToggleableAbility extends Ability {
                 }
 
                 impl(beyonder);
+
+                if(abilityType != AbilityType.SEQUENCE_PROGRESSION) {
+                    copyCounter++;
+                }
             }
         }.runTaskTimer(LOTM.getInstance(), 0, tickDelay);
     }

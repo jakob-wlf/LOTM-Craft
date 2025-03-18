@@ -50,8 +50,12 @@ public class SunPathway extends Pathway {
                                         "§k§r§7- §6Sneaking with Ability: §7Damage entities in domain.§r", "unshadowed_domain")
                         },
                         3, new Ability[] {
+                                new GazeOfPurification(this, 3, AbilityType.SEQUENCE_PROGRESSION, "Gaze of Purification", Material.YELLOW_CANDLE, "As the embodiment of justice anything you gaze at will be purified.", "gaze_of_purification"),
+                                new WallOfLight(this, 3, AbilityType.SEQUENCE_PROGRESSION, "Wall of Light", Material.YELLOW_BANNER, "Create an impenetrable wall of light.", "wall_of_light")
                         },
                         2, new Ability[] {
+                                new WingsOfLight(this, 2, AbilityType.SEQUENCE_PROGRESSION, "Wings of Light", Material.FEATHER, "Create wings out of pure light, allowing you to fly.", "wings_of_light"),
+                                new SpearOfLight(this, 2, AbilityType.SEQUENCE_PROGRESSION, "Spear of Light", Material.SPECTRAL_ARROW, "Summon a spear made from pure sunlight that travels at liht speed and restrains targets with holy light.", "spear_of_lights")
                         },
                         1, new Ability[] {
                         }
