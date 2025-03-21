@@ -3,6 +3,7 @@ package de.jakob.lotm.pathways.beyonder;
 import de.jakob.lotm.LOTM;
 import de.jakob.lotm.pathways.Pathway;
 import de.jakob.lotm.pathways.abilities.Ability;
+import de.jakob.lotm.pathways.abilities.AbilityType;
 import de.jakob.lotm.pathways.abilities.PassiveAbility;
 import de.jakob.lotm.util.lotm.BeyonderInventoryHolder;
 import de.jakob.lotm.util.minecraft.EntityUtil;
@@ -204,7 +205,7 @@ public class BeyonderPlayer extends Beyonder{
 
         ItemStack abilityItem = ability.getItem();
 
-        if(abilityItem == null || player.getInventory().contains(abilityItem))
+        if(abilityItem == null || (player.getInventory().contains(abilityItem) && ability.getAbilityType() == AbilityType.SEQUENCE_PROGRESSION))
             return;
 
         player.getInventory().addItem(abilityItem);

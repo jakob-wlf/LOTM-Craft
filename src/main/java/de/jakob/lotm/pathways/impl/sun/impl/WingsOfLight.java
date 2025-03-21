@@ -18,7 +18,7 @@ public class WingsOfLight extends ToggleableAbility {
         super(pathway, sequence, abilityType, name, material, description, id);
 
         canBeUSedByNonPlayer = false;
-        tickDelay = 2;
+        tickDelay = 1;
     }
 
     @Override
@@ -40,7 +40,7 @@ public class WingsOfLight extends ToggleableAbility {
 
     @Override
     protected void impl(Beyonder beyonder) {
-        if(!beyonder.removeSpirituality(8)) {
+        if(!beyonder.removeSpirituality(1)) {
             casting.remove(beyonder);
             return;
         }
@@ -63,6 +63,7 @@ public class WingsOfLight extends ToggleableAbility {
 
         player.setAllowFlight(false);
         player.setFlying(false);
+        LOTM.getInstance().getRemoveAllowFlight().remove(beyonder);
 
     }
 }

@@ -62,6 +62,9 @@ public class EntityUtil {
             return true;
         }
 
+        if(entity1.getScoreboardTags().contains("ally_" + entity2.getUniqueId()) || entity2.getScoreboardTags().contains("ally_" + entity1.getUniqueId()))
+            return true;
+
         return false;
     }
 

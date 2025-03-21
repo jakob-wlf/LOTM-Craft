@@ -3,8 +3,11 @@ package de.jakob.lotm.pathways.impl.hermit;
 import de.jakob.lotm.pathways.Pathway;
 import de.jakob.lotm.pathways.abilities.Ability;
 import de.jakob.lotm.pathways.abilities.AbilityType;
+import de.jakob.lotm.pathways.abilities.common_abilities.Cogitation;
 import de.jakob.lotm.pathways.abilities.common_abilities.SpiritVision;
-import de.jakob.lotm.pathways.impl.hermit.impl.PhysicalEnhancements;
+import de.jakob.lotm.pathways.impl.hermit.abilities.PhysicalEnhancements;
+import de.jakob.lotm.pathways.impl.hermit.abilities.SpellCasting;
+import de.jakob.lotm.pathways.impl.hermit.abilities.StarrySpellCasting;
 import org.bukkit.Color;
 import org.bukkit.Material;
 
@@ -19,15 +22,18 @@ public class HermitPathway extends Pathway {
         abilities = new HashMap<>(Map.of(
                 9, new Ability[]{
                         new PhysicalEnhancements(this, 9, AbilityType.SEQUENCE_PROGRESSION, "Physical Enhancements", Material.IRON_CHESTPLATE, "Gain boosts to your physical stats that grow with your Sequence.", "physical_enhancements_hermit"),
+                        new Cogitation(this, 9, AbilityType.SEQUENCE_PROGRESSION, "Cogitation", Material.POPPED_CHORUS_FRUIT, "Enter a state of Cogitation to quickly replenish your spirituality.", "cogitation"),
                         new SpiritVision(this, 9, AbilityType.SEQUENCE_PROGRESSION, "Spirit Vision", Material.ENDER_EYE, "Reveal the health of nearby entities, granting you insight into your enemies and friends.", "spirit_vision"),
                 },
                 8, new Ability[] {
                 },
                 7, new Ability[]{
+                        new SpellCasting(this, 8, AbilityType.SEQUENCE_PROGRESSION, "Spellcasting", Material.AMETHYST_SHARD, "cast various different spells using different materials.", "spell_casting_hermit")
                 },
                 6, new Ability[] {
                 },
                 5, new Ability[] {
+                        new StarrySpellCasting(this, 5, AbilityType.SEQUENCE_PROGRESSION, "Starry Spellcasting", Material.NETHER_STAR, "Conjure and manipulate dazzling stars to attack or restrain your foes.", "star_magic")
                 },
                 4, new Ability[] {
                 },

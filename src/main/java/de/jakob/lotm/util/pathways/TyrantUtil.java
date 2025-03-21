@@ -58,9 +58,9 @@ public class TyrantUtil implements Listener {
         for(int i = 0; i < random.nextInt(5) + 2; i++) {
             Location branchLoc = top.clone();
             int counter = 0;
-            while(counter < 110 && !branchLoc.getBlock().getType().isSolid()) {
+            while(counter < 220 && !branchLoc.getBlock().getType().isSolid()) {
                 ParticleSpawner.displayParticles(world, Particle.DUST, branchLoc, (int) (detail), 0, 0, 0, 0, dust2, 1040);
-                branchLoc.add(random.nextDouble(-.5, .5), -.2, random.nextDouble(-.5, .5));
+                branchLoc.add(random.nextDouble(-.25, .25), -.1, random.nextDouble(-.25, .25));
                 counter++;
             }
         }
@@ -117,7 +117,7 @@ public class TyrantUtil implements Listener {
         while(!loc.getBlock().getType().isSolid() && loc.getY() >= 0) {
             loc.subtract(0, .5, 0);
         }
-        Location top = loc.clone().add(0, 35, 0);
+        Location top = loc.clone().add(0, 30, 0);
 
         Location lightningLoc = top.clone();
         int breakoutCounter = 0;
@@ -133,9 +133,9 @@ public class TyrantUtil implements Listener {
         for(int i = 0; i < random.nextInt(8) + 5; i++) {
             Location branchLoc = top.clone();
             int counter = 0;
-            while(counter < 140 && !branchLoc.getBlock().getType().isSolid()) {
+            while(counter < 550 && !branchLoc.getBlock().getType().isSolid()) {
                 ParticleSpawner.displayParticles(world, Particle.DUST, branchLoc, (int) (detail), 0, 0, 0, 0, dust2, 1040);
-                branchLoc.add(random.nextDouble(-.9, .9), -.1, random.nextDouble(-.9, .9));
+                branchLoc.add(random.nextDouble(-.2, .2), -.05, random.nextDouble(-.2, .2));
                 counter++;
             }
         }

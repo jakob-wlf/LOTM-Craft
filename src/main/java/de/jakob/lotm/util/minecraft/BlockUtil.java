@@ -6,11 +6,35 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.util.Vector;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class BlockUtil {
+
+    public static Set<Block> getSphereBlocks(Location center, int radius) {
+        Set<Block> blocks = new HashSet<>();
+        World world = center.getWorld();
+
+        if (world == null) {
+            return blocks;
+        }
+
+        int cx = center.getBlockX();
+        int cy = center.getBlockY();
+        int cz = center.getBlockZ();
+        int radiusSquared = radius * radius;
+
+        for (int x = -radius; x <= radius; x++) {
+            for (int y = -radius; y <= radius; y++) {
+                for (int z = -radius; z <= radius; z++) {
+                    if (x * x + y * y + z * z <= radiusSquared) {
+                        blocks.add(world.getBlockAt(cx + x, cy + y, cz + z));
+                    }
+                }
+            }
+        }
+
+        return blocks;
+    }
 
     public static List<Block> getPassableBlocksInCircle(Location center, double radius, int detail) {
         List<Block> passableBlocks = new ArrayList<>();
@@ -178,6 +202,61 @@ public class BlockUtil {
         }
         return blocks;
     }
+
+    public static final Set<Material> naturalBlocks = Set.of(
+            Material.STONE,
+            Material.GRASS_BLOCK,
+            Material.DIRT,
+            Material.COARSE_DIRT,
+            Material.PODZOL,
+            Material.SAND,
+            Material.RED_SAND,
+            Material.GRAVEL,
+            Material.FARMLAND,
+            Material.CLAY,
+            Material.SNOW,
+            Material.SNOW_BLOCK,
+            Material.ICE,
+            Material.PACKED_ICE,
+            Material.BLUE_ICE,
+            Material.CACTUS,
+            Material.VINE,
+            Material.SUGAR_CANE,
+            Material.OAK_LOG,
+            Material.SPRUCE_LOG,
+            Material.BIRCH_LOG,
+            Material.JUNGLE_LOG,
+            Material.ACACIA_LOG,
+            Material.DARK_OAK_LOG,
+            Material.MANGROVE_LOG,
+            Material.CHERRY_LOG,
+            Material.BAMBOO_BLOCK,
+            Material.OAK_LEAVES,
+            Material.DIRT_PATH,
+            Material.SPRUCE_LEAVES,
+            Material.BIRCH_LEAVES,
+            Material.JUNGLE_LEAVES,
+            Material.ACACIA_LEAVES,
+            Material.DARK_OAK_LEAVES,
+            Material.MANGROVE_LEAVES,
+            Material.CHERRY_LEAVES,
+            Material.BAMBOO,
+            Material.MOSS_BLOCK,
+            Material.MOSS_CARPET,
+            Material.MYCELIUM,
+            Material.MUSHROOM_STEM,
+            Material.BROWN_MUSHROOM,
+            Material.RED_MUSHROOM,
+            Material.SHORT_GRASS,
+            Material.TALL_GRASS,
+            Material.FERN,
+            Material.LARGE_FERN,
+            Material.DEAD_BUSH,
+            Material.SEAGRASS,
+            Material.KELP,
+            Material.SEA_PICKLE,
+            Material.DRIPSTONE_BLOCK,
+            Material.POINTED_DRIPSTONE);
 
 
 }

@@ -335,6 +335,9 @@ public final class LOTM extends JavaPlugin {
         getCommand("beyonderhelp").setExecutor(new BeyonderHelpCommand());
         getCommand("abilityinfos").setExecutor(new AbilityInfosCommand());
         getCommand("book").setExecutor(new BookCommand());
+
+        getCommand("ally").setExecutor(new AllyCommand());
+        getCommand("removeally").setExecutor(new RemoveAllyCommand());
     }
 
     private void registerPathways() {

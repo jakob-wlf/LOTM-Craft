@@ -51,6 +51,12 @@ commands:
   book:
     description: Get the information-book for the plugin.
     usage: /<command>
+  ally:
+    description: Add another player as your ally.
+    usage: /<command> <player>
+  removeally:
+    description: Remove another player as your ally.
+    usage: /<command> <player>
 permissions:
   lotm.admin:
     description: Allows for usage of Admin Commands in the plugin, allowing for free manipulation of the pathways and abilities.

@@ -38,9 +38,9 @@ public class ElectromagneticTornado extends Ability {
             tornadoCount.replace(beyonder, tornadoCount.get(beyonder) + 1);
 
         LivingEntity entity = beyonder.getEntity();
-        LivingEntity targetEntity = getTargetEntity(entity, 25);
+        LivingEntity targetEntity = getTargetEntity(entity, 22);
 
-        Location loc = getTargetLocation(entity, 30);
+        Location loc = getTargetLocation(entity, 17);
         World world = entity.getWorld();
 
         UUID locationUUID = UUID.randomUUID();

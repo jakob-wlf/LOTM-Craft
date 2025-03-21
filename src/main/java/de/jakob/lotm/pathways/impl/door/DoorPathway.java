@@ -25,10 +25,7 @@ public class DoorPathway extends Pathway {
                         new DoorOpening(this, 9, AbilityType.SEQUENCE_PROGRESSION, "Door Opening", Material.BIRCH_DOOR, "Pass through solid walls effortlessly.\n", "door_opening")
                 },
                 8, new Ability[] {
-                        new Burning(this, 8, AbilityType.SEQUENCE_PROGRESSION, "Burning", Material.BLAZE_POWDER, "Ignite enemies in flames.", "burning"),
-                        new ElectricShock(this, 8, AbilityType.SEQUENCE_PROGRESSION, "Electric Shock", Material.IRON_NUGGET, "Discharge a small electric jolt.", "electric_shock"),
-                        new Freezing(this, 8, AbilityType.SEQUENCE_PROGRESSION, "Freezing", Material.SNOWBALL, "Freeze enemies in front of you.", "freezing"),
-                        new Wind(this, 8, AbilityType.SEQUENCE_PROGRESSION, "Wind", Material.FEATHER, "Summon gusts of wind to push enemies back.", "wind")
+                        new SpellCasting(this, 8, AbilityType.SEQUENCE_PROGRESSION, "Spell Casting", Material.PINK_DYE, "Cast several relatively weak magic spells", "spell_casting")
                 },
                 7, new Ability[] {
                         new SpiritVision(this, 7, AbilityType.SEQUENCE_PROGRESSION, "Spirit Vision", Material.ENDER_EYE, "Reveal the health of nearby entities, granting you insight into your enemies and friends.", "spirit_vision"),

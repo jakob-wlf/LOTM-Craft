@@ -252,7 +252,7 @@ public class ItemsUtil {
         meta.addPage("§3§l✦ Available Pathways ✦§r\n\n" + pathwaysList);
 
         // Commands Page
-        meta.addPage("§3§l✦ Commands ✦\n§r" + "§6§l/beyonder (op only)§r - Become a Beyonder.\n" + "§6§l/beyonderhelp§r - Get relevant information.\n" + "§6§l/book§r - Get this book.\n" + "§6§l/abilities§r - Access all your abilities.");
+        meta.addPage("§3§l✦ Commands ✦\n§r" + "§6§l/beyonder (op only)§r - Become a Beyonder.\n" + "§6§l/beyonderhelp§r - Get relevant information.\n" + "§6§l/book§r - Get this book.\n" + "§6§l/abilities§r - Access all your abilities.\n" + "§6§l/ally§r - Add another player as your ally.\n" + "§6§l/removeally§r - Remove another player as your ally.");
 
         // Rogue Beyonders Page
         meta.addPage("§3§l✦ Rogue Beyonders ✦\n§r" + "You may encounter rogue Beyonders in the world.\n" + "They can be §d§lhostile§r or §d§lpassive§r.\n\n" + "They drop their §6§lBeyonder Characteristics§r upon defeat.");

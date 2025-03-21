@@ -12,6 +12,8 @@ public class TextUtil {
             §b/abilityInfos [sequence] §7- §fDisplays information about your abilities.
                §7- Without a parameter: Shows info for all your abilities.
                §7- With a sequence (e.g., §3/abilityInfos 5§7): Shows info for that specific sequence.
+            §b/ally §7- §fAdd another player as your ally.
+            §b/removeally §7- §Remove another player as your ally.
 
             §aTip: §7Use §b/beyonderhelp §7to see this message again at any time!""";
 

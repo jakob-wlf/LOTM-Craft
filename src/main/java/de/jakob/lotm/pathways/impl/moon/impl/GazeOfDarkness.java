@@ -80,11 +80,13 @@ public class GazeOfDarkness extends Ability implements Listener {
                     return;
                 }
 
+                ParticleSpawner.displayParticles(world, Particle.LARGE_SMOKE, target.getEyeLocation().subtract(0, .5, 0), 15, .3, .8, .3, 0, 200);
+
                 LivingEntity targetEntity = getTargetEntity(entity, 30, true, 1);
                 if(targetEntity == target) {
                     target.damage(3 * beyonder.getCurrentMultiplier(), entity);
-                    ParticleSpawner.displayParticles(world, Particle.LARGE_SMOKE, target.getEyeLocation().subtract(0, .5, 0), 25, .3, .8, .3, 0, 200);
-                    ParticleSpawner.displayParticles(world, Particle.WITCH, target.getEyeLocation().subtract(0, .5, 0), 25, .3, .8, .3, 0, 200);
+                    ParticleSpawner.displayParticles(world, Particle.LARGE_SMOKE, target.getEyeLocation().subtract(0, .5, 0), 40, .3, .8, .3, 0, 200);
+                    ParticleSpawner.displayParticles(world, Particle.WITCH, target.getEyeLocation().subtract(0, .5, 0), 40, .3, .8, .3, 0, 200);
                 }
 
                 target.addPotionEffect(new PotionEffect(PotionEffectType.DARKNESS, 20, 0, false, false, false));

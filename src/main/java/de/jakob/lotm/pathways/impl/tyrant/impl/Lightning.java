@@ -22,7 +22,7 @@ public class Lightning extends Ability {
 
         Location location = getTargetLocation(beyonder.getEntity(), 18);
 
-        TyrantUtil.strikeLightning(location, beyonder.isGriefingEnabled(), TyrantUtil.blueDust, TyrantUtil.blueDust2, 12);
+        TyrantUtil.strikeLightning(location, beyonder.isGriefingEnabled(), TyrantUtil.blueDustBig, TyrantUtil.blueDust2, 4);
         damageNearbyEntities(29, beyonder.getCurrentMultiplier(), beyonder.getEntity(), 8, location, beyonder.getEntity().getWorld(), false, 0);
     }
 }

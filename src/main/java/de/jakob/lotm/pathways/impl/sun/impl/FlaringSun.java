@@ -1,5 +1,6 @@
 package de.jakob.lotm.pathways.impl.sun.impl;
 
+import de.jakob.lotm.LOTM;
 import de.jakob.lotm.pathways.Pathway;
 import de.jakob.lotm.pathways.abilities.Ability;
 import de.jakob.lotm.pathways.abilities.AbilityType;
@@ -41,6 +42,11 @@ public class FlaringSun extends Ability {
         if(world == null)
             return;
 
+        if(!loc.getBlock().getType().isSolid()) {
+            loc.getBlock().setType(Material.LIGHT);
+            LOTM.getInstance().getBlocksToRemove().add(loc);
+        }
+
         runTaskWithDuration(4, 20 * 12, () -> {
             if(random.nextInt(3) == 0)
                 world.playSound(loc, Sound.ENTITY_BLAZE_SHOOT, .6f, .75f);
@@ -52,6 +58,11 @@ public class FlaringSun extends Ability {
         }, () -> {
             if(casting.containsKey(beyonder) && casting.get(beyonder) > 0)
                 casting.replace(beyonder, casting.get(beyonder) - 1);
+
+            if(loc.getBlock().getType() == Material.LIGHT) {
+                loc.getBlock().setType(Material.AIR);
+                LOTM.getInstance().getBlocksToRemove().remove(loc);
+            }
         });
 
     }

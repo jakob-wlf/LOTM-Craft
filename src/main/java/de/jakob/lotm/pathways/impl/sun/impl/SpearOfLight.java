@@ -51,6 +51,7 @@ public class SpearOfLight extends Ability {
             @Override
             public void run() {
                 if(damageNearbyEntities(65, beyonder.getCurrentMultiplier(), entity, 2.5, location, location.getWorld())) {
+                    location.add(direction);
                     runTaskWithDuration(2, 20 * 15, () -> {
                         addPotionEffectToNearbyEntities(entity, 3, location, location.getWorld(), new PotionEffect(PotionEffectType.SLOWNESS, 20, 10, false, false, false));
                         ParticleUtil.createParticleSphere(location, 3, 9, Particle.END_ROD);

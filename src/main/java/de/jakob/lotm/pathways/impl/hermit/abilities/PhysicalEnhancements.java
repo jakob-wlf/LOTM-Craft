@@ -1,4 +1,4 @@
-package de.jakob.lotm.pathways.impl.hermit.impl;
+package de.jakob.lotm.pathways.impl.hermit.abilities;
 
 import de.jakob.lotm.pathways.Pathway;
 import de.jakob.lotm.pathways.abilities.AbilityType;

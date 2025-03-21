@@ -4,6 +4,7 @@ import de.jakob.lotm.LOTM;
 import de.jakob.lotm.pathways.Pathway;
 import de.jakob.lotm.pathways.beyonder.Beyonder;
 import de.jakob.lotm.pathways.beyonder.BeyonderPlayer;
+import de.jakob.lotm.util.MathUtil;
 import de.jakob.lotm.util.minecraft.EntityUtil;
 import de.jakob.lotm.util.minecraft.ParticleSpawner;
 import lombok.Getter;
@@ -23,10 +24,7 @@ import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.Stream;
 
 @Getter
@@ -51,6 +49,11 @@ public abstract class Ability {
     protected final LOTM plugin = LOTM.getInstance();
 
     protected String customModelData;
+
+    protected boolean hasCooldown = false;
+    protected int cooldownTicks = 20;
+
+    private final HashSet<Beyonder> onCooldown = new HashSet<>();
 
     public Ability(Pathway pathway, int sequence, AbilityType abilityType, String name, Material material, String description, String id) {
         this.pathway = pathway;
@@ -145,6 +148,13 @@ public abstract class Ability {
             return;
 
         entity.getWorld().playSound(entity.getLocation(), sound, volume, pitch);
+    }
+
+    public void restrictMovement(LivingEntity entity, Location location, double radius) {
+        if(location.getWorld() == null)
+            return;
+
+        getNearbyLivingEntities(entity, radius, location, location.getWorld()).forEach(t -> t.setVelocity(new Vector(0, 0, 0)));
     }
 
     public ItemStack getItem() {
@@ -519,9 +529,50 @@ public abstract class Ability {
     }
 
     public void prepareAbility(Beyonder beyonder) {
+        if(onCooldown.contains(beyonder) && hasCooldown)
+            return;
+
+        if(hasCooldown) {
+            onCooldown.add(beyonder);
+            Bukkit.getScheduler().runTaskLater(plugin, () -> onCooldown.remove(beyonder), cooldownTicks);
+        }
+
         LivingEntity entity = beyonder.getEntity();
         World world = entity.getWorld();
         Location location = entity.getLocation();
+
+        Entity noAbilityMarker = world.getNearbyEntities(location, 30, 20, 30).stream().filter(e -> e.getType() == EntityType.MARKER).filter(e -> {
+            if(e.getScoreboardTags().stream().noneMatch(s -> s.equalsIgnoreCase("no_abilities")))
+                return false;
+
+            String radiusString = e.getScoreboardTags().stream().filter(s -> s.startsWith("radius_")).map(s -> s.replace("radius_", "")).findFirst().orElse(null);
+
+            if(radiusString == null || !MathUtil.isInteger(radiusString))
+                return false;
+
+            String sequenceString = e.getScoreboardTags().stream().filter(s -> s.startsWith("sequence_")).map(s -> s.replace("sequence_", "")).findFirst().orElse(null);
+            if(sequenceString == null || !MathUtil.isInteger(sequenceString))
+                return false;
+
+            int radius = Integer.parseInt(radiusString);
+            int sequence = Integer.parseInt(sequenceString);
+
+            if(e.getLocation().distance(location) > radius)
+                return false;
+
+            if(sequence > beyonder.getCurrentSequence())
+                return false;
+
+            String uuid = e.getScoreboardTags().stream().filter(s -> s.startsWith("exclude_")).map(s -> s.replace("exclude_", "")).findFirst().orElse(null);
+            if(uuid == null || beyonder.getUuid().toString().equalsIgnoreCase(uuid))
+                return false;
+
+            return true;
+
+        }).findFirst().orElse(null);
+
+        if(noAbilityMarker != null)
+            return;
 
         if(canBeCopied) {
             Marker marker = (Marker) world.spawnEntity(location, EntityType.MARKER);

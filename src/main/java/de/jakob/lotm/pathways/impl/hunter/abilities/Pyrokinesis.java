@@ -186,7 +186,7 @@ public class Pyrokinesis extends Ability {
                     return;
                 }
 
-                if(counter > 250) {
+                if(counter > 20 * 7) {
                     entity.setInvisible(false);
                     cancel();
                 }

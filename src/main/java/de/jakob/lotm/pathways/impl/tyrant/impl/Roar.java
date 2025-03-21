@@ -11,10 +11,16 @@ import org.bukkit.*;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
+import java.util.HashSet;
+
 @NoArgsConstructor
 public class Roar extends Ability {
+
     public Roar(Pathway pathway, int sequence, AbilityType abilityType, String name, Material material, String description, String id) {
         super(pathway, sequence, abilityType, name, material,description, id);
+
+        hasCooldown = true;
+        cooldownTicks = 15;
     }
 
     @Override

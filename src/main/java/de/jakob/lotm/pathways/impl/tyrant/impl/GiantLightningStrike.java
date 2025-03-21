@@ -23,7 +23,7 @@ public class GiantLightningStrike extends Ability {
 
         Location location = getTargetLocation(beyonder.getEntity(), 14);
 
-        TyrantUtil.strikeGiantLightning(location, beyonder.isGriefingEnabled(), TyrantUtil.purpleDust, TyrantUtil.purpleDust2, 7);
+        TyrantUtil.strikeGiantLightning(location, beyonder.isGriefingEnabled(), TyrantUtil.purpleDustBig, TyrantUtil.purpleDust2, 2);
         damageNearbyEntities(83, beyonder.getCurrentMultiplier(), beyonder.getEntity(), 14, location, beyonder.getEntity().getWorld(), false, 0);
     }
 
