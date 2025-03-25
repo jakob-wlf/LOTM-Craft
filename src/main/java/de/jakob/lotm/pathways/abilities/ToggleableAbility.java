@@ -13,6 +13,9 @@ import java.util.HashSet;
 public abstract class ToggleableAbility extends Ability {
 
     protected int spiritualityCost = -1;
+
+    protected int constantSpiritualityCost = -1;
+
     protected int tickDelay = 1;
 
     protected final HashSet<Beyonder> casting = new HashSet<>();
@@ -46,6 +49,10 @@ public abstract class ToggleableAbility extends Ability {
                     casting.remove(beyonder);
 
                 if(beyonder.getEntity() == null || !beyonder.getEntity().isValid() || beyonder.getCurrentPathway() != pathway || beyonder.getCurrentSequence() > sequence) {
+                    casting.remove(beyonder);
+                }
+
+                if(constantSpiritualityCost > 0 && !beyonder.removeSpirituality(constantSpiritualityCost)) {
                     casting.remove(beyonder);
                 }
 

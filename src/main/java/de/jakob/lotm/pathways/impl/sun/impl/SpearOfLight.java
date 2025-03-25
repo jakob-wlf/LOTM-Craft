@@ -54,6 +54,7 @@ public class SpearOfLight extends Ability {
                     location.add(direction);
                     runTaskWithDuration(2, 20 * 15, () -> {
                         addPotionEffectToNearbyEntities(entity, 3, location, location.getWorld(), new PotionEffect(PotionEffectType.SLOWNESS, 20, 10, false, false, false));
+                        restrictMovement(entity, location, 3);
                         ParticleUtil.createParticleSphere(location, 3, 9, Particle.END_ROD);
                     }, null);
 

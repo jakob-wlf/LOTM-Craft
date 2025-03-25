@@ -6,6 +6,7 @@ import de.jakob.lotm.pathways.abilities.AbilityType;
 import de.jakob.lotm.pathways.abilities.common_abilities.Cogitation;
 import de.jakob.lotm.pathways.abilities.common_abilities.SpiritVision;
 import de.jakob.lotm.pathways.impl.hermit.abilities.PhysicalEnhancements;
+import de.jakob.lotm.pathways.impl.hermit.abilities.ScrollCreation;
 import de.jakob.lotm.pathways.impl.hermit.abilities.SpellCasting;
 import de.jakob.lotm.pathways.impl.hermit.abilities.StarrySpellCasting;
 import org.bukkit.Color;
@@ -28,9 +29,10 @@ public class HermitPathway extends Pathway {
                 8, new Ability[] {
                 },
                 7, new Ability[]{
-                        new SpellCasting(this, 8, AbilityType.SEQUENCE_PROGRESSION, "Spellcasting", Material.AMETHYST_SHARD, "cast various different spells using different materials.", "spell_casting_hermit")
+                        new SpellCasting(this, 7, AbilityType.SEQUENCE_PROGRESSION, "Spellcasting", Material.AMETHYST_SHARD, "Cast various different spells using different materials.", "spell_casting_hermit")
                 },
                 6, new Ability[] {
+                        new ScrollCreation(this, 6, AbilityType.SEQUENCE_PROGRESSION, "Scroll Creation", Material.PAPER, "Create multiple different scrolls with unique effects.", "scroll_creation")
                 },
                 5, new Ability[] {
                         new StarrySpellCasting(this, 5, AbilityType.SEQUENCE_PROGRESSION, "Starry Spellcasting", Material.NETHER_STAR, "Conjure and manipulate dazzling stars to attack or restrain your foes.", "star_magic")

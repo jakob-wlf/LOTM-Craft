@@ -15,7 +15,9 @@ import de.jakob.lotm.pathways.impl.sun.SunPathway;
 import de.jakob.lotm.pathways.impl.twilight_giant.TwilightGiantPathway;
 import de.jakob.lotm.pathways.impl.tyrant.TyrantPathway;
 import de.jakob.lotm.util.LogUtil;
+import de.jakob.lotm.util.lotm.UnderworldUtil;
 import de.jakob.lotm.util.minecraft.ItemsUtil;
+import de.jakob.lotm.util.minecraft.ParticleSpawner;
 import de.jakob.lotm.util.pathways.TyrantUtil;
 import lombok.Getter;
 import lombok.NonNull;
@@ -100,6 +102,10 @@ public final class LOTM extends JavaPlugin {
         registerRecipes();
 
         new TyrantUtil();
+        ParticleSpawner.initializeProtocolLib();
+
+        UnderworldUtil underworldUtil = new UnderworldUtil();
+        underworldUtil.createUnderworld(4746, 80, -8780);
 
         // Load Beyonders
         BeyonderConfigManager.loadBeyonders();
@@ -126,7 +132,7 @@ public final class LOTM extends JavaPlugin {
             for(Entity entity : world.getEntities()) {
                 if(CitizensAPI.getNPCRegistry().isNPC(entity)) {
                     NPC npc = CitizensAPI.getNPCRegistry().getNPC(entity);
-                    if(npc.getName().startsWith("§r§l")) {
+                    if(npc.getName().startsWith("§r§l") ||(npc.isSpawned() && npc.getEntity().getScoreboardTags().contains("beyonder_npc"))) {
                         npc.destroy();
                         CitizensAPI.getNPCRegistry().deregister(npc);
                     }

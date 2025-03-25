@@ -126,15 +126,15 @@ public class BrewListener implements Listener {
         block.removeMetadata("brewing", LOTM.getInstance());
 
         ItemStack potion = null;
-        for(Pathway pathway : LOTM.getInstance().getPathways()) {
+        outerloop: for(Pathway pathway : LOTM.getInstance().getPathways()) {
 
             for (int i = 1; i < 10; i++) {
                 ItemStack[] ingredients = pathway.getPotionIngredients().get(i);
 
-                if (ingredients.length != items.size())
+                if (ingredients.length != items.size() && items.size() != 1)
                     continue;
 
-                boolean equal = true;
+                boolean equal = ingredients.length != 0;
                 List<Integer> matchedIndices = new ArrayList<>();
 
                 for (ItemStack ingredient : ingredients) {
@@ -152,17 +152,27 @@ public class BrewListener implements Listener {
                     }
                 }
 
+                System.out.println(equal);
+
 
                 if(!equal) {
                     if(items.size() == 1) {
-                        if(ItemsUtil.isSimilar(items.get(0), pathway.getCharacteristicForSequence(i)))
+                        System.out.println("Sequence: " + i + " Pathway: " + pathway.getName());
+
+                        System.out.println(items.get(0).getItemMeta().getDisplayName());
+                        System.out.println( pathway.getCharacteristicForSequence(i).getItemMeta().getDisplayName());
+
+                        if(ItemsUtil.isSimilar(items.get(0), pathway.getCharacteristicForSequence(i))) {
                             equal = true;
+
+                            System.out.println(equal);
+                        }
                     }
                 }
 
                 if (equal) {
                     potion = pathway.getPotions().getPotion(i);
-                    break;
+                    break outerloop;
                 }
             }
         }

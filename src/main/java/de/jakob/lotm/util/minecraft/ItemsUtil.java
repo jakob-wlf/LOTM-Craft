@@ -7,6 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapelessRecipe;
@@ -229,6 +230,19 @@ public class ItemsUtil {
         return item;
     }
 
+    public static void removeItem(Player player, ItemStack item) {
+        ItemStack[] contents = player.getInventory().getContents();
+        for (int i = 0; i < contents.length; i++) {
+            if (contents[i] != null && ItemsUtil.isSimilar(contents[i], item)) {
+                if(contents[i].getAmount() > 1)
+                    contents[i].setAmount(contents[i].getAmount() - 1);
+                else
+                    player.getInventory().setItem(i, null);
+                break; // Exit loop after removing one instance
+            }
+        }
+    }
+
     public static ItemStack getInfoBook() {
         ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
         BookMeta meta = (BookMeta) book.getItemMeta();
@@ -337,8 +351,17 @@ public class ItemsUtil {
 
             if(meta1.hasDisplayName() && meta2.hasDisplayName() && !meta1.getDisplayName().equals(meta2.getDisplayName()))
                 return false;
-            if(meta1.hasLore() && meta2.hasLore() && !meta1.getLore().get(0).equals(meta2.getLore().get(0)))
-                return false;
+
+            if(meta1.hasLore() && meta2.hasLore()) {
+                if(meta1.getLore().size() != meta2.getLore().size())
+                    return false;
+
+                for(int i = 0; i < meta1.getLore().size(); i++) {
+                    if(!meta1.getLore().get(i).equalsIgnoreCase(meta2.getLore().get(i)))
+                        return false;
+                }
+            }
+
             if (meta1.hasCustomModelData() && meta2.hasCustomModelData()) {
                 try {
                     // Check integer-based custom model data safely
@@ -347,6 +370,7 @@ public class ItemsUtil {
                     if (cmd1 != cmd2) {
                         return false;
                     }
+
                 } catch (IllegalStateException e) {
                     // Ignore and proceed to component-based comparison
                 }

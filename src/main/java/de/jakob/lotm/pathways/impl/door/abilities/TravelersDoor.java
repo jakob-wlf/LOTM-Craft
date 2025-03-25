@@ -52,7 +52,7 @@ public class TravelersDoor extends Ability implements Listener {
         }
 
         endTransport(player);
-        openDoor(beyonder, 20 * 6, true);
+        openDoor(beyonder, true);
     }
 
     @EventHandler
@@ -99,11 +99,6 @@ public class TravelersDoor extends Ability implements Listener {
     }
 
     @Override
-    public void rightClick(Beyonder beyonder) {
-        prepareAbility(beyonder);
-    }
-
-    @Override
     public void sneakRightClick(Beyonder beyonder) {
         if(previousGameModes.containsKey((Player) beyonder.getEntity()) || cooldowns.contains((Player) beyonder.getEntity()))
             return;
@@ -115,7 +110,7 @@ public class TravelersDoor extends Ability implements Listener {
 
     @Override
     public void useAbility(Beyonder beyonder) {
-        openDoor(beyonder, 20 * 6, false);
+        openDoor(beyonder, false);
     }
 
     @Override
@@ -141,8 +136,8 @@ public class TravelersDoor extends Ability implements Listener {
         transportEntity((Player) beyonder.getEntity());
     }
 
-    private void openDoor(Beyonder beyonder, int duration, boolean behind) {
-        openDoor(beyonder, duration, behind, null);
+    private void openDoor(Beyonder beyonder, boolean behind) {
+        openDoor(beyonder, 120, behind, null);
     }
 
     private void openDoor(Beyonder beyonder, int duration, boolean behind, @Nullable Location destination) {
@@ -210,7 +205,7 @@ public class TravelersDoor extends Ability implements Listener {
                                     cooldowns.remove(player);
                                 }
                             }.runTaskLater(LOTM.getInstance(), 20 * 3);
-                            openDoor(beyonder, 20 * 6, true);
+                            openDoor(beyonder, true);
                         }
                     }
                 }

@@ -22,12 +22,16 @@ public class SkeletonSpirit extends Spirit{
                 5,
                 1.85,
                 6,
-                new Particle.DustOptions[]{new Particle.DustOptions(Color.fromRGB(180, 180, 180), 40f)},
+                new Particle.DustOptions[]{new Particle.DustOptions(Color.fromRGB(180, 180, 180), 10f)},
                 new PhysicalEnhancements(null, 9, AbilityType.SEQUENCE_PROGRESSION, "Physical Enhancements", Material.IRON_CHESTPLATE, "", "physical_enhancements_death"),
                 new BoneSmash(null, 6, AbilityType.SEQUENCE_PROGRESSION, "Bone Smash", Material.BONE, "", "physical_enhancements_death")
         );
 
-        spirit.getEntity().getEquipment().setHelmet(new ItemStack(Material.IRON_HELMET));
+        if(spirit != null) {
+            spirit.getEntity().getEquipment().setItemInMainHand(new ItemStack(Material.IRON_SWORD));
+            spirit.getEntity().getEquipment().setHelmet(new ItemStack(Material.IRON_HELMET));
+            spirit.setDustAmount(12);
+        }
 
         return spirit;
     }

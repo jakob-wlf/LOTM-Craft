@@ -43,6 +43,8 @@ public class BeyonderNPC extends Beyonder{
         npc.spawn(location);
         npc.setProtected(false);
 
+        npc.getEntity().getScoreboardTags().add("beyonder_npc");
+
         this.uuid = npc.getMinecraftUniqueId();
         this.hostile = hostile;
         this.dummy = dummy;

@@ -133,7 +133,7 @@ public class StarrySpellCasting extends SelectableAbility {
 
             }
         }, () -> {
-            damageNearbyEntities(28, beyonder.getCurrentMultiplier(), entity, 2, targetLoc, world);
+            damageNearbyEntities(32, beyonder.getCurrentMultiplier(), entity, 2, targetLoc, world);
             ParticleSpawner.displayParticles(world, Particle.DUST, targetLoc.clone().add(0, 2, 0), 200, .7, 3, .7, 0, dustBig, 200);
             ParticleSpawner.displayParticles(world, Particle.END_ROD, targetLoc.clone().add(0, 2, 0), 500, .7, 3, .7, 0, 200);
         });

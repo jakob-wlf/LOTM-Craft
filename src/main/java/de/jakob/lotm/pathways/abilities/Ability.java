@@ -53,7 +53,7 @@ public abstract class Ability {
     protected boolean hasCooldown = false;
     protected int cooldownTicks = 20;
 
-    private final HashSet<Beyonder> onCooldown = new HashSet<>();
+    protected final HashSet<Beyonder> onCooldown = new HashSet<>();
 
     public Ability(Pathway pathway, int sequence, AbilityType abilityType, String name, Material material, String description, String id) {
         this.pathway = pathway;
@@ -243,6 +243,23 @@ public abstract class Ability {
             boolean ignoreCooldown,
             LivingEntity... exclude
     ) {
+        return damageNearbyEntities(damage, multiplier, caster, radius, location, world, fire,fireticks, cooldownTicks, ignoreCooldown, false, exclude);
+    }
+
+    protected boolean damageNearbyEntities(
+            double damage,
+            double multiplier,
+            @Nullable LivingEntity caster,
+            double radius,
+            @NotNull Location location,
+            @NotNull World world,
+            boolean fire,
+            int fireticks,
+            int cooldownTicks,
+            boolean ignoreCooldown,
+            boolean throughBlocks,
+            LivingEntity... exclude
+    ) {
         boolean damaged = false;
         if(location.getWorld() != world)
             world = location.getWorld();
@@ -256,23 +273,37 @@ public abstract class Ability {
             return false;
         }
 
-        outerloop: for(Entity entity : world.getNearbyEntities(location, radius, radius, radius)) {
-            if(!(entity instanceof LivingEntity))
+        outerloop: for (Entity entity : world.getNearbyEntities(location, radius, radius, radius)) {
+            if (!(entity instanceof LivingEntity))
                 continue;
-            if(entity == caster)
-                continue;
-
-            if(List.of(exclude).contains(entity) || entity.getType() == EntityType.ARMOR_STAND || (entity.getScoreboardTags().contains("spirit") && caster != null && caster.getScoreboardTags().stream().noneMatch(tag -> tag.startsWith("see_spirits"))))
+            if (entity == caster)
                 continue;
 
-            if(caster != null && !EntityUtil.mayDamage(entity, caster)[0])
+            if (List.of(exclude).contains(entity) || entity.getType() == EntityType.ARMOR_STAND || (entity.getScoreboardTags().contains("spirit") && caster != null && caster.getScoreboardTags().stream().noneMatch(tag -> tag.startsWith("see_spirits"))))
                 continue;
 
-            if(fire)
+            if (caster != null && !EntityUtil.mayDamage(entity, caster)[0])
+                continue;
+
+            if (fire)
                 entity.setFireTicks(fireticks);
 
+            if(!throughBlocks) {
+                Vector rayDir = location.clone().toVector().subtract(((LivingEntity) entity).getEyeLocation().clone().toVector()).normalize().multiply(.75);
+                Location rayStart = ((LivingEntity) entity).getEyeLocation().clone().add(0, -.5, 0);
 
-            if(((LivingEntity) entity).getNoDamageTicks() == 0 || ignoreCooldown) {
+                int breakoutCounter = 100;
+                while(breakoutCounter > 0 && rayStart.distance(location) > 1) {
+                    if(rayStart.getBlock().getType().isSolid())
+                        continue outerloop;
+
+                    rayStart.add(rayDir);
+
+                    breakoutCounter--;
+                }
+            }
+
+            if (((LivingEntity) entity).getNoDamageTicks() == 0 || ignoreCooldown) {
                 ((LivingEntity) entity).damage(damage * multiplier, caster);
                 ((LivingEntity) entity).setNoDamageTicks(cooldownTicks);
 
@@ -282,6 +313,86 @@ public abstract class Ability {
 
         return damaged;
     }
+
+    protected boolean damageInDirection(
+            double damage,
+            double multiplier,
+            @Nullable LivingEntity caster,
+            double range,          // maximum distance along the direction vector
+            double offset,         // allowed deviation from the line
+            @NotNull Location location,
+            @NotNull World world,
+            boolean fire,
+            int fireticks,
+            int cooldownTicks,
+            boolean ignoreCooldown,
+            @NotNull Vector direction,
+            LivingEntity... exclude
+    ) {
+        boolean damaged = false;
+        if(location.getWorld() != world)
+            world = location.getWorld();
+
+        if(world == null)
+            return false;
+
+        // Check for valid starting location
+        if (Double.isNaN(location.getX()) || Double.isInfinite(location.getX()) ||
+                Double.isNaN(location.getY()) || Double.isInfinite(location.getY()) ||
+                Double.isNaN(location.getZ()) || Double.isInfinite(location.getZ())) {
+            return false;
+        }
+
+        // Normalize the direction vector once for further calculations.
+        Vector normDir = direction.clone().normalize();
+
+        // Get nearby entities within a box that definitely covers our range and offset.
+        // We use range for the forward distance and offset for lateral deviation.
+        double searchRadius = Math.max(range, offset);
+        for(Entity entity : world.getNearbyEntities(location, searchRadius, searchRadius, searchRadius)) {
+            if(!(entity instanceof LivingEntity))
+                continue;
+            if(entity == caster)
+                continue;
+            if(List.of(exclude).contains(entity) ||
+                    entity.getType() == EntityType.ARMOR_STAND ||
+                    (entity.getScoreboardTags().contains("spirit") && caster != null &&
+                            caster.getScoreboardTags().stream().noneMatch(tag -> tag.startsWith("see_spirits"))))
+                continue;
+            if(caster != null && !EntityUtil.mayDamage(entity, caster)[0])
+                continue;
+
+            // Calculate the vector from starting location to the entity's location.
+            // Using entity.getLocation() for simplicity; adjust if you need a more precise position.
+            Vector toEntity = entity.getLocation().toVector().subtract(location.toVector());
+
+            // Projection of toEntity onto our normalized direction vector
+            double dot = toEntity.dot(normDir);
+            // Only consider entities in front of the starting location and within the specified range.
+            if(dot < 0 || dot > range)
+                continue;
+
+            // Calculate the perpendicular distance from the entity to the line.
+            Vector projection = normDir.clone().multiply(dot);
+            double perpendicularDistance = toEntity.clone().subtract(projection).length();
+            if(perpendicularDistance > offset)
+                continue;
+
+            // Apply fire effect if enabled.
+            if(fire)
+                entity.setFireTicks(fireticks);
+
+            // Damage the entity if it is ready to be damaged.
+            LivingEntity living = (LivingEntity) entity;
+            if(living.getNoDamageTicks() == 0 || ignoreCooldown) {
+                living.damage(damage * multiplier, caster);
+                living.setNoDamageTicks(cooldownTicks);
+                damaged = true;
+            }
+        }
+        return damaged;
+    }
+
 
     protected void launchParticleProjectile(Location loc, Vector direction, Particle particle, Particle.DustOptions dustOptions, double maxDistance, double damage, double multiplier, double speed, LivingEntity damager, int particleAmount, double size) {
         launchParticleProjectile(loc, direction, particle, dustOptions, maxDistance, damage, multiplier, speed, damager, particleAmount, 0, size);
@@ -603,6 +714,9 @@ public abstract class Ability {
     }
 
     public boolean shouldUseAbility(Beyonder beyonder) {
+        if(hasCooldown) {
+            return !onCooldown.contains(beyonder);
+        }
         return true;
     }
 

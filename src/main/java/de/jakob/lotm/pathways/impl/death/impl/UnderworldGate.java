@@ -6,6 +6,7 @@ import de.jakob.lotm.pathways.abilities.AbilityType;
 import de.jakob.lotm.pathways.abilities.SelectableAbility;
 import de.jakob.lotm.pathways.beyonder.Beyonder;
 import de.jakob.lotm.pathways.beyonder.BeyonderSpirit;
+import de.jakob.lotm.util.lotm.UnderworldUtil;
 import de.jakob.lotm.util.minecraft.EntityUtil;
 import de.jakob.lotm.util.minecraft.ParticleSpawner;
 import de.jakob.lotm.util.minecraft.VectorUtil;
@@ -35,7 +36,7 @@ public class UnderworldGate extends SelectableAbility {
 
     @Override
     protected void initAbilities() {
-        abilities = new String[]{"Tentacles", "Suction", "Spirits"};
+        abilities = new String[]{"Tentacles", "Suction", "Spirits", "Underworld Gate"};
     }
 
     @Override
@@ -43,7 +44,8 @@ public class UnderworldGate extends SelectableAbility {
         spiritualityCost = new HashMap<>(Map.of(
                 0, 70,
                 1, 70,
-                2, 70
+                2, 70,
+                3, 40
         ));
     }
 
@@ -53,6 +55,7 @@ public class UnderworldGate extends SelectableAbility {
             case 0 -> castTentacleVersion(beyonder);
             case 1 -> castSuctionVersion(beyonder);
             case 2 -> castSpiritVersion(beyonder);
+            case 3 -> castGate(beyonder);
         }
     }
 
@@ -217,7 +220,7 @@ public class UnderworldGate extends SelectableAbility {
                     if(target.getVelocity().length() < 2.2)
                         target.setVelocity(target.getVelocity().add(direction));
                     if(target.getLocation().distance(loc) < 1.6) {
-                        teleportToNether(target);
+                        teleportToUnderworld(target);
                     }
                 }
 
@@ -232,8 +235,51 @@ public class UnderworldGate extends SelectableAbility {
 
     }
 
-    private void teleportToNether(LivingEntity entity) {
-        Location teleportLocation = createLocationInNether();
+    private void castGate(Beyonder beyonder) {
+        casting.remove(beyonder);
+
+        GateResponse gate = createGate(beyonder, true, 5);
+        if(gate == null)
+            return;
+
+        LivingEntity entity = beyonder.getEntity();
+        Location loc = gate.location.clone().subtract(0, .5, 0);
+        ItemDisplay itemDisplay = gate.itemDisplay;
+        Vector gateDirection = gate.gateDirection;
+
+        Location suckCenter = loc.clone().add(gateDirection.clone().multiply(7));
+
+        new BukkitRunnable() {
+
+            @Override
+            public void run() {
+                if(!itemDisplay.isValid()) {
+                    cancel();
+                    return;
+                }
+
+                if(!casting.containsKey(beyonder) || casting.get(beyonder) != itemDisplay) {
+                    cancel();
+                    return;
+                }
+
+                List<LivingEntity> nearbyEntities = getNearbyLivingEntities(entity, 8, suckCenter, entity.getWorld()).stream().filter(e -> EntityUtil.mayDamage(e, entity)[1]).filter(e -> !e.getScoreboardTags().contains("spirit")).toList();
+                for(LivingEntity target : nearbyEntities) {
+                    if(target.getLocation().distance(loc) < 1.6) {
+                        teleportToUnderworld(target);
+                    }
+                }
+
+                if(entity.getWorld() == loc.getWorld() && entity.getLocation().distance(loc) < 1.6 ) {
+                    teleportToUnderworld(entity);
+                }
+            }
+        }.runTaskTimer(plugin, 15, 3);
+
+    }
+
+    private void teleportToUnderworld(LivingEntity entity) {
+        Location teleportLocation = UnderworldUtil.underworldLocation == null ? createLocationInNether() : UnderworldUtil.underworldLocation;
         if(teleportLocation == null) teleportLocation = new Location(entity.getWorld(), random.nextInt(1000) - 500, 295, random.nextInt(1000) - 500);
         World teleportWorld = teleportLocation.getWorld();
 

@@ -26,7 +26,7 @@ public class AllyCommand implements CommandExecutor {
         }
 
         Player target = Bukkit.getPlayerExact(args[0]);
-        if(target == null || target.isValid()) {
+        if(target == null || !target.isValid()) {
             player.sendMessage(ErrorMessageUtil.playerNotFound());
             return true;
         }

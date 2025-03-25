@@ -17,7 +17,12 @@ import java.util.Optional;
 
 public class ParticleSpawner {
 
-    private static final ProtocolManager protocolManager = ProtocolLibrary.getProtocolManager();
+    private static ProtocolManager protocolManager = null;
+
+    public static void initializeProtocolLib() {
+        if(LOTM.getInstance().isProtocolLibEnabled())
+            protocolManager = ProtocolLibrary.getProtocolManager();
+    }
 
     public static void displayParticlesWithPackets(World world, Particle particle, Location location, int amount, double offsetX, double offsetY, double offsetZ, double speed, Particle.DustOptions dustOptions, int maxDistance) {
         if (!LOTM.getInstance().isProtocolLibEnabled()) {

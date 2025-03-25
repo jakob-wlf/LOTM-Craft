@@ -112,7 +112,8 @@ public class WaterManipulation extends Ability {
 
                     double distance = target.getLocation().distance(entity.getLocation());
                     if(Math.sqrt((distance - radius) * (distance - radius)) <= 1.5) {
-                        target.damage(8 * beyonder.getCurrentMultiplier(), entity);
+                        target.damage(18 * beyonder.getCurrentMultiplier(), entity);
+                        target.setNoDamageTicks(14);
                         world.playSound(target.getEyeLocation(), Sound.ENTITY_PLAYER_HURT_DROWN, 1, random.nextFloat(.6f, 1f));
                     }
                 }

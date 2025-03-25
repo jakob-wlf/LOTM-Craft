@@ -16,7 +16,6 @@ public class DeathPathway extends Pathway {
     public DeathPathway(String displayName, String name, String colorPrefix, Color color) {
         super(displayName, name, colorPrefix, color);
 
-        //TODO: Spirit Manipulation -> Select spirits that will actually follow you and fight for you. You will get their abilities as items and as long as they are nearby you can use them but they will still be fired from the spirit
         abilities = new HashMap<>(Map.of(
                 9, new Ability[]{
                         new PhysicalEnhancements(this, 9, AbilityType.SEQUENCE_PROGRESSION, "Physical Enhancements", Material.IRON_CHESTPLATE, "Gain boosts to your physical stats that grow with your Sequence.", "physical_enhancements_death"),
@@ -35,7 +34,8 @@ public class DeathPathway extends Pathway {
                                 """, "spirit_controlling")
                 },
                 6, new Ability[] {
-                        new Necromancy(this, 5, AbilityType.SEQUENCE_PROGRESSION, "Necromancy", Material.BONE, "Summon a horde of undead to fight on your behalf.", "necromancy")
+                        new Necromancy(this, 6, AbilityType.SEQUENCE_PROGRESSION, "Necromancy", Material.BONE, "Summon a horde of undead to fight on your behalf.", "necromancy"),
+                        new LanguageOfTheDead(this, 6, AbilityType.SEQUENCE_PROGRESSION, "Language of the Dead", Material.CHARCOAL, "Compel the soul of the target to leave their body, rendering them still and damaging them.", "language_of_the_dead")
                 },
                 5, new Ability[] {
                         new UnderworldGate(this, 5, AbilityType.SEQUENCE_PROGRESSION, "Underworld Gate", Material.PALE_OAK_DOOR, """
@@ -44,10 +44,15 @@ public class DeathPathway extends Pathway {
                                 """, "underworld_gate")
                 },
                 4, new Ability[] {
+                        new RottingWind(this, 4, AbilityType.SEQUENCE_PROGRESSION, "Rotting Wind", Material.NETHERITE_SCRAP, "Create a wind that silently rots all entities and blocks.", "rotting_wind"),
+                        new SpiritWorldShuttling(this, 4, AbilityType.SEQUENCE_PROGRESSION, "Spirit World Shuttling", Material.CYAN_DYE, "Quickly traverse the spirit world.", "spirit_world_shuttling")
                 },
                 3, new Ability[] {
+                        new GazeOfDeath(this, 3, AbilityType.SEQUENCE_PROGRESSION, "Gaze of Death", Material.ENDER_EYE, "Anyone you look at will slowly wither away and die.", "gaze_of_death"),
+                        new RiverStyxManifestation(this, 3, AbilityType.SEQUENCE_PROGRESSION, "River Styx Manifestation", Material.BLACK_DYE, "Partially manifest the River Styxc into the real world. All that stand in it too long will be rendered weak and motionless and will soon wither away.", "river_styx_manifestation")
                 },
                 2, new Ability[] {
+                        new DeadFlame(this, 2, AbilityType.SEQUENCE_PROGRESSION, "Death Flame", Material.FIREWORK_STAR, "Spit out a pale dead flame that covers a large area.", "death_flame")
                 },
                 1, new Ability[] {
                 }

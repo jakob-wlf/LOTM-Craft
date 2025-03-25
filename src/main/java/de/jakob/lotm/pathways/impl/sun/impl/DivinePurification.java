@@ -64,7 +64,7 @@ public class DivinePurification extends Ability {
                 ParticleUtil.drawCircle(targetLoc, new Vector(0, 1, 0), 2.7, Particle.END_ROD, dust, 24);
                 ParticleUtil.drawCircle(targetLoc, new Vector(0, 1, 0), 2.7, Particle.FLAME, null, 30);
 
-                damageNearbyEntities(72, beyonder.getCurrentMultiplier(), entity, 4, targetLoc, entity.getWorld(), false, 0, 14);
+                damageNearbyEntities(72, beyonder.getCurrentMultiplier(), entity, 6, targetLoc, entity.getWorld(), false, 0, 14);
 
                 targetLoc.subtract(0, 1, 0);
             }, () -> lights.forEach(l -> {

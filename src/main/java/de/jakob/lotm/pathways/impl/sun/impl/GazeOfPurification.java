@@ -6,10 +6,13 @@ import de.jakob.lotm.pathways.abilities.ToggleableAbility;
 import de.jakob.lotm.pathways.beyonder.Beyonder;
 import de.jakob.lotm.util.minecraft.ParticleSpawner;
 import lombok.NoArgsConstructor;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 
 @NoArgsConstructor
 public class GazeOfPurification extends ToggleableAbility {
@@ -42,5 +45,12 @@ public class GazeOfPurification extends ToggleableAbility {
         ParticleSpawner.displayParticles(target.getWorld(), Particle.END_ROD, target.getEyeLocation().subtract(0, target.getHeight() / 2, 0), 40, .3, target.getHeight() / 2, .3, 0, 200);
         ParticleSpawner.displayParticles(target.getWorld(), Particle.DUST, target.getEyeLocation().subtract(0, target.getHeight() / 2, 0), 40, .3, target.getHeight() / 2, .3, 0, dust, 200);
 
+    }
+
+    @Override
+    public void onHold(Beyonder beyonder, Player player) {
+        String text = pathway.getColorPrefix() + (casting.contains(beyonder) ? "Active" : "Inactive");
+
+        player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(text));
     }
 }
