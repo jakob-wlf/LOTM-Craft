@@ -45,7 +45,8 @@ public class DeathPathway extends Pathway {
                 },
                 4, new Ability[] {
                         new RottingWind(this, 4, AbilityType.SEQUENCE_PROGRESSION, "Rotting Wind", Material.NETHERITE_SCRAP, "Create a wind that silently rots all entities and blocks.", "rotting_wind"),
-                        new SpiritWorldShuttling(this, 4, AbilityType.SEQUENCE_PROGRESSION, "Spirit World Shuttling", Material.CYAN_DYE, "Quickly traverse the spirit world.", "spirit_world_shuttling")
+                        new SpiritWorldShuttling(this, 4, AbilityType.SEQUENCE_PROGRESSION, "Spirit World Shuttling", Material.CYAN_DYE, "Quickly traverse the spirit world.", "spirit_world_shuttling"),
+                        new UndeadSummoning(this, 4, AbilityType.SEQUENCE_PROGRESSION, "Undead Summoning", Material.BONE_MEAL, "Summon powerful undead from the underworld to server you.", "undead_summoning")
                 },
                 3, new Ability[] {
                         new GazeOfDeath(this, 3, AbilityType.SEQUENCE_PROGRESSION, "Gaze of Death", Material.ENDER_EYE, "Anyone you look at will slowly wither away and die.", "gaze_of_death"),

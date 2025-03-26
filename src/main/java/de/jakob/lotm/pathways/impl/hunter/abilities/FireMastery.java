@@ -82,8 +82,9 @@ public class FireMastery extends Ability {
 
     @Override
     public void sneakToggle(Beyonder beyonder) {
-        if(beyonder.getCurrentSequence() > 2)
+        if(beyonder.getCurrentSequence() > 2 || !beyonder.getEntity().isOnGround())
             return;
+
 
         LivingEntity entity = beyonder.getEntity();
 

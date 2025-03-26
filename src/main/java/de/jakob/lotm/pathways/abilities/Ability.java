@@ -53,6 +53,8 @@ public abstract class Ability {
     protected boolean hasCooldown = false;
     protected int cooldownTicks = 20;
 
+    protected int spirituality = 0;
+
     protected final HashSet<Beyonder> onCooldown = new HashSet<>();
 
     public Ability(Pathway pathway, int sequence, AbilityType abilityType, String name, Material material, String description, String id) {
@@ -435,6 +437,40 @@ public abstract class Ability {
         }.runTaskTimer(LOTM.getInstance(), 0, 1);
     }
 
+    protected void launchParticleProjectile(Location loc, Vector direction, Particle particle, Particle.DustOptions dustOptions, double maxDistance, double damage, double multiplier, double speed, LivingEntity damager, int particleAmount, int fireticks, double size, double randomness, boolean ignoreCooldown, Particle... additionalParticles) {
+        Location startLoc = loc.clone();
+
+        if(startLoc.getWorld() == null)
+            return;
+
+        direction.normalize().multiply((1/20f) * speed);
+
+        new BukkitRunnable() {
+
+            int counter = 0;
+
+            @Override
+            public void run() {
+                ParticleSpawner.displayParticles(startLoc.getWorld(), particle, startLoc, particleAmount, (size / 3f), (size / 3f), (size / 3f), 0, dustOptions, 200);
+                for(Particle p : additionalParticles) {
+                    ParticleSpawner.displayParticles(startLoc.getWorld(), p, startLoc, particleAmount, (size / 3f), (size / 3f), (size / 3f), 0, dustOptions, 200);
+                }
+
+                if(((counter / 20f) * speed) > maxDistance) {
+                    cancel();
+                    return;
+                }
+
+                damageNearbyEntities(damage, multiplier, damager, size * 1.4f, startLoc, startLoc.getWorld(), fireticks != 0, fireticks, 10, ignoreCooldown);
+
+                startLoc.add(direction);
+                if(randomness > 0)
+                    direction.add(new Vector(random.nextDouble(2 * randomness) - randomness, random.nextDouble(2 * randomness) - randomness, random.nextDouble(2 * randomness) - randomness));
+                counter ++;
+            }
+        }.runTaskTimer(LOTM.getInstance(), 0, 1);
+    }
+
     protected Vector getDirectionNormalized(LivingEntity entity, int maxMobDetectionDistance) {
         Entity target = getTargetEntity(entity, maxMobDetectionDistance);
 
@@ -470,7 +506,7 @@ public abstract class Ability {
         return getNearbyLivingEntities(exclude, radius, location, world, new EntityType[0]);
     }
 
-    protected List<LivingEntity> getNearbyLivingEntities(@Nullable LivingEntity exclude, double radius, @NotNull Location location, @NotNull World world, EntityType... excludedEntityTypes) {
+    protected List<LivingEntity> getNearbyLivingEntities(@Nullable LivingEntity exclude, double radius, @NotNull Location location, @NotNull World world, boolean excludeTeamMembers, EntityType... excludedEntityTypes) {
         List<LivingEntity> entities = new ArrayList<>();
 
         if(location.getWorld() != world)
@@ -485,6 +521,9 @@ public abstract class Ability {
             if (entity == exclude)
                 continue;
 
+            if(excludeTeamMembers && exclude != null && !EntityUtil.mayDamage(exclude, entity)[0])
+                continue;
+
             if (Stream.of(excludedEntityTypes).anyMatch(e -> e == livingEntity.getType()))
                 continue;
 
@@ -492,6 +531,10 @@ public abstract class Ability {
         }
 
         return entities;
+    }
+
+    protected List<LivingEntity> getNearbyLivingEntities(@Nullable LivingEntity exclude, double radius, @NotNull Location location, @NotNull World world, EntityType... excludedEntityTypes) {
+        return getNearbyLivingEntities(exclude, radius, location, world, false, excludedEntityTypes);
     }
 
     protected boolean addPotionEffectToNearbyEntities(LivingEntity caster, double radius, Location location, World world, PotionEffect... potionEffects) {
@@ -647,6 +690,9 @@ public abstract class Ability {
             onCooldown.add(beyonder);
             Bukkit.getScheduler().runTaskLater(plugin, () -> onCooldown.remove(beyonder), cooldownTicks);
         }
+
+        if(spirituality != 0 && !beyonder.removeSpirituality(spirituality))
+            return;
 
         LivingEntity entity = beyonder.getEntity();
         World world = entity.getWorld();

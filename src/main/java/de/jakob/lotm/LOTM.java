@@ -6,6 +6,7 @@ import de.jakob.lotm.pathways.Pathway;
 import de.jakob.lotm.pathways.abilities.Ability;
 import de.jakob.lotm.pathways.beyonder.*;
 import de.jakob.lotm.pathways.impl.abyss.AbyssPathway;
+import de.jakob.lotm.pathways.impl.chained.ChainedPathway;
 import de.jakob.lotm.pathways.impl.death.DeathPathway;
 import de.jakob.lotm.pathways.impl.door.DoorPathway;
 import de.jakob.lotm.pathways.impl.hermit.HermitPathway;
@@ -356,6 +357,7 @@ public final class LOTM extends JavaPlugin {
         pathways.put("death", new DeathPathway("Death", "death", "8", Color.fromRGB(52, 50, 54)));
         pathways.put("sun", new SunPathway("Sun", "sun", "6", Color.fromRGB(255, 191, 71)));
         pathways.put("hermit", new HermitPathway("Hermit", "hermit", "d", Color.fromRGB(176, 81, 240)));
+        pathways.put("chained", new ChainedPathway("Chained", "chained", "7", Color.fromRGB(203, 158, 217)));
     }
 
     @Override

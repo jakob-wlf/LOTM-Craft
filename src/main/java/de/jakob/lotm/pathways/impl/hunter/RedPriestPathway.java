@@ -47,6 +47,9 @@ public class RedPriestPathway extends Pathway {
                         new ChainOfCommand(this, 4, AbilityType.SEQUENCE_PROGRESSION, "Chain of Command", Material.CHAIN, "Designate entities as your subordinates, allowing them to share your damage and assist in battle.", "chain_of_command")
                 },
                 3, new Ability[] {
+                        new FogOfWar(this, 3, AbilityType.SEQUENCE_PROGRESSION, "Fog of War", Material.QUARTZ, "Create a dense fog that weakens and disorients your enemies.", "fog_of_war"),
+                        new WarSong(this, 3, AbilityType.SEQUENCE_PROGRESSION, "War Song", Material.MUSIC_DISC_BLOCKS, "Enhance yourself and your allies while weakening your opponents.", "war_song"),
+                        new WarCry(this, 3, AbilityType.SEQUENCE_PROGRESSION, "War Cry", Material.RAW_IRON, "Release a deafening cry that knocks back and damages all your opponents.", "war_cry")
                 },
                 2, new Ability[] {
                 },

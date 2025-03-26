@@ -36,14 +36,14 @@ public class DeadFlame extends ToggleableAbility {
             for(double i = -1; i < 1.25; i+=.25) {
                 Vector vector = VectorUtil.rotateAroundY(direction, 45 * i);
 
-                ParticleUtil.drawLine(beyonder.getEntity().getEyeLocation().add(direction.clone().multiply(2)).add(0, j, 0), vector, Particle.DUST, 1, beyonder.getEntity().getWorld(), dust, 3, .4, 25);
-                ParticleUtil.drawLine(beyonder.getEntity().getEyeLocation().add(direction.clone().multiply(2)).add(0, j, 0), vector, Particle.DUST, 1, beyonder.getEntity().getWorld(), dust2, 1, .4, 25);
+                ParticleUtil.drawLine(beyonder.getEntity().getEyeLocation().add(direction.clone().multiply(2)).add(0, j, 0), vector, Particle.DUST, 1.5, beyonder.getEntity().getWorld(), dust, 3, .4, 25);
+                ParticleUtil.drawLine(beyonder.getEntity().getEyeLocation().add(direction.clone().multiply(2)).add(0, j, 0), vector, Particle.DUST, 1.5, beyonder.getEntity().getWorld(), dust2, 1, .4, 25);
                 if(random.nextInt(4) == 0) {
                     ParticleUtil.drawLine(beyonder.getEntity().getEyeLocation().add(direction.clone().multiply(2)).add(0, j, 0), vector, Particle.END_ROD, 2.5, beyonder.getEntity().getWorld(), null, 1, .5, 25);
                     ParticleUtil.drawLine(beyonder.getEntity().getEyeLocation().add(direction.clone().multiply(2)).add(0, j, 0), vector, Particle.FLAME, 2.5, beyonder.getEntity().getWorld(), null, 1, .5, 25);
                 }
 
-                damageInDirection(60, beyonder.getCurrentMultiplier(), beyonder.getEntity(), 25, 1.4, beyonder.getEntity().getEyeLocation().add(direction.clone().multiply(2)), beyonder.getEntity().getWorld(), false, 0, 10, false, vector);
+                damageInDirection(60, beyonder.getCurrentMultiplier(), beyonder.getEntity(), 25, 3.5, beyonder.getEntity().getEyeLocation().add(direction.clone().multiply(2)), beyonder.getEntity().getWorld(), false, 0, 10, false, vector);
             }
         }
 
