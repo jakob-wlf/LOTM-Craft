@@ -13,6 +13,9 @@ import java.io.File;
 import java.util.*;
 
 public class BeyonderConfigManager {
+
+
+
     public static void loadBeyonders() {
         File file = new File(LOTM.getInstance().getDataFolder(), "beyonders.yml");
 

@@ -698,6 +698,9 @@ public abstract class Ability {
         World world = entity.getWorld();
         Location location = entity.getLocation();
 
+        if(entity instanceof Player player && player.getGameMode() == GameMode.SPECTATOR)
+            return;
+
         Entity noAbilityMarker = world.getNearbyEntities(location, 30, 20, 30).stream().filter(e -> e.getType() == EntityType.MARKER).filter(e -> {
             if(e.getScoreboardTags().stream().noneMatch(s -> s.equalsIgnoreCase("no_abilities")))
                 return false;
@@ -752,7 +755,10 @@ public abstract class Ability {
             beyonder.removeAbility(this);
         }
 
-        useAbility(beyonder);
+        try {
+            useAbility(beyonder);
+        }
+        catch (Exception ignored) {}
     }
 
     public String getDescription() {

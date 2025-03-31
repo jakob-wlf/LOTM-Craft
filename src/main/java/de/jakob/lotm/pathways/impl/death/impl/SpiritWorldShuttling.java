@@ -1,5 +1,6 @@
 package de.jakob.lotm.pathways.impl.death.impl;
 
+import de.jakob.lotm.LOTM;
 import de.jakob.lotm.pathways.Pathway;
 import de.jakob.lotm.pathways.abilities.AbilityType;
 import de.jakob.lotm.pathways.abilities.ToggleableAbility;
@@ -10,23 +11,38 @@ import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerInteractEvent;
 
 import java.util.HashMap;
 import java.util.UUID;
 
 @NoArgsConstructor
-public class SpiritWorldShuttling extends ToggleableAbility {
+public class SpiritWorldShuttling extends ToggleableAbility implements Listener {
 
     private final HashMap<UUID, GameMode> previousGameModes = new HashMap<>();
 
     public SpiritWorldShuttling(Pathway pathway, int sequence, AbilityType abilityType, String name, Material material, String description, String id) {
         super(pathway, sequence, abilityType, name, material, description, id);
 
+        LOTM.getInstance().registerListener(this);
+
         canBeUSedByNonPlayer = false;
         canBeCopied = false;
     }
 
-    @Override
+    @EventHandler
+    public void onInteract(PlayerInteractEvent event) {
+        Beyonder beyonder = LOTM.getInstance().getBeyonder(event.getPlayer().getUniqueId());
+
+        if(beyonder == null || !casting.contains(beyonder))
+            return;
+
+        casting.remove(beyonder);
+    }
+
+   @Override
     protected void start(Beyonder beyonder) {
         Player player = (Player) beyonder.getEntity();
         previousGameModes.put(player.getUniqueId(), player.getGameMode());

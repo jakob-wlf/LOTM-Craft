@@ -40,6 +40,10 @@ public abstract class Spirit {
         entity.setFireTicks(0);
 
         BeyonderSpirit beyonderSpirit = LOTM.getInstance().createBeyonderSpirit(entity.getUniqueId(), null, sequence);
+
+        if(beyonderSpirit == null)
+            return null;
+
         beyonderSpirit.setDefaultAI(defaultAI);
         beyonderSpirit.setDustAmount(20);
         beyonderSpirit.setShowEntity(showSpirit);

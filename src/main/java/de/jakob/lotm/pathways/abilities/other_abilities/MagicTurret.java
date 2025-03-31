@@ -43,7 +43,7 @@ public class MagicTurret extends Ability {
         LivingEntity target = getTargetEntity(entity, 20, EntityType.ALLAY);
 
         runTaskWithDuration(2, 20 * 8, () -> {
-            if(target.getWorld() != loc.getWorld())
+            if(target == null || target.getWorld() != loc.getWorld())
                 return;
             ParticleSpawner.displayParticles(world, Particle.WITCH, loc, 25, .05, .05, .05, 0, 200);
 

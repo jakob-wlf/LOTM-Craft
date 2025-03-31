@@ -21,6 +21,14 @@ public class VectorUtil {
         return new Vector(newX, vector.getY(), newZ).normalize();
     }
 
+    public static Vector rotateAroundYPositive90(Vector dir) {
+        return new Vector(-dir.getZ(), dir.getY(), dir.getX());
+    }
+
+    public static Vector rotateAroundYNegative90(Vector dir) {
+        return new Vector(dir.getZ(), dir.getY(), -dir.getX());
+    }
+
     public static Vector rotateAroundX(Vector vector, double angle) {
         double radians = Math.toRadians(angle);
 

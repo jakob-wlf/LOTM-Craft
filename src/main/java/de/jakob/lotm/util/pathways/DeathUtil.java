@@ -21,28 +21,32 @@ import org.joml.Vector3f;
 
 public class DeathUtil {
 
-    public static ItemDisplay createDoor(Location location, Vector dir, int duration, int riseTime) {
+    public static ItemDisplay createDoor(Location location, Vector direction, int duration, int riseTime) {
+        direction.setY(0).normalize().multiply(.5);
+
         location.add(0, .5, 0);
         double size = 2.5;
+
+        location.setPitch(0);
+        location.setYaw(0);
 
         World world = location.getWorld();
         if (world == null) return null;
 
 
-        dir = VectorUtil.rotateAroundY(dir, 90);
-
+        Vector dir = VectorUtil.rotateAroundYPositive90(direction);
 
         Material material = Material.PALE_OAK_DOOR;
         Color color = Color.WHITE;
-        ItemDisplay itemDisplay = createItemDisplay(world, location.clone().add(dir.clone().multiply(1.22)), material, size, dir, color, -15, riseTime);
-        ItemDisplay itemDisplay2 = createItemDisplay(world, location.clone().add(dir.clone().multiply(-1.22)), material, size, dir, color, 15, riseTime, itemDisplay);
+        ItemDisplay itemDisplay = createItemDisplay(world, location.clone().add(dir.clone().multiply(2.45)), material, size, dir, color, -15, riseTime);
+        ItemDisplay itemDisplay2 = createItemDisplay(world, location.clone().add(dir.clone().multiply(-2.45)), material, size, dir, color, 15, riseTime, itemDisplay);
 
         destroyDisplayAfterDuration(itemDisplay, duration);
         destroyDisplayAfterDuration(itemDisplay2, duration);
 
-        Vector offsetDir = VectorUtil.rotateAroundY(dir, -90).normalize();
+        Vector offsetDir = VectorUtil.rotateAroundYNegative90(dir).normalize();
         Location glassLocation = location.clone()
-                .add(VectorUtil.rotateAroundY(dir, -90).multiply(.8))
+                .add(VectorUtil.rotateAroundYNegative90(dir).multiply(1.6))
                 .subtract(0, 0.24, 0);
         createGlassPane(world, glassLocation, size * .8, size * 1.48, offsetDir, duration, riseTime, itemDisplay);
 

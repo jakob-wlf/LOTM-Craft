@@ -15,6 +15,7 @@ import de.jakob.lotm.pathways.impl.moon.MoonPathway;
 import de.jakob.lotm.pathways.impl.sun.SunPathway;
 import de.jakob.lotm.pathways.impl.twilight_giant.TwilightGiantPathway;
 import de.jakob.lotm.pathways.impl.tyrant.TyrantPathway;
+import de.jakob.lotm.util.ConfigManager;
 import de.jakob.lotm.util.LogUtil;
 import de.jakob.lotm.util.lotm.UnderworldUtil;
 import de.jakob.lotm.util.minecraft.ItemsUtil;
@@ -102,7 +103,10 @@ public final class LOTM extends JavaPlugin {
         registerListeners();
         registerRecipes();
 
+        ConfigManager.init();
+
         new TyrantUtil();
+
         ParticleSpawner.initializeProtocolLib();
 
         UnderworldUtil underworldUtil = new UnderworldUtil();
@@ -166,6 +170,7 @@ public final class LOTM extends JavaPlugin {
         registerListener(new SpiritSpawnListener());
         registerListener(new ProjectileShootListener());
         registerListener(new TargetListener());
+        registerListener(new VillagerTradeListener());
     }
 
     public void removeListener(Listener listener) {

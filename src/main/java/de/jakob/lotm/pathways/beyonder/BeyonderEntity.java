@@ -84,7 +84,11 @@ public class BeyonderEntity extends Beyonder {
 
                 if((!(entity instanceof LivingEntity livingEntity) || !entity.isValid())) {
                     if(getEntity() != null)
-                        Bukkit.getScheduler().runTaskLater(LOTM.getInstance(), () -> getEntity().getScoreboardTags().remove(tag), 2);
+                        Bukkit.getScheduler().runTaskLater(LOTM.getInstance(), () -> {
+                            if(getEntity() != null) {
+                                getEntity().getScoreboardTags().remove(tag);
+                            }
+                        }, 2);
                     return null;
                 }
 

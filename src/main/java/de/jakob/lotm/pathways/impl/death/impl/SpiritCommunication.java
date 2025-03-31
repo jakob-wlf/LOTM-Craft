@@ -61,7 +61,8 @@ public class SpiritCommunication extends Ability {
             player.playSound(player, Sound.ENTITY_ALLAY_HURT, .7f, .6f);
         Bukkit.getScheduler().runTaskLater(plugin, () -> spirit.setCurrentTarget(null), 20 * 8);
         runTaskWithDuration(2, 20 * 8, () -> {
-
+            if(beyonder.getEntity() == null)
+                return;
             boolean seeSpirits = beyonder.getEntity().getScoreboardTags().stream().anyMatch(s -> s.startsWith("see_spirits"));
             if(spirit.getEntity() != null && seeSpirits)
                 ParticleSpawner.displayParticles(spirit.getEntity().getWorld(), Particle.ANGRY_VILLAGER, spirit.getEntity().getLocation(), random.nextInt(2) + 1, .5, .5, .5, 0, 200);

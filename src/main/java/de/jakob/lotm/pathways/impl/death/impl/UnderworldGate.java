@@ -95,6 +95,9 @@ public class UnderworldGate extends SelectableAbility {
                     default -> DefaultSpirit.spawn(loc);
                 };
 
+                if(spirit == null)
+                    return;
+
                 spirit.setLifespan(50);
                 
                 spirit.getEntity().setVelocity(gateDirection);
@@ -333,7 +336,7 @@ public class UnderworldGate extends SelectableAbility {
 
         Location loc = targetEnemy ? target.getEyeLocation() : entity.getEyeLocation();
 
-        Vector direction = targetEnemy ? VectorUtil.rotateAroundY(entity.getEyeLocation().getDirection().setY(0).normalize().multiply(.5), -90) : loc.getDirection().setY(0).normalize().multiply(.5);
+        Vector direction = targetEnemy ? VectorUtil.rotateAroundY(entity.getEyeLocation().getDirection().setY(0).normalize().multiply(.5), -90) : beyonder.getEntity().getEyeLocation().getDirection().setY(0).normalize().multiply(.5);
 
         for(double i = 0; i < (targetEnemy ? enemyDistance : 7); i+=.5) {
             loc.add(direction);

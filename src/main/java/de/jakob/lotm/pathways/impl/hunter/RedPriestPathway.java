@@ -52,6 +52,9 @@ public class RedPriestPathway extends Pathway {
                         new WarCry(this, 3, AbilityType.SEQUENCE_PROGRESSION, "War Cry", Material.RAW_IRON, "Release a deafening cry that knocks back and damages all your opponents.", "war_cry")
                 },
                 2, new Ability[] {
+                        new WeatherManipulation(this, 2, AbilityType.SEQUENCE_PROGRESSION, "Weather Manipulation", Material.PHANTOM_MEMBRANE, "Create various weather phenomena.", "weather_manipulation"),
+                        new Fly(this, 2, AbilityType.SEQUENCE_PROGRESSION, "Fly", Material.FEATHER, "Allows you to fly.", "fly"),
+                        new FlameAuthority(this, 2, AbilityType.SEQUENCE_PROGRESSION, "Flame Authority", Material.RED_DYE, "Complete command of flames, covering an entire battlefield.", "flame_authority")
                 },
                 1, new Ability[] {
                 }

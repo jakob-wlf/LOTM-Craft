@@ -49,7 +49,7 @@ public class FreezeScroll extends MysticalScroll{
             i.addAndGet(5);
 
             addPotionEffectToNearbyEntities(entity, 30, startLoc, startLoc.getWorld(), new PotionEffect(PotionEffectType.SLOWNESS, 30, 10, false, false, false));
-            damageNearbyEntities(39.5, 1, entity, i.get(), startLoc, startLoc.getWorld(), false, 0, 10, false);
+            damageNearbyEntities(21, 1, entity, i.get(), startLoc, startLoc.getWorld(), false, 0, 10, false);
 
             ParticleSpawner.displayParticles(startLoc.getWorld(), Particle.SNOWFLAKE, startLoc, 350, i.get(), 2, i.get(), 0, 200);
             ParticleSpawner.displayParticles(startLoc.getWorld(), Particle.SNOWFLAKE, startLoc, 350, i.get(), .2, i.get(), 0, 200);

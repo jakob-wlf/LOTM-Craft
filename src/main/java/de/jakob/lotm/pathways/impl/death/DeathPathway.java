@@ -56,6 +56,7 @@ public class DeathPathway extends Pathway {
                         new DeadFlame(this, 2, AbilityType.SEQUENCE_PROGRESSION, "Death Flame", Material.FIREWORK_STAR, "Spit out a pale dead flame that covers a large area.", "death_flame")
                 },
                 1, new Ability[] {
+                        new Death(this, 1, AbilityType.SEQUENCE_PROGRESSION, "Death", Material.WITHER_SKELETON_SKULL, "Spread Death and decay in the area. All lesser beings will turn into undead slaves of you.", "death")
                 }
         ));
     }

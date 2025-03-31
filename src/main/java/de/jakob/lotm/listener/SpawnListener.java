@@ -1,8 +1,10 @@
 package de.jakob.lotm.listener;
 
+import de.jakob.lotm.BeyonderConfigManager;
 import de.jakob.lotm.LOTM;
 import de.jakob.lotm.entity.*;
 import de.jakob.lotm.pathways.Pathway;
+import de.jakob.lotm.util.ConfigManager;
 import de.jakob.lotm.util.lotm.Lookup;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -37,51 +39,12 @@ public class SpawnListener implements Listener {
             if(event.getEntity().getScoreboardTags().contains("no_spawn"))
                 return;
 
-            //TODO: Rework tomorrow
-            switch(event.getEntityType()) {
-                case MAGMA_CUBE -> {
-                    if(random.nextInt(10) == 0)
-                        FireSalamander.spawn(event.getLocation());
-                }
-                case CAVE_SPIDER -> {
-                    if(random.nextInt(15) == 0)
-                        BlackHuntingSpider.spawn(event.getLocation());
-                }
-                case WOLF -> {
-                    if(random.nextInt(22) == 0)
-                        GrayDemonicWolf.spawn(event.getLocation());
-                }
-                case PARROT -> {
-                    if(random.nextInt(12) == 0)
-                        BlueShadowFalcon.spawn(event.getLocation());
-                }
-                case CHICKEN -> {
-                    if(random.nextInt(35) == 0)
-                        BlueShadowFalcon.spawn(event.getLocation());
-                }
-                case ENDERMAN -> {
-                    if(random.nextInt(15) == 0)
-                        LostTraveler.spawn(event.getLocation());
-                }
-                case ZOMBIE -> {
-                    if(random.nextInt(48) == 0)
-                        AncientWraith.spawn(event.getLocation());
-                }
-            }
+            spawnCustomEntity(event);
 
             if(Lookup.isNoNPCSpawnEntity(event.getEntity()))
                 return;
 
-            Player nearestPlayer = LOTM.getInstance().getNearestPlayer(event.getLocation());
-            if(nearestPlayer != null && nearestPlayer.getLocation().distance(event.getLocation()) < 6)
-                return;
-
-            if(event.getEntityType() == EntityType.VILLAGER && random.nextInt(4) == 0) {
-                spawnBeyonderNPC(event.getLocation(), false);
-                return;
-            }
-
-            if(random.nextInt(20) != 0)
+            if(random.nextInt(1000) > ConfigManager.getNPCSpawnRate())
                 return;
 
             if(!(event.getEntity() instanceof LivingEntity))
@@ -94,29 +57,41 @@ public class SpawnListener implements Listener {
             if(block.getType() == Material.WATER || block.getType() == Material.LAVA) return;
             if(block.getType().isSolid() || block.getRelative(0, 10, 0).getType().isSolid()) return;
 
-            if(random.nextInt(10) == 0) {
-                Bukkit.getScheduler().runTaskLater(LOTM.getInstance(), () -> spawnBeyonderEntity((LivingEntity) event.getEntity(), event.getEntityType()), 20);
-            }
-            else {
-                Bukkit.getScheduler().runTaskLater(LOTM.getInstance(), () -> {
-                    spawnBeyonderNPC(event.getLocation(), random.nextInt(4) == 0);
-                }, 20);
-            }
+            Bukkit.getScheduler().runTaskLater(LOTM.getInstance(), () -> spawnBeyonderNPC(event.getLocation(), random.nextInt(4) == 0), 20);
         }, 20);
     }
 
-    private void spawnBeyonderEntity(LivingEntity entity, EntityType entityType) {
-
-        Pathway pathway = Lookup.getPathwayForEntity(entityType);
-
-        if(pathway == null)
-            return;
-
-        Bukkit.getScheduler().runTaskLater(LOTM.getInstance(), () -> {
-            LOTM.getInstance().createBeyonder(entity.getUniqueId(), pathway, random.nextInt(4, 10));
-            entity.setCustomNameVisible(true);
-            entity.setCustomName(pathway.getColorPrefix() + entity.getName());
-        }, 20);
+    private void spawnCustomEntity(EntitySpawnEvent event) {
+        switch(event.getEntityType()) {
+            case MAGMA_CUBE -> {
+                if(random.nextInt(10) == 0)
+                    FireSalamander.spawn(event.getLocation());
+            }
+            case CAVE_SPIDER -> {
+                if(random.nextInt(15) == 0)
+                    BlackHuntingSpider.spawn(event.getLocation());
+            }
+            case WOLF -> {
+                if(random.nextInt(22) == 0)
+                    GrayDemonicWolf.spawn(event.getLocation());
+            }
+            case PARROT -> {
+                if(random.nextInt(12) == 0)
+                    BlueShadowFalcon.spawn(event.getLocation());
+            }
+            case CHICKEN -> {
+                if(random.nextInt(35) == 0)
+                    BlueShadowFalcon.spawn(event.getLocation());
+            }
+            case ENDERMAN -> {
+                if(random.nextInt(15) == 0)
+                    LostTraveler.spawn(event.getLocation());
+            }
+            case ZOMBIE -> {
+                if(random.nextInt(48) == 0)
+                    AncientWraith.spawn(event.getLocation());
+            }
+        }
     }
 
     private void spawnBeyonderNPC(Location location, boolean hostile) {

@@ -89,7 +89,7 @@ public class LunarBattlefield extends Ability {
                         beyonderTarget.addMultiplierModifier(.75, 35);
                     }
 
-                    if(entity.getLocation().distance(location) < radius) {
+                    if(entity.getLocation().getWorld() == location.getWorld() && entity.getLocation().distance(location) < radius) {
                         entity.getScoreboardTags().add("lunar");
                         entity.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 2, 3, false, false, false));
                         beyonder.addMultiplierModifier(1.3, 35);
