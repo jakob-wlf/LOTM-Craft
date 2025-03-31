@@ -56,7 +56,9 @@ public class DeathPathway extends Pathway {
                         new DeadFlame(this, 2, AbilityType.SEQUENCE_PROGRESSION, "Death Flame", Material.FIREWORK_STAR, "Spit out a pale dead flame that covers a large area.", "death_flame")
                 },
                 1, new Ability[] {
-                        new Death(this, 1, AbilityType.SEQUENCE_PROGRESSION, "Death", Material.WITHER_SKELETON_SKULL, "Spread Death and decay in the area. All lesser beings will turn into undead slaves of you.", "death")
+                        new Death(this, 1, AbilityType.SEQUENCE_PROGRESSION, "Death", Material.WITHER_SKELETON_SKULL, "Spread Death and decay in the area. All lesser beings will turn into undead slaves of you.", "death"),
+                        new Erasure(this, 1, AbilityType.SEQUENCE_PROGRESSION, "Erasure", Material.WHITE_STAINED_GLASS, "Erase all matter and all beings around you.", "erasure"),
+                        new CrownOfSilence(this, 1, AbilityType.SEQUENCE_PROGRESSION, "Crown of Silence", Material.AMETHYST_CLUSTER, "Silence everything around you, stoping all movements and restricting the usage of Beyonder powers.", "crown_of_silence")
                 }
         ));
     }

@@ -63,7 +63,7 @@ public class UndeadSummoning extends Ability {
             undead.getScoreboardTags().add("belongs_to_" + beyonder.getUuid());
             undead.getScoreboardTags().add("no_spawn");
             undead.getScoreboardTags().add("no_drop");
-            undead.getAttribute(Attribute.SCALE).setBaseValue(2);
+            undead.getAttribute(Attribute.SCALE).setBaseValue(3);
             Pathway deathPathway = LOTM.getInstance().getPathway("death");
             BeyonderEntity undeadBeyonder = (BeyonderEntity) LOTM.getInstance().createBeyonder(undead.getUniqueId(), deathPathway, beyonder.getCurrentSequence(), false, false, false);
             if(undeadBeyonder == null)

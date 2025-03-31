@@ -90,6 +90,12 @@ public class DivineKingdomOfBlazingLight extends Ability {
         marker.setPersistent(true);
         marker.setInvulnerable(true);
 
+        Marker noAbilitiesMarker = (Marker) entity.getWorld().spawnEntity(entity.getLocation(), EntityType.MARKER);
+        noAbilitiesMarker.getScoreboardTags().add("no_abilities");
+        noAbilitiesMarker.getScoreboardTags().add("radius_100");
+        noAbilitiesMarker.getScoreboardTags().add("sequence_" + beyonder.getCurrentSequence());
+        noAbilitiesMarker.getScoreboardTags().add("exclude_" + beyonder.getUuid());
+
         BlockUtil.getSphereBlocks(entity.getEyeLocation().clone().add(0, 35, 0), 12).forEach(b -> b.setType(Material.ORANGE_STAINED_GLASS));
         BlockUtil.getSphereBlocks(entity.getEyeLocation().clone().add(0, 35, 0), 10).forEach(b -> b.setType(Material.YELLOW_STAINED_GLASS));
         BlockUtil.getSphereBlocks(entity.getEyeLocation().clone().add(0, 35, 0), 8).forEach(b -> b.setType(Material.LIGHT));

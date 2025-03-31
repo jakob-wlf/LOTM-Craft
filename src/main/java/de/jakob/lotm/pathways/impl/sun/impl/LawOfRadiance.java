@@ -51,7 +51,7 @@ public class LawOfRadiance extends Ability {
 
         Marker marker = (Marker) world.spawnEntity(location, EntityType.MARKER);
         marker.getScoreboardTags().add("no_abilities");
-        marker.getScoreboardTags().add("radius_30");
+        marker.getScoreboardTags().add("radius_20");
         marker.getScoreboardTags().add("sequence_" + beyonder.getCurrentSequence());
         marker.getScoreboardTags().add("exclude_" + beyonder.getUuid());
 

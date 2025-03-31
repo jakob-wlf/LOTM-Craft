@@ -120,7 +120,7 @@ public class WeatherManipulation extends SelectableAbility {
 
         runTaskWithDuration(5, 20 * 20, () -> {
             ParticleSpawner.displayParticles(world, Particle.SNOWFLAKE, targetLoc, 1500, 18, 7, 18, 0.1, 200);
-            damageNearbyEntities(38, beyonder.getCurrentMultiplier(), entity, 20, targetLoc, world);
+            damageNearbyEntities(38, beyonder.getCurrentMultiplier(), entity, 20, targetLoc, world, false, 0, 10, false, true);
             addPotionEffectToNearbyEntities(entity, 20, targetLoc, world, new PotionEffect(PotionEffectType.SLOWNESS, 20, 4, false, false, false));
         }, null);
 
@@ -144,7 +144,7 @@ public class WeatherManipulation extends SelectableAbility {
         runTaskWithDuration(5, 20 * 20, () -> {
             ParticleSpawner.displayParticles(world, Particle.DUST, targetLoc, 1000, 18, 4, 18, 0, droughtDust, 200);
             ParticleSpawner.displayParticles(world, Particle.FLAME, targetLoc, 1000, 18, 4, 18, 0, 200);
-            damageNearbyEntities(38, beyonder.getCurrentMultiplier(), entity, 20, targetLoc, world, true, 20 * 5);
+            damageNearbyEntities(38, beyonder.getCurrentMultiplier(), entity, 20, targetLoc, world, true, 20 * 5, 10, false, true);
             addPotionEffectToNearbyEntities(entity, 20, targetLoc, world, new PotionEffect(PotionEffectType.SLOWNESS, 20, 4, false, false, false));
         }, null);
 

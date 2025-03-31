@@ -680,8 +680,35 @@ public class ParticleUtil {
                                             UUID locationUUID,
                                             int delay) {
 
+        return spawnParticleTornado(particle, dustOptions, height, bottomRadius, topRadius, duration, detail, pSpeed, 1.0, locationUUID, delay);
+    }
+
+    /**
+     * Spawns a rotating, cone-shaped particle tornado at a given location.
+     *
+     * @param particle      The Particle type to display (e.g., Particle.FLAME, Particle.REDSTONE).
+     * @param dustOptions   DustOptions (only if particle == Particle.REDSTONE; can be null otherwise).
+     * @param height        How tall the tornado is (in blocks).
+     * @param bottomRadius  The radius at the bottom (base) of the tornado.
+     * @param topRadius     The radius at the top of the tornado.
+     * @param duration      How long the tornado lasts (in ticks). (20 ticks = 1 second by default)
+     * @param detail        Controls how many particle points get spawned each tick (higher = denser).
+     * @param pSpeed        The particle speed (the "extra" parameter in spawnParticle).
+     */
+    public static BukkitTask spawnParticleTornado(Particle particle,
+                                                  Particle.DustOptions dustOptions,
+                                                  double height,
+                                                  double bottomRadius,
+                                                  double topRadius,
+                                                  long duration,
+                                                  int detail,
+                                                  double pSpeed,
+                                                  double speed,
+                                                  UUID locationUUID,
+                                                  int delay) {
+
         // How many full revolutions the tornado makes in one second
-        final double revolutionsPerSecond = 1.0;
+        final double revolutionsPerSecond = speed;
 
         // The total number of ticks we want the effect to run
         final long totalTicks = duration;

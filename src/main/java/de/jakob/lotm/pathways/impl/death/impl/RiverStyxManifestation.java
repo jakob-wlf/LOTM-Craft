@@ -28,7 +28,10 @@ public class RiverStyxManifestation extends Ability {
 
     public RiverStyxManifestation(Pathway pathway, int sequence, AbilityType abilityType, String name, Material material, String description, String id) {
         super(pathway, sequence, abilityType, name, material, description, id);
+    }
 
+    @Override
+    protected void init() {
         hasCooldown = true;
         cooldownTicks = 20 * 30;
     }
@@ -48,13 +51,13 @@ public class RiverStyxManifestation extends Ability {
         if(world == null)
             return;
 
-        List<Location> riverLocations = getLocationsAboveGround(targetLoc, vector, 20);
+        List<Location> riverLocations = getLocationsAboveGround(targetLoc, vector, 30);
 
         runTaskWithDuration(4, 12 * 30, () -> {
             riverLocations.forEach(l -> {
                 ParticleSpawner.displayParticles(world, Particle.DUST, l, 10, 1.5, .4, 1.5, 0, dust, 200);
 
-                getNearbyLivingEntities(entity, 12, l, world).forEach(e -> {
+                getNearbyLivingEntities(entity, 6, l, world).forEach(e -> {
                     if(affectedEntities.contains(e))
                         return;
 

@@ -65,6 +65,8 @@ public abstract class Ability {
         this.material = material;
         this.description = description;
         this.id = id;
+
+        init();
     }
 
     public Ability(Pathway pathway, int sequence, AbilityType abilityType, String name, Material material, String description, String id, boolean canBeCopied, boolean canBeUSedByNonPlayer, boolean showAbilityIcon) {
@@ -78,10 +80,12 @@ public abstract class Ability {
         this.canBeCopied = canBeCopied;
         this.canBeUSedByNonPlayer = canBeUSedByNonPlayer;
         this.showAbilityIcon = showAbilityIcon;
+
+        init();
     }
 
     public Ability() {
-
+        init();
     }
 
     public void takeOverValues(Ability ability) {
@@ -130,6 +134,10 @@ public abstract class Ability {
     }
 
     public void onSwitchOutItem(Beyonder beyonder, Player player) {
+
+    }
+
+    protected void init() {
 
     }
 
@@ -294,9 +302,14 @@ public abstract class Ability {
                 Vector rayDir = location.clone().toVector().subtract(((LivingEntity) entity).getEyeLocation().clone().toVector()).normalize().multiply(.75);
                 Location rayStart = ((LivingEntity) entity).getEyeLocation().clone().add(0, -.5, 0);
 
+                int hitCount = 0;
+
                 int breakoutCounter = 100;
                 while(breakoutCounter > 0 && rayStart.distance(location) > 1) {
                     if(rayStart.getBlock().getType().isSolid())
+                        hitCount++;
+
+                    if(hitCount >= 3)
                         continue outerloop;
 
                     rayStart.add(rayDir);

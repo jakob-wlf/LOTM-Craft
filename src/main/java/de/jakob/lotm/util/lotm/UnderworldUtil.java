@@ -34,7 +34,7 @@ public class UnderworldUtil{
         Bukkit.getScheduler().runTaskLater(LOTM.getInstance(), () -> {
             LOTM.getLogUtil().info("Creating Underworld.");
             List<Block> blocks = BlockUtil.getBlocksInCircleRadius(underworldLocation.getBlock(), 120, true, Material.BONE_BLOCK, Material.VOID_AIR, Material.CAVE_AIR);
-            placeBlocksInBatches(blocks, Material.BONE_BLOCK, 1600, 2);
+            placeBlocksInBatches(blocks, Material.BONE_BLOCK, 1000, 2);
         }, 5);
     }
 

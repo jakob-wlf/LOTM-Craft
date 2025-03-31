@@ -4,21 +4,20 @@ import de.jakob.lotm.pathways.Pathway;
 import de.jakob.lotm.pathways.abilities.AbilityType;
 import de.jakob.lotm.pathways.abilities.SelectableAbility;
 import de.jakob.lotm.pathways.beyonder.Beyonder;
-import de.jakob.lotm.util.minecraft.ParticleSpawner;
-import de.jakob.lotm.util.minecraft.VectorUtil;
+import de.jakob.lotm.util.minecraft.*;
 import lombok.NoArgsConstructor;
 import org.bukkit.*;
+import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ItemDisplay;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Transformation;
 import org.bukkit.util.Vector;
 import org.joml.Quaternionf;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 @NoArgsConstructor
@@ -50,7 +49,109 @@ public class FlameAuthority extends SelectableAbility {
         switch (ability) {
             case 0 -> castMeteor(beyonder);
             case 1 -> castFireRain(beyonder);
+            case 2 -> launchFireball(beyonder);
+            case 3 -> castFlamePillar(beyonder);
         }
+    }
+
+    private void castFlamePillar(Beyonder beyonder) {
+        LivingEntity entity = beyonder.getEntity();
+
+        Location loc = getTargetLocation(entity, 25).subtract(0, 2, 0);
+
+        World world = loc.getWorld();
+        if(world == null)
+            return;
+
+        UUID locationUUID = UUID.randomUUID();
+
+        LocationProvider.setLocation(locationUUID, loc);
+
+        BukkitTask tornadoTask = ParticleUtil.spawnParticleTornado(Particle.FLAME, null, 20, 4, 4, 20 * 20, 150, 0, .5, locationUUID, 0);
+        BukkitTask tornadoTask2 = ParticleUtil.spawnParticleTornado(Particle.FLAME, null, 20, 4, 4, 20 * 20, 150, 0, .5, locationUUID, 5);
+        BukkitTask tornadoTask3 = ParticleUtil.spawnParticleTornado(Particle.FLAME, null, 20, 4, 4, 20 * 20, 150, 0, .5, locationUUID, 10);
+        BukkitTask tornadoTask4 = ParticleUtil.spawnParticleTornado(Particle.FLAME, null, 20, 4, 4, 20 * 20, 150, 0, .5, locationUUID, 15);
+
+        runTaskWithDuration(10, 20 * 12, () -> {
+            damageNearbyEntities(50, 1, entity, 5, loc, world, true, 20 * 2, 10, false);
+            world.playSound(loc, Sound.ENTITY_BLAZE_SHOOT, 5f, .85f);
+        }, () -> {
+            tornadoTask.cancel();
+            tornadoTask2.cancel();
+            tornadoTask3.cancel();
+            tornadoTask4.cancel();
+        });
+    }
+
+    private void launchFireball(Beyonder beyonder) {
+        LivingEntity entity = beyonder.getEntity();
+        Vector direction = getDirectionNormalized(entity, 30).multiply(1.5);
+        Location loc = entity.getEyeLocation().add(direction);
+
+        World world = loc.getWorld();
+
+        if(world == null)
+            return;
+
+        world.playSound(loc, Sound.ENTITY_BLAZE_SHOOT, 1f, 1f);
+
+        ItemDisplay fireball = (ItemDisplay) world.spawnEntity(loc, EntityType.ITEM_DISPLAY);
+        fireball.setItemStack(new ItemStack(Material.FIRE_CHARGE));
+        fireball.setGravity(false);
+
+        Transformation transformation = fireball.getTransformation();
+        transformation.getScale().set(2.2);
+        fireball.setTransformation(transformation);
+
+
+        AtomicBoolean hasHit = new AtomicBoolean(false);
+
+        runTaskWithDuration(1, 20 * 8, () -> {
+            if(hasHit.get())
+                return;
+
+            if(damageNearbyEntities(55, beyonder.getCurrentMultiplier(), entity, 3, loc, world, true, 20 * 8, 10, true)) {
+                world.createExplosion(loc, 7, beyonder.isGriefingEnabled(), beyonder.isGriefingEnabled(), entity);
+
+                fireball.remove();
+                hasHit.set(true);
+                return;
+            }
+
+            if(loc.getBlock().getType().isSolid()) {
+                loc.subtract(direction);
+                damageNearbyEntities(55, beyonder.getCurrentMultiplier(), entity, 3, loc, world, true, 20 * 8, 10, true);
+                world.createExplosion(loc, 7, beyonder.isGriefingEnabled(), beyonder.isGriefingEnabled(), entity);
+
+                if(!beyonder.isGriefingEnabled()) {
+                    fireball.remove();
+                    hasHit.set(true);
+                    return;
+                }
+            }
+
+            fireball.teleport(loc);
+            ParticleSpawner.displayParticles(world, Particle.FLAME, loc, 180, .6, .6, .6, 0, 200);
+            ParticleSpawner.displayParticles(world, Particle.SMOKE, loc, 90, .6, .6, .6, 0, 200);
+
+            damageNearbyEntities(40, beyonder.getCurrentMultiplier(), entity, 3, loc, world, true, 20 * 8);
+
+            if(beyonder.isGriefingEnabled()) {
+                List<Block> blocks = BlockUtil.getBlocksInCircleRadius(loc.getBlock(), 4, false);
+                blocks.forEach(b -> {
+                    if(!b.getType().isSolid()) {
+                        if(random.nextInt(4) == 0)
+                            b.setType(Material.FIRE);
+                    }
+                    else {
+                        if(random.nextInt(4) == 0)
+                            b.setType(Material.BASALT);
+                    }
+                });
+            }
+
+            loc.add(direction);
+        }, fireball::remove);
     }
 
     private void castFireRain(Beyonder beyonder) {

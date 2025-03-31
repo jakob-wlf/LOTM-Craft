@@ -48,8 +48,19 @@ public class Death extends Ability {
 
         runTaskWithDuration(5, 20 * 3, () -> {
             if(beyonder.isGriefingEnabled()) {
-                List<Block> blocks = BlockUtil.getBlocksInCircleRadius(loc.getBlock(), i.get(), true, Material.SOUL_SOIL).stream().filter(b -> b.getType().isSolid()).toList();
-                blocks.forEach(block -> block.setType(Material.SOUL_SOIL));
+                List<Block> blocks = BlockUtil.getBlocksInCircleRadius(loc.getBlock(), i.get(), true, Material.SOUL_SOIL, Material.SOUL_SAND, Material.BASALT).stream().filter(b -> b.getType().isSolid()).toList();
+                blocks.forEach(block -> {
+                    switch(random.nextInt(4)) {
+                        case 0:
+                            block.setType(Material.SOUL_SAND);
+                            break;
+                        case 1, 2:
+                            block.setType(Material.SOUL_SOIL);
+                            break;
+                        case 3:
+                            block.setType(Material.BASALT);
+                    }
+                });
             }
 
             i.addAndGet(2);
@@ -61,10 +72,12 @@ public class Death extends Ability {
                 Pathway p = LOTM.getInstance().getPathway("death");
                 int sequence = 7;
 
-                if(beyonderTarget != null && beyonderTarget.getCurrentSequence() < 3)
+                if(beyonderTarget != null && beyonderTarget.getCurrentSequence() < 3) {
+                    e.damage(80 * beyonder.getCurrentMultiplier(), beyonder.getEntity());
                     return;
+                }
 
-                if(beyonderTarget != null && beyonderTarget.getCurrentSequence() > 3 && beyonderTarget.getCurrentSequence() < 7) {
+                if(beyonderTarget != null && beyonderTarget.getCurrentSequence() < 7) {
                     sequence = beyonderTarget.getCurrentSequence();
                     p = beyonderTarget.getCurrentPathway();
                 }
