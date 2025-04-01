@@ -1,8 +1,11 @@
 package de.jakob.lotm.util.minecraft;
 
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 public class EntityUtil {
@@ -45,6 +48,17 @@ public class EntityUtil {
 
         return new boolean[]{true, true};
     }
+
+    public static final Set<EntityType> UNDEAD_ENTITIES = new HashSet<>() {{
+        add(EntityType.ZOMBIE);
+        add(EntityType.SKELETON);
+        add(EntityType.WITHER_SKELETON);
+        add(EntityType.STRAY);
+        add(EntityType.HUSK);
+        add(EntityType.DROWNED);
+        add(EntityType.PHANTOM);
+        add(EntityType.WITHER);
+    }};
 
     public static boolean areOnTheSameTeam(Entity entity1, Entity entity2) {
         List<String> servantEntities = entity1.getScoreboardTags().stream().filter(s -> s.startsWith("belongs_to_")).toList();

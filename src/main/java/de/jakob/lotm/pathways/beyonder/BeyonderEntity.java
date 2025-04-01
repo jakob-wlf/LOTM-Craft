@@ -73,12 +73,18 @@ public class BeyonderEntity extends Beyonder {
                 UUID masterUUID = UUID.fromString(tag.replace("belongs_to_", ""));
                 Entity entity = Bukkit.getEntity(masterUUID);
                 if(entity == null){
-                    Bukkit.getScheduler().runTaskLater(LOTM.getInstance(), () -> getEntity().getScoreboardTags().remove(tag), 2);
+                    Bukkit.getScheduler().runTaskLater(LOTM.getInstance(), () -> {
+                        if(getEntity() != null)
+                            getEntity().getScoreboardTags().remove(tag);
+                    }, 2);
                     return null;
                 }
 
                 if(entity.getWorld() != getEntity().getWorld()) {
-                    Bukkit.getScheduler().runTaskLater(LOTM.getInstance(), () -> getEntity().getScoreboardTags().remove(tag), 2);
+                    Bukkit.getScheduler().runTaskLater(LOTM.getInstance(), () -> {
+                        if(getEntity() != null)
+                            getEntity().getScoreboardTags().remove(tag);
+                    }, 2);
                     return null;
                 }
 

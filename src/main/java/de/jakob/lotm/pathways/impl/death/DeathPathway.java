@@ -24,7 +24,8 @@ public class DeathPathway extends Pathway {
                 },
                 8, new Ability[] {
                         new EyeOfDeath(this, 8, AbilityType.SEQUENCE_PROGRESSION, "Eye of Death", Material.ENDER_EYE, "Determine the weaknesses of your enemies, effectively dealing more damage.", "eye_of_death"),
-                        new SpiritCommunication(this, 8, AbilityType.SEQUENCE_PROGRESSION, "Spirit Communication", Material.COAL, "Communicate with the nearby spirits and let them help you restrain or fight your enemy.", "spirit_communication")
+                        new SpiritCommunication(this, 8, AbilityType.SEQUENCE_PROGRESSION, "Spirit Communication", Material.COAL, "Communicate with the nearby spirits and let them help you restrain or fight your enemy.", "spirit_communication"),
+                        new Dead(this, 8, AbilityType.SEQUENCE_PROGRESSION, "Dead", Material.SKELETON_SKULL, "You are now considered dead, alowing you to survive in the underworld.", "dead")
                 },
                 7, new Ability[]{
                         new SpiritControlling(this, 7, AbilityType.SEQUENCE_PROGRESSION, "Spirit Controlling", Material.AMETHYST_SHARD, """

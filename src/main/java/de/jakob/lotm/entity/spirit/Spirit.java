@@ -35,6 +35,7 @@ public abstract class Spirit {
         entity.setSilent(true);
         entity.getScoreboardTags().add("no_spawn");
         entity.getScoreboardTags().add("no_drop");
+        entity.getScoreboardTags().add("dead");
         entity.getAttribute(Attribute.SCALE).setBaseValue(size);
         entity.setVisualFire(false);
         entity.setFireTicks(0);

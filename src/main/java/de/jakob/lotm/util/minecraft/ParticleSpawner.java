@@ -100,9 +100,83 @@ public class ParticleSpawner {
         }
     }
 
+    public static void displayParticles(Particle particle, Location location, int amount, double offsetX, double offsetY, double offsetZ, double speed, int maxDistance) {
+        World world = location.getWorld();
+
+        if(world == null)
+            return;
+
+        for(Player player : world.getPlayers()) {
+            if(player.getWorld() == world && player.getLocation().distance(location) < maxDistance) {
+                player.spawnParticle(particle, location, amount, offsetX, offsetY, offsetZ, speed, null, true);
+            }
+        }
+    }
+
+    public static void displayParticles(Particle particle, Location location, int amount, double offsetX, double offsetY, double offsetZ, double speed, Particle.DustOptions dustOptions, int maxDistance) {
+        World world = location.getWorld();
+
+        if(world == null)
+            return;
+
+        for(Player player : world.getPlayers()) {
+            if(player.getWorld() == world && player.getLocation().distance(location) < maxDistance) {
+                if(particle == Particle.DUST)
+                    player.spawnParticle(particle, location, amount, offsetX, offsetY, offsetZ, speed, dustOptions, true);
+                else
+                    player.spawnParticle(particle, location, amount, offsetX, offsetY, offsetZ, speed, null, true);
+            }
+        }
+    }
+
+    public static void displayParticles(Particle particle, Location location, int amount, double offsetX, double offsetY, double offsetZ, double speed, Color color, int maxDistance) {
+        World world = location.getWorld();
+
+        if(world == null)
+            return;
+
+        for(Player player : world.getPlayers()) {
+            if(player.getWorld() == world && player.getLocation().distance(location) < maxDistance) {
+                if(particle == Particle.ENTITY_EFFECT)
+                    player.spawnParticle(particle, location, amount, offsetX, offsetY, offsetZ, speed, color, true);
+                else
+                    player.spawnParticle(particle, location, amount, offsetX, offsetY, offsetZ, speed, null, true);
+            }
+        }
+    }
+
+    public static void displayForcedDust(Particle particle, Location location, int amount, double offsetX, double offsetY, double offsetZ, double speed, Particle.DustOptions dust) {
+        World world = location.getWorld();
+
+        if(world == null)
+            return;
+
+        if(particle == Particle.DUST)
+            world.spawnParticle(particle, location, amount, offsetX, offsetY, offsetZ, speed, dust, true);
+        else
+            world.spawnParticle(particle, location, amount, offsetX, offsetY, offsetZ, speed, null, true);
+    }
+
+    public static void displayParticles(Particle particle, Location location, int amount, double offsetX, double offsetY, double offsetZ, double speed, BlockData blockdata, int maxDistance) {
+        World world = location.getWorld();
+
+        if(world == null)
+            return;
+
+        for(Player player : world.getPlayers()) {
+            if(player.getWorld() == world && player.getLocation().distance(location) < maxDistance) {
+                if(particle == Particle.BLOCK || particle == Particle.BLOCK_MARKER)
+                    player.spawnParticle(particle, location, amount, offsetX, offsetY, offsetZ, speed, blockdata, true);
+                else
+                    player.spawnParticle(particle, location, amount, offsetX, offsetY, offsetZ, speed, null, true);
+            }
+        }
+    }
 
 
     public static void displayParticles(World world, Particle particle, Location location, int amount, double offsetX, double offsetY, double offsetZ, double speed, int maxDistance) {
+        if(world != location.getWorld())
+            return;
         for(Player player : world.getPlayers()) {
             if(player.getWorld() == world && player.getLocation().distance(location) < maxDistance) {
                 player.spawnParticle(particle, location, amount, offsetX, offsetY, offsetZ, speed, null, true);
@@ -111,6 +185,9 @@ public class ParticleSpawner {
     }
 
     public static void displayParticles(World world, Particle particle, Location location, int amount, double offsetX, double offsetY, double offsetZ, double speed, Particle.DustOptions dustOptions, int maxDistance) {
+        if(world != location.getWorld())
+            return;
+
         for(Player player : world.getPlayers()) {
             if(player.getWorld() == world && player.getLocation().distance(location) < maxDistance) {
                 if(particle == Particle.DUST)
@@ -122,6 +199,9 @@ public class ParticleSpawner {
     }
 
     public static void displayParticles(World world, Particle particle, Location location, int amount, double offsetX, double offsetY, double offsetZ, double speed, Color color, int maxDistance) {
+        if(world != location.getWorld())
+            return;
+
         for(Player player : world.getPlayers()) {
             if(player.getWorld() == world && player.getLocation().distance(location) < maxDistance) {
                 if(particle == Particle.ENTITY_EFFECT)
@@ -133,6 +213,9 @@ public class ParticleSpawner {
     }
 
     public static void displayForcedDust(World world, Particle particle, Location location, int amount, double offsetX, double offsetY, double offsetZ, double speed, Particle.DustOptions dust) {
+        if(world != location.getWorld())
+            return;
+
         if(particle == Particle.DUST)
             world.spawnParticle(particle, location, amount, offsetX, offsetY, offsetZ, speed, dust, true);
         else
@@ -140,6 +223,9 @@ public class ParticleSpawner {
     }
 
     public static void displayParticles(World world, Particle particle, Location location, int amount, double offsetX, double offsetY, double offsetZ, double speed, BlockData blockdata, int maxDistance) {
+        if(world != location.getWorld())
+            return;
+
         for(Player player : world.getPlayers()) {
             if(player.getWorld() == world && player.getLocation().distance(location) < maxDistance) {
                 if(particle == Particle.BLOCK || particle == Particle.BLOCK_MARKER)
@@ -151,6 +237,7 @@ public class ParticleSpawner {
     }
 
     public static void displayParticles(World world, Particle particle, double x, double y, double z, int amount, double offsetX, double offsetY, double offsetZ, double speed, int maxDistance) {
+
         Location location = new Location(world, x, y, z);
         for(Player player : world.getPlayers()) {
             if(player.getWorld() == world && player.getLocation().distance(location) < maxDistance) {

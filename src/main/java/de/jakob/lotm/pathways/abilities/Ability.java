@@ -178,6 +178,8 @@ public abstract class Ability {
         if(meta == null)
             return item;
 
+        String colorprefix = pathway != null ? pathway.getColorPrefix() : "§7";
+
         String displayName = this instanceof PassiveAbility ? pathway.getColorPrefix() + name + " §7(Passive)" : pathway.getColorPrefix() + name;
         meta.setDisplayName(displayName);
         meta.setUnbreakable(true);

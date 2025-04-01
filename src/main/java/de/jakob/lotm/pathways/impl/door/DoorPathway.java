@@ -50,9 +50,10 @@ public class DoorPathway extends Pathway {
                         new Exile(this, 4, AbilityType.SEQUENCE_PROGRESSION, "Exile", Material.CRIMSON_DOOR, "Banish enemies to a chaotic space, either ending the battle swiftly or giving you time to escape.", "exile"),
                 },
                 3, new Ability[] {
+                        new Wandering(this, 3, AbilityType.SEQUENCE_PROGRESSION, "Wandering", Material.LAPIS_LAZULI, "Travel between all the different realms.", "wandering")
                 },
                 2, new Ability[] {
-                        //new SpaceCollapse(this, 2, AbilityType.SEQUENCE_PROGRESSION, "Space Collapse", Material.ECHO_SHARD, "Tear Space and have it become swallowed by the void, causing everything within the affected area to gradually collapse and shatter.", "space_collapse")
+                        new SpaceCollapse(this, 2, AbilityType.SEQUENCE_PROGRESSION, "Space Collapse", Material.ECHO_SHARD, "Tear Space and have it become swallowed by the void, causing everything within the affected area to gradually collapse and shatter.", "space_collapse")
                 },
                 1, new Ability[] {
                 }

@@ -6,6 +6,7 @@ import de.jakob.lotm.entity.*;
 import de.jakob.lotm.pathways.Pathway;
 import de.jakob.lotm.util.ConfigManager;
 import de.jakob.lotm.util.lotm.Lookup;
+import de.jakob.lotm.util.lotm.UnderworldUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -25,6 +26,10 @@ public class SpawnListener implements Listener {
 
     @EventHandler
     public void onEntitySpawn(EntitySpawnEvent event) {
+        if(event.getLocation().getWorld() == UnderworldUtil.underworldLocation.getWorld() && event.getLocation().distance(UnderworldUtil.underworldLocation) <= UnderworldUtil.underworldSize) {
+            event.setCancelled(true);
+        }
+
         Bukkit.getScheduler().runTaskLater(LOTM.getInstance(), () -> {
             if(event.getEntity() instanceof LivingEntity livingEntity && !livingEntity.hasAI()) {
                 return;

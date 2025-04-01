@@ -76,7 +76,8 @@ public final class LOTM extends JavaPlugin {
             "health_display",
             "see_spirits",
             "belongs_to",
-            "spirit"
+            "spirit",
+            "dead"
     );
 
     @Getter
@@ -111,6 +112,7 @@ public final class LOTM extends JavaPlugin {
 
         UnderworldUtil underworldUtil = new UnderworldUtil();
         underworldUtil.createUnderworld(4746, 80, -8780);
+        underworldUtil.loop();
 
         // Load Beyonders
         BeyonderConfigManager.loadBeyonders();
