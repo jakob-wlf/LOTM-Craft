@@ -207,7 +207,7 @@ public class SpaceConcealment extends Ability {
     @Override
     public void onHold(Beyonder beyonder, Player player) {
         if(!selectedAbilities.containsKey(beyonder))
-            selectedAbilities.put(beyonder, 0);
+            selectedAbilities.put(beyonder, 1);
 
         if(!radius.containsKey(beyonder))
             radius.put(beyonder, 4);

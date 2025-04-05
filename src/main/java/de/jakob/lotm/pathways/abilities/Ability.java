@@ -25,6 +25,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Stream;
 
 @Getter
@@ -166,6 +167,11 @@ public abstract class Ability {
 
         getNearbyLivingEntities(entity, radius, location, location.getWorld()).forEach(t -> t.setVelocity(new Vector(0, 0, 0)));
     }
+
+    public void restrictMovement(LivingEntity entity) {
+        runTaskWithDuration(1, 10, () -> entity.setVelocity(new Vector(0, 0, 0)));
+    }
+
 
     public ItemStack getItem() {
         ItemStack item = new ItemStack(material);
@@ -517,8 +523,75 @@ public abstract class Ability {
         }.runTaskTimer(plugin, 0, Math.max(1, period));
     }
 
+    protected void runTaskWithDuration(int period, double duration, AtomicBoolean breakCondition, Runnable task, Runnable onFinish) {
+        new BukkitRunnable() {
+            int counter = 0;
+
+            @Override
+            public void run() {
+                if (counter >= duration || breakCondition.get()) {
+                    if (onFinish != null) {
+                        onFinish.run();
+                    }
+                    cancel();
+                    return;
+                }
+
+                if (task != null) {
+                    task.run();
+                }
+
+                counter += (period <= 0) ? 1 : period;
+            }
+        }.runTaskTimer(plugin, 0, Math.max(1, period));
+    }
+
+    protected void runTaskWithDuration(int period, double duration, AtomicBoolean breakCondition, Runnable task) {
+        runTaskWithDuration(period, duration, breakCondition, task, null);
+    }
+
+    protected void runTaskWithDuration(int period, double duration, Runnable task) {
+        runTaskWithDuration(period, duration, task, null);
+    }
+
     protected List<LivingEntity> getNearbyLivingEntities(@Nullable LivingEntity exclude, double radius, @NotNull Location location, @NotNull World world) {
         return getNearbyLivingEntities(exclude, radius, location, world, new EntityType[0]);
+    }
+
+    protected List<LivingEntity> getNearbyLivingEntities(@Nullable LivingEntity exclude, double radius, @NotNull Location location, boolean excludeTeamMembers, EntityType... excludedEntityTypes) {
+        World world = location.getWorld();
+
+        if(world == null)
+            return new ArrayList<>();
+
+        List<LivingEntity> entities = new ArrayList<>();
+
+        if(location.getWorld() != world)
+            world = location.getWorld();
+
+        if(world == null)
+            return entities;
+
+        for(Entity entity : world.getNearbyEntities(location, radius, radius, radius)) {
+            if (!(entity instanceof LivingEntity livingEntity) || entity.getType() == EntityType.ARMOR_STAND)
+                continue;
+            if (entity == exclude)
+                continue;
+
+            if(excludeTeamMembers && exclude != null && !EntityUtil.mayDamage(exclude, entity)[0])
+                continue;
+
+            if (Stream.of(excludedEntityTypes).anyMatch(e -> e == livingEntity.getType()))
+                continue;
+
+            entities.add(livingEntity);
+        }
+
+        return entities;
+    }
+
+    protected List<LivingEntity> getNearbyLivingEntities(@Nullable LivingEntity exclude, double radius, @NotNull Location location, EntityType... excludedEntityTypes) {
+        return getNearbyLivingEntities(exclude, radius, location, false, excludedEntityTypes);
     }
 
     protected List<LivingEntity> getNearbyLivingEntities(@Nullable LivingEntity exclude, double radius, @NotNull Location location, @NotNull World world, boolean excludeTeamMembers, EntityType... excludedEntityTypes) {
@@ -699,6 +772,9 @@ public abstract class Ability {
 
     public void prepareAbility(Beyonder beyonder) {
         if(onCooldown.contains(beyonder) && hasCooldown)
+            return;
+
+        if(!beyonder.isMayUsePowers())
             return;
 
         if(hasCooldown) {

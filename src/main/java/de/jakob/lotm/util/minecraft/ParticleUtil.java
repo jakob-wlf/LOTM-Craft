@@ -157,7 +157,7 @@ public class ParticleUtil {
             double z = radius * Math.cos(theta);
 
             Location particleLocation = center.clone().add(x, y, z);
-            displayParticles(world, particle, particleLocation, 1, 0, 0, 0, 0, dustOptions, 250);
+            displayParticles(world, particle, particleLocation, 1, 0, 0, 0, 0, dustOptions, 450);
         }
     }
 

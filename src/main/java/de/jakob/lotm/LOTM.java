@@ -77,7 +77,8 @@ public final class LOTM extends JavaPlugin {
             "see_spirits",
             "belongs_to",
             "spirit",
-            "dead"
+            "dead",
+            "is_sealed"
     );
 
     @Getter

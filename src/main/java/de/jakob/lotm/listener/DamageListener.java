@@ -1,8 +1,10 @@
 package de.jakob.lotm.listener;
 
+import de.jakob.lotm.LOTM;
 import de.jakob.lotm.util.minecraft.EntityUtil;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -21,7 +23,8 @@ public class DamageListener implements Listener {
     @EventHandler
     public void onEntityDamage(EntityDamageEvent event) {
         if(event.getCause() == EntityDamageEvent.DamageCause.FIRE_TICK || event.getCause() == EntityDamageEvent.DamageCause.FIRE || event.getCause() == EntityDamageEvent.DamageCause.LAVA ||event.getCause() == EntityDamageEvent.DamageCause.MELTING) {
-            if(event.getEntity() instanceof LivingEntity livingEntity)
+            Player player = LOTM.getInstance().getNearestPlayer(event.getEntity().getLocation());
+            if(event.getEntity() instanceof LivingEntity livingEntity && player != null && player.getLocation().distance(livingEntity.getLocation()) < 30 && player != livingEntity)
                 livingEntity.setNoDamageTicks(0);
         }
 

@@ -20,6 +20,8 @@ public abstract class ToggleableAbility extends Ability {
 
     protected final HashSet<Beyonder> casting = new HashSet<>();
 
+    protected boolean allowDifferentWorld = false;
+
     public ToggleableAbility(Pathway pathway, int sequence, AbilityType abilityType, String name, Material material, String description, String id) {
         super(pathway, sequence, abilityType, name, material, description, id);
     }
@@ -38,6 +40,10 @@ public abstract class ToggleableAbility extends Ability {
 
         casting.add(beyonder);
         start(beyonder);
+
+        if(!casting.contains(beyonder)) {
+            return;
+        }
 
         new BukkitRunnable() {
 

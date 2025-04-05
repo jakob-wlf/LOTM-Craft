@@ -52,6 +52,9 @@ public abstract class Beyonder implements Listener {
 
     protected double digestion = 0;
 
+    @Getter
+    private boolean mayUsePowers = true;
+
     public Beyonder(UUID uuid, Pathway currentPathway, int currentSequence) {
         this.uuid = uuid;
         this.currentPathway = currentPathway;
@@ -229,6 +232,14 @@ public abstract class Beyonder implements Listener {
             Ability ability = usableAbilities.get(random.nextInt(usableAbilities.size()));
             ability.prepareAbility(this);
         }
+    }
+
+
+    public void disablePowers(int ticks) {
+        mayUsePowers = false;
+        Bukkit.getScheduler().runTaskLater(LOTM.getInstance(), () -> {
+            mayUsePowers = true;
+        }, ticks);
     }
 
     public void addAbility(Ability ability) {

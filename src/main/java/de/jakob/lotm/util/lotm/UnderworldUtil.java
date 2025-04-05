@@ -7,6 +7,8 @@ import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.List;
@@ -50,7 +52,8 @@ public class UnderworldUtil{
                     return;
 
                 world.getNearbyEntities(underworldLocation, underworldSize, 190, 190).stream().filter(e -> e instanceof LivingEntity).map(e -> (LivingEntity) e).filter(e -> !e.getScoreboardTags().contains("dead") && !EntityUtil.UNDEAD_ENTITIES.contains(e.getType())).forEach(e -> {
-                    e.damage(500);
+                    e.damage(70);
+                    e.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 20 * 5, 4, false, false, false));
                 });
 
                 world.getNearbyEntities(underworldLocation, 190, 190, 190).stream().filter(e -> !(e instanceof LivingEntity)).forEach(Entity::remove);
