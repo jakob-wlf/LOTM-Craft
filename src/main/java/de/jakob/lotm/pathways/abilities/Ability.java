@@ -208,6 +208,18 @@ public abstract class Ability {
         return item;
     }
 
+    private Location distortionLoc(Location loc, double radius) {
+        World world = loc.getWorld();
+        if(world == null)
+            return null;
+
+        Marker marker = world.getNearbyEntities(loc, radius, radius, radius).stream().filter(e -> e instanceof Marker && e.getScoreboardTags().contains("distortion_pull")).map(e -> (Marker) e).findFirst().orElse(null);
+        if(marker == null)
+            return null;
+
+        return marker.getLocation();
+    }
+
     protected boolean damageNearbyEntities(
             double damage,
             double multiplier,
@@ -675,7 +687,10 @@ public abstract class Ability {
         }
 
         Location eyeLocation = entity.getEyeLocation();
-        Vector direction = eyeLocation.getDirection();
+        Vector direction = eyeLocation.getDirection().normalize();
+        Location distortionLoc = distortionLoc(eyeLocation, radius);
+        if(distortionLoc != null)
+            direction = distortionLoc.toVector().subtract(eyeLocation.toVector()).normalize();
 
         for (int i = 1; i <= radius; i++) {
             Location currentLocation = eyeLocation.clone().add(direction.clone().multiply(i));
@@ -713,7 +728,10 @@ public abstract class Ability {
 
     protected Location getLocationLookedAt(LivingEntity entity, double radius, boolean oneBlockBefore) {
         Location eyeLocation = entity.getEyeLocation();
-        Vector direction = eyeLocation.getDirection();
+        Vector direction = eyeLocation.getDirection().normalize();
+        Location distortionLoc = distortionLoc(eyeLocation, radius);
+        if(distortionLoc != null)
+            direction = distortionLoc.toVector().subtract(eyeLocation.toVector()).normalize();
 
         for (double i = 0; i <= radius; i+=.25) {
             Location currentLocation = eyeLocation.clone().add(direction.clone().multiply(i));
@@ -729,7 +747,10 @@ public abstract class Ability {
 
     protected Block getTargetBlock(LivingEntity entity, double radius, boolean oneBlockBefore) {
         Location eyeLocation = entity.getEyeLocation();
-        Vector direction = eyeLocation.getDirection();
+        Vector direction = eyeLocation.getDirection().normalize();
+        Location distortionLoc = distortionLoc(eyeLocation, radius);
+        if(distortionLoc != null)
+            direction = distortionLoc.toVector().subtract(eyeLocation.toVector()).normalize();
 
         for (double i = 0; i <= radius; i+=.25) {
             Location currentLocation = eyeLocation.clone().add(direction.clone().multiply(i));

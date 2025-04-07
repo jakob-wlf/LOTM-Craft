@@ -52,9 +52,9 @@ public class DoorPathway extends Pathway {
                 3, new Ability[] {
                         new Wandering(this, 3, AbilityType.SEQUENCE_PROGRESSION, "Wandering", Material.LAPIS_LAZULI, "Travel between all the different realms.", "wandering"),
                         new Conceptualization(this, 3, AbilityType.SEQUENCE_PROGRESSION, "Conceptualization", Material.NETHER_STAR, "Conceptualize yourself to quickly traverse the world and wander around different realms.", "conceptualization"),
-                        new Seal(this, 3, AbilityType.SEQUENCE_PROGRESSION, "Seal", Material.OXIDIZED_COPPER_DOOR, "Seal the target. If they are weaker you can send them to an unknown location, unable for them to escape", "seal")
                 },
                 2, new Ability[] {
+                        new Seal(this, 2, AbilityType.SEQUENCE_PROGRESSION, "Seal", Material.OXIDIZED_COPPER_DOOR, "Seal the target. If they are weaker you can send them to an unknown location, unable for them to escape", "seal"),
                         new SpaceCollapse(this, 2, AbilityType.SEQUENCE_PROGRESSION, "Space Collapse", Material.ECHO_SHARD, "Tear Space and have it become swallowed by the void, causing everything within the affected area to gradually collapse and shatter.", "space_collapse"),
                         new BlackHole(this, 2, AbilityType.SEQUENCE_PROGRESSION, "Black Hole", Material.BLACK_DYE, "Create a black hole that pulls in all entities and blocks within a certain radius.", "black_hole")
                 },

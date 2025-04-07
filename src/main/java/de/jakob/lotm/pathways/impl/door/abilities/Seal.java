@@ -28,23 +28,64 @@ public class Seal extends Ability {
     protected void init() {
         hasCooldown = true;
         cooldownTicks = 20;
-        spirituality = 300;
+        spirituality = 500;
     }
 
     @Override
     public void useAbility(Beyonder beyonder) {
         LivingEntity entity = beyonder.getEntity();
-        LivingEntity target = getTargetEntity(entity, 16);
+
+        if(entity instanceof Player player && player.isSneaking()) {
+            Location loc = getTargetLocation(entity,25);
+
+            if(loc.getWorld() == null)
+                return;
+
+            getNearbyLivingEntities(entity, 6, loc, loc.getWorld(), true).forEach(livingEntity -> {
+                Beyonder beyonderTarget = plugin.getBeyonder(livingEntity.getUniqueId());
+
+                if(beyonderTarget != null && beyonderTarget.getCurrentSequence() > beyonder.getCurrentSequence())
+                    beyonderTarget.disablePowers(20 * 12);
+            });
+
+            runTaskWithDuration(4, 20 * 12, () -> {
+                ParticleUtil.createParticleSphere(loc.clone().add(0, .6, 0), 6, 40, Particle.DUST, dust);
+                ParticleUtil.createParticleSphere(loc.clone().add(0, .6, 0), 6, 40, Particle.DUST, dust2);
+                ParticleUtil.createParticleSphere(loc.clone().add(0, .6, 0), 6, 40, Particle.END_ROD);
+
+                loc.getWorld().playSound(loc, Sound.BLOCK_ENCHANTMENT_TABLE_USE, .5f, 1);
+
+                addPotionEffectToNearbyEntities(entity, 6, loc, loc.getWorld(), new PotionEffect(PotionEffectType.SLOWNESS, 20 * 5, 10, false, false, false));
+                restrictMovement(entity, loc, 6);
+
+            });
+            return;
+        }
+
+        LivingEntity target = getTargetEntity(entity, 25);
 
         if (target == null) {
-            if(entity instanceof Player player)
-                player.sendMessage("§dNo target found!");
+            Location loc = getTargetLocation(entity,25);
+
+            if(loc.getWorld() == null)
+                return;
+
+            runTaskWithDuration(4, 20 * 5, () -> {
+                ParticleUtil.createParticleSphere(loc.clone().add(0, .6, 0), 2, 20, Particle.DUST, dust);
+                ParticleUtil.createParticleSphere(loc.clone().add(0, .6, 0), 2, 20, Particle.DUST, dust2);
+                ParticleUtil.createParticleSphere(loc.clone().add(0, .6, 0), 2, 20, Particle.END_ROD);
+
+                loc.getWorld().playSound(loc, Sound.BLOCK_ENCHANTMENT_TABLE_USE, .5f, 1);
+
+                restrictMovement(entity, loc, 2);
+
+            });
             return;
         }
 
         Beyonder beyonderTarget = plugin.getBeyonder(target.getUniqueId());
 
-        if(beyonderTarget == null || beyonderTarget.getCurrentSequence() > beyonder.getCurrentSequence()) {
+        if(beyonderTarget == null || beyonderTarget.getCurrentSequence() > beyonder.getCurrentSequence() + 1) {
             ParticleUtil.createParticleSphere(target.getLocation().add(0, .6, 0), 1, 20, Particle.DUST, dust);
             ParticleUtil.createParticleSphere(target.getLocation().add(0, .6, 0), 1, 20, Particle.DUST, dust2);
             ParticleUtil.createParticleSphere(target.getLocation().add(0, .6, 0), 1, 20, Particle.END_ROD);
@@ -52,17 +93,11 @@ public class Seal extends Ability {
             target.getWorld().playSound(target.getLocation(), Sound.BLOCK_PORTAL_TRAVEL, .15f, 1);
             target.getWorld().playSound(target.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1, 1);
 
-            System.out.println("0");
-
-            Location endLocation = createLocationInEnd(random.nextInt(347246, 347646), 200, random.nextInt(-323223, -323623));
-
-            System.out.println("1");
+            Location endLocation = createLocationInEnd(random.nextDouble(800) + 347246, 200, random.nextDouble(800) - 323223);
 
             if(endLocation == null) {
                 return;
             }
-
-            System.out.println("2");
 
             BlockUtil.getBlocksInRectangle(endLocation.clone().add(3, -1, 3), endLocation.clone().add(-3, -1, -3), false).forEach(b -> {
                 if(!b.getType().isSolid())
@@ -89,7 +124,9 @@ public class Seal extends Ability {
 
         beyonderTarget.getEntity().addScoreboardTag("is_sealed");
 
-        int duration = beyonder.getCurrentSequence() == beyonderTarget.getCurrentSequence() ? 20 * 12 : 20 * 3;
+        int duration = beyonder.getCurrentSequence() >= beyonderTarget.getCurrentSequence() ? 20 * 12 : 20 * 3;
+
+        beyonderTarget.disablePowers(duration);
 
         runTaskWithDuration(4, duration, () -> {
             ParticleUtil.createParticleSphere(beyonderTarget.getEntity().getLocation().add(0, .6, 0), 2, 20, Particle.DUST, dust);
@@ -97,7 +134,6 @@ public class Seal extends Ability {
             ParticleUtil.createParticleSphere(beyonderTarget.getEntity().getLocation().add(0, .6, 0), 2, 20, Particle.END_ROD);
 
             beyonderTarget.getEntity().getWorld().playSound(beyonderTarget.getEntity().getLocation(), Sound.BLOCK_ENCHANTMENT_TABLE_USE, .5f, 1);
-            beyonderTarget.disablePowers(6);
 
             beyonderTarget.getEntity().addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 20 * 5, 10, false, false, false));
             restrictMovement(beyonderTarget.getEntity());
@@ -117,6 +153,7 @@ public class Seal extends Ability {
         // If the world is successfully loaded, create a Location
         if (endWorld != null) {
             return new Location(endWorld, x, y, z);
+
         } else {
             return null;
         }

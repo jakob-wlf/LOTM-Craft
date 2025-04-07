@@ -61,6 +61,10 @@ public class Conceptualization extends ToggleableAbility implements Listener {
             return;
 
         Player player = (Player) beyonder.getEntity();
+
+        if(player == null || !player.isValid())
+            return;
+
         player.setInvisible(false);
         player.setAllowFlight(false);
 

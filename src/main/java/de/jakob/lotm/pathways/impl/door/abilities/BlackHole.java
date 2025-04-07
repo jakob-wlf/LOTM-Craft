@@ -18,7 +18,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.util.Vector;
 
+import java.util.Comparator;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -59,7 +61,7 @@ public class BlackHole extends Ability implements Listener {
             return;
 
         HashSet<FallingBlock> currentBlocks = new HashSet<>();
-        Set<Block> nearbyBlocks = BlockUtil.getSphereBlocks(loc, 35);
+        Set<Block> nearbyBlocks = new HashSet<>(BlockUtil.getSphereBlocks(loc, 35).stream().sorted(Comparator.comparing(b -> b.getLocation().distance(loc.clone()))).toList());
 
         AtomicBoolean isCancelled = new AtomicBoolean(false);
 
@@ -86,29 +88,34 @@ public class BlackHole extends Ability implements Listener {
                 e.setVelocity(direction.multiply(.5));
             });
 
-            nearbyBlocks.forEach(b -> {
-                if(!b.getType().isSolid() || b.getRelative(0, 1, 0).getType().isSolid() || (beyonder.isGriefingEnabled() ? random.nextInt(900) != 0 : random.nextInt(4000) != 0))
+            Set<Block> removeFromSet = new HashSet<>();
+
+            nearbyBlocks.stream().limit(800).forEach(b -> {
+                if(!b.getType().isSolid() || b.getRelative(0, 1, 0).getType().isSolid() || beyonder.isGriefingEnabled() ? random.nextInt(90) != 0 : random.nextInt(400) != 0)
                     return;
 
-                FallingBlock fallingBlock = loc.getWorld().spawnFallingBlock(b.getLocation().add(.5, 1, .5), b.getBlockData());
+                FallingBlock fallingBlock = loc.getWorld().spawnFallingBlock(b.getLocation().add(.5, 1.5, .5), b.getBlockData());
                 fallingBlock.setGravity(false);
                 fallingBlock.setDropItem(false);
                 fallingBlock.setHurtEntities(false);
                 currentBlocks.add(fallingBlock);
                 blocks.add(fallingBlock);
+                removeFromSet.add(b);
 
-                runTaskWithDuration(1, 20 * 3, () -> {
-                    if(fallingBlock.getLocation().distance(loc) < 4) {
+                runTaskWithDuration(1, 20 * 6, () -> {
+                    if(fallingBlock.getLocation().distanceSquared(loc) < 2) {
                         fallingBlock.remove();
                         return;
                     }
 
-                    fallingBlock.setVelocity(loc.toVector().subtract(fallingBlock.getLocation().toVector()).normalize().multiply(.5));
+                    fallingBlock.setVelocity(loc.clone().toVector().subtract(fallingBlock.getLocation().toVector()).normalize().multiply(.5));
                 }, fallingBlock::remove);
 
                 if(beyonder.isGriefingEnabled())
                     b.setType(Material.AIR);
             });
+
+            nearbyBlocks.removeAll(removeFromSet);
         }, () -> currentBlocks.forEach(b -> {
             b.remove();
             blocks.remove(b);
