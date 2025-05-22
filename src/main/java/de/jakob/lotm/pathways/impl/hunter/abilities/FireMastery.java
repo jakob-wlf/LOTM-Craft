@@ -246,7 +246,7 @@ public class FireMastery extends Ability {
         Location loc = entity.getEyeLocation().add(direction.clone().multiply(3));
 
         LivingEntity target = getTargetEntity(entity, 100);
-        Location destination = target != null ? target.getEyeLocation() : getTargetBlock(entity, 100).getLocation();
+        Location destination = getTargetLocation(entity, 100);
 
         new BukkitRunnable() {
 
@@ -314,8 +314,7 @@ public class FireMastery extends Ability {
     }
 
     private void createEruption(@NotNull LivingEntity entity, double damageMultiplier, boolean griefing) {
-        LivingEntity target = getTargetEntity(entity, 100);
-        Location destination = target != null ? target.getEyeLocation() : getTargetBlock(entity, 100).getLocation();
+        Location destination = getTargetLocation(entity, 100);
 
         World world = entity.getWorld();
 

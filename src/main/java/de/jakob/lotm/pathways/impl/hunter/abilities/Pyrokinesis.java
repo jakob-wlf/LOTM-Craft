@@ -116,13 +116,14 @@ public class Pyrokinesis extends Ability {
     }
 
     private void castAbility(LivingEntity entity, int ability, double multiplier, boolean transform, boolean griefing) {
+        Vector direction = getDirectionNormalized(entity, 50);
         switch(ability) {
-            case 0 -> launchFireball(entity.getEyeLocation().getDirection(), entity, multiplier, transform);
-            case 1 -> createFireWall(entity.getEyeLocation().getDirection(), entity, multiplier, griefing);
+            case 0 -> launchFireball(direction, entity, multiplier, transform);
+            case 1 -> createFireWall(direction, entity, multiplier, griefing);
             case 2 -> createFlameWave(entity, multiplier, griefing);
-            case 3 -> launchGiantFireball(entity.getEyeLocation().getDirection(), entity, multiplier, griefing);
-            case 4 -> createFireRavens(entity.getEyeLocation().getDirection(), entity, multiplier, griefing);
-            case 5 -> createBlazingSpear(entity.getEyeLocation().getDirection(), entity, multiplier, transform, griefing);
+            case 3 -> launchGiantFireball(direction, entity, multiplier, griefing);
+            case 4 -> createFireRavens(direction, entity, multiplier, griefing);
+            case 5 -> createBlazingSpear(direction, entity, multiplier, transform, griefing);
         }
     }
 
@@ -244,7 +245,7 @@ public class Pyrokinesis extends Ability {
     }
 
     private void launchFireball(@NotNull Vector direction, @NotNull LivingEntity entity, double damageMultiplier, boolean transform) {
-        direction.normalize().multiply(2);
+        direction.normalize().multiply(.2);
         Location location = entity.getEyeLocation().clone().add(direction).add(direction);
 
         SmallFireball fireball = (SmallFireball) entity.getWorld().spawnEntity(location, EntityType.SMALL_FIREBALL);

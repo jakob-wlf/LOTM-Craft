@@ -48,15 +48,19 @@ public class DoorPathway extends Pathway {
                                 §k§r§7- §6Sneak Right-Click: §7Adjust the radius of the space.§r
                                 §k§r§7- §6Sneak Left-Click: §7Remove all separated spaces.§r""", "space_concealment"),
                         new Exile(this, 4, AbilityType.SEQUENCE_PROGRESSION, "Exile", Material.CRIMSON_DOOR, "Banish enemies to a chaotic space, either ending the battle swiftly or giving you time to escape.", "exile"),
+                        new DoorSubstitution(this, 4, AbilityType.SEQUENCE_PROGRESSION, "Door Substitution", Material.ACACIA_DOOR, "Create door substitutions that trigger when you get damaged..", "door_substitution"),
+
                 },
                 3, new Ability[] {
                         new Wandering(this, 3, AbilityType.SEQUENCE_PROGRESSION, "Wandering", Material.LAPIS_LAZULI, "Travel between all the different realms.", "wandering"),
                         new Conceptualization(this, 3, AbilityType.SEQUENCE_PROGRESSION, "Conceptualization", Material.NETHER_STAR, "Conceptualize yourself to quickly traverse the world and wander around different realms.", "conceptualization"),
+                        new Seal(this, 3, AbilityType.SEQUENCE_PROGRESSION, "Seal", Material.OXIDIZED_COPPER_DOOR, "Seal the target. If they are weaker you can send them to an unknown location, unable for them to escape", "seal"),
                 },
                 2, new Ability[] {
-                        new Seal(this, 2, AbilityType.SEQUENCE_PROGRESSION, "Seal", Material.OXIDIZED_COPPER_DOOR, "Seal the target. If they are weaker you can send them to an unknown location, unable for them to escape", "seal"),
+                        new Replicating(this, 2, AbilityType.SEQUENCE_PROGRESSION, "Replicating", Material.DUNE_ARMOR_TRIM_SMITHING_TEMPLATE, "Replicate the powers of Beyonders when they use them and use them as your own.", "replicating"),
                         new SpaceCollapse(this, 2, AbilityType.SEQUENCE_PROGRESSION, "Space Collapse", Material.ECHO_SHARD, "Tear Space and have it become swallowed by the void, causing everything within the affected area to gradually collapse and shatter.", "space_collapse"),
-                        new BlackHole(this, 2, AbilityType.SEQUENCE_PROGRESSION, "Black Hole", Material.BLACK_DYE, "Create a black hole that pulls in all entities and blocks within a certain radius.", "black_hole")
+                        new BlackHole(this, 2, AbilityType.SEQUENCE_PROGRESSION, "Black Hole", Material.BLACK_DYE, "Create a black hole that pulls in all entities and blocks within a certain radius.", "black_hole"),
+                        new SpaceDistortion(this, 2, AbilityType.SEQUENCE_PROGRESSION, "Space Distortion", Material.ENDER_EYE, "Create a distortion in space that distorts the attacks of beyonders and randomly teleports entities that stand close to it", "space_distortion"),
                 },
                 1, new Ability[] {
                 }

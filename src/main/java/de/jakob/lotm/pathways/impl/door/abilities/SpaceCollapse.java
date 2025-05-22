@@ -22,7 +22,7 @@ import java.util.Set;
 public class SpaceCollapse extends Ability{
 
     private static final Particle.DustOptions dust = new Particle.DustOptions(Color.fromRGB(74, 24, 125), 2f);
-    private static final Particle.DustOptions dust2 = new Particle.DustOptions(Color.fromRGB(128, 93, 163), 1.5f);
+    private static final Particle.DustOptions dust2 = new Particle.DustOptions(Color.fromRGB(0, 0, 0), 1.5f);
     private static final BlockData blockData = Bukkit.createBlockData(Material.BLACK_CONCRETE);
 
     public SpaceCollapse(Pathway pathway, int sequence, AbilityType abilityType, String name, Material material, String description, String id) {

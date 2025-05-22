@@ -204,7 +204,7 @@ public class TravelersDoor extends Ability implements Listener {
                                 public void run() {
                                     cooldowns.remove(player);
                                 }
-                            }.runTaskLater(LOTM.getInstance(), 20 * 3);
+                            }.runTaskLater(LOTM.getInstance(), 35);
                             openDoor(beyonder, true);
                         }
                     }
@@ -247,7 +247,7 @@ public class TravelersDoor extends Ability implements Listener {
             public void run() {
                 cooldowns.remove(player);
             }
-        }.runTaskLater(LOTM.getInstance(), 20 * 3);
+        }.runTaskLater(LOTM.getInstance(), 35);
     }
 
     private void endTransport(Player player) {
@@ -269,7 +269,7 @@ public class TravelersDoor extends Ability implements Listener {
             public void run() {
                 cooldowns.remove(player);
             }
-        }.runTaskLater(LOTM.getInstance(), 20 * 3);
+        }.runTaskLater(LOTM.getInstance(), 35);
     }
 
 
