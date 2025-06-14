@@ -27,7 +27,7 @@ public class DivineKingdomOfBlazingLight extends Ability {
         super(pathway, sequence, abilityType, name, material, description, id);
 
         canBeCopied = false;
-        canBeUSedByNonPlayer = false;
+        canBeUsedByNonPlayer = false;
 
         new BukkitRunnable() {
 

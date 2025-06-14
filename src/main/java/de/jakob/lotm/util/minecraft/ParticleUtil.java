@@ -82,7 +82,7 @@ public class ParticleUtil {
     private static final boolean O = false;
 
     public enum Shape {
-        CLASSIC_WINGS, HORNS
+        CLASSIC_WINGS, HORNS, WOLF_EARS
     }
 
     private static final boolean[][] CLASSIC_WINGS = {
@@ -105,6 +105,17 @@ public class ParticleUtil {
             {O, O, O, X, X, O, O, O, O, O, O, X, X, O, O, O},
             {O, O, O, X, X, X, O, O, O, O, X, X, X, O, O, O},
     };
+
+    private static final boolean[][] WOLF_EARS = {
+            {O, O, O, X, O, O, O, O, O, O, O, O, O, O, X, O, O, O},
+            {O, O, X, X, X, O, O, O, O, O, O, O, O, X, X, X, O, O},
+            {O, O, X, X, X, O, O, O, O, O, O, O, O, X, X, X, O, O},
+            {O, X, X, X, X, X, O, O, O, O, O, O, X, X, X, X, X, O},
+            {O, X, X, X, X, X, X, O, O, O, O, X, X, X, X, X, X, O},
+            {O, X, X, X, X, X, X, X, O, O, X, X, X, X, X, X, X, O},
+            {O, X, X, X, X, X, X, X, O, O, X, X, X, X, X, X, X, O},
+    };
+
 
     private static final boolean[][] TREE = {
             {O, O, O, O, O, O, X, X, X, X, O, O, O, O, O, O},
@@ -167,6 +178,7 @@ public class ParticleUtil {
 
         boolean[][] selectedShape = switch (shape) {
             case HORNS -> HORNS;
+            case WOLF_EARS -> WOLF_EARS;
             default -> CLASSIC_WINGS;
         };
 

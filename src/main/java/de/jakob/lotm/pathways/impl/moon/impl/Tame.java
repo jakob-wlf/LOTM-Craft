@@ -20,7 +20,7 @@ public class Tame extends Ability {
     public Tame(Pathway pathway, int sequence, AbilityType type, String name, Material item, String description, String id) {
         super(pathway, sequence, type, name, item, description, id);
 
-        canBeUSedByNonPlayer = false;
+        canBeUsedByNonPlayer = false;
     }
 
     @Override

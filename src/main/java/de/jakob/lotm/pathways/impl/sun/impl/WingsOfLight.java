@@ -16,8 +16,11 @@ public class WingsOfLight extends ToggleableAbility {
 
     public WingsOfLight(Pathway pathway, int sequence, AbilityType abilityType, String name, Material material, String description, String id) {
         super(pathway, sequence, abilityType, name, material, description, id);
+    }
 
-        canBeUSedByNonPlayer = false;
+    @Override
+    protected void init() {
+        canBeUsedByNonPlayer = false;
         tickDelay = 1;
     }
 

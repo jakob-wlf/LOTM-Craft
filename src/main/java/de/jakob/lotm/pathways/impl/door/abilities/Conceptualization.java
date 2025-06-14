@@ -24,7 +24,8 @@ public class Conceptualization extends ToggleableAbility implements Listener {
     @Override
     protected void init() {
         plugin.registerListener(this);
-        canBeUSedByNonPlayer = false;
+        canBeUsedByNonPlayer = false;
+        allowDifferentWorld = true;
     }
 
     @Override

@@ -25,6 +25,11 @@ public class GazeOfDeath extends ToggleableAbility {
         super(pathway, sequence, abilityType, name, material, description, id);
     }
 
+    @Override
+    protected void init() {
+        customModelData = id;
+    }
+
     //TODO: Sounds
     @Override
     protected void impl(Beyonder beyonder) {

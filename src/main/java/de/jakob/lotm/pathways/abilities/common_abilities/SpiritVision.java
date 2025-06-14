@@ -2,7 +2,6 @@ package de.jakob.lotm.pathways.abilities.common_abilities;
 
 import de.jakob.lotm.LOTM;
 import de.jakob.lotm.pathways.Pathway;
-import de.jakob.lotm.pathways.abilities.Ability;
 import de.jakob.lotm.pathways.abilities.AbilityType;
 import de.jakob.lotm.pathways.abilities.ToggleableAbility;
 import de.jakob.lotm.pathways.beyonder.Beyonder;
@@ -16,8 +15,6 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
 
@@ -31,7 +28,7 @@ public class SpiritVision extends ToggleableAbility {
         customModelData = "spirit_vision_ability";
 
         canBeCopied = false;
-        canBeUSedByNonPlayer = false;
+        canBeUsedByNonPlayer = false;
 
         tickDelay = 4;
     }

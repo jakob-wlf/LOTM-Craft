@@ -32,7 +32,7 @@ public class SpaceCollapse extends Ability{
     @Override
     protected void init() {
         hasCooldown = true;
-        cooldownTicks = 20 * 9;
+        cooldownTicks = 20 * 6;
     }
 
     @Override
@@ -86,7 +86,10 @@ public class SpaceCollapse extends Ability{
         }, () -> {
             if(beyonder.isGriefingEnabled()) {
                 riftLocations.forEach(b -> {
-                    BlockUtil.getSphereBlocks(b, 9).forEach(block -> block.setType(Material.AIR));
+                    BlockUtil.getSphereBlocks(b, 3).forEach(block -> block.setType(Material.AIR));
+                });
+                breakLocations.forEach(b -> {
+                    BlockUtil.getSphereBlocks(b, 2).forEach(block -> block.setType(Material.AIR));
                 });
             }
             ParticleSpawner.displayParticles(Particle.BLOCK, middleLoc, 1000, 4, 9.5, 4, 0, blockData, 200);

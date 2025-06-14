@@ -25,7 +25,7 @@ public class LightningTransformation extends ToggleableAbility {
         super(pathway, sequence, abilityType, name, material, description, id);
 
         canBeCopied = false;
-        canBeUSedByNonPlayer = false;
+        canBeUsedByNonPlayer = false;
     }
 
     //TODO: Sounds

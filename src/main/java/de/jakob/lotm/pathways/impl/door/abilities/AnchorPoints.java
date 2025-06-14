@@ -16,7 +16,7 @@ public class AnchorPoints extends Ability {
 
     @Override
     protected void init() {
-        canBeUSedByNonPlayer = false;
+        canBeUsedByNonPlayer = false;
         canBeCopied = false;
     }
 

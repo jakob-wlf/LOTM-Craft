@@ -34,7 +34,7 @@ public class TravelersDoor extends Ability implements Listener {
     public TravelersDoor(Pathway pathway, int sequence, AbilityType abilityType, String name, Material material, String description, String id) {
         super(pathway, sequence, abilityType, name, material,description, id);
 
-        canBeUSedByNonPlayer = false;
+        canBeUsedByNonPlayer = false;
 
         LOTM.getInstance().registerListener(this);
 

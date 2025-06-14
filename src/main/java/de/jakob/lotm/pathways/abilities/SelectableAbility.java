@@ -19,6 +19,7 @@ public abstract class SelectableAbility extends Ability {
     public SelectableAbility(Pathway pathway, int sequence, AbilityType abilityType, String name, Material material, String description, String id) {
         super(pathway, sequence, abilityType, name, material,description, id);
 
+        init();
         initAbilities();
         initSpiritualityCost();
     }
@@ -26,6 +27,7 @@ public abstract class SelectableAbility extends Ability {
     public SelectableAbility() {
         super();
 
+        init();
         initAbilities();
         initSpiritualityCost();
     }

@@ -33,7 +33,7 @@ public class ChainOfCommand extends Ability implements Listener {
 
         entitiesUnderPlayer = new HashMap<>();
         canBeCopied = false;
-        canBeUSedByNonPlayer = false;
+        canBeUsedByNonPlayer = false;
 
         LOTM.getInstance().registerListener(this);
     }

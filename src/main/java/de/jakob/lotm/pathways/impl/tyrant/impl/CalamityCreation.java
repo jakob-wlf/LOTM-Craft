@@ -81,7 +81,7 @@ public class CalamityCreation extends SelectableAbility implements Listener {
 
         world.createExplosion(loc.clone(), 15, beyonder.isGriefingEnabled(), beyonder.isGriefingEnabled(), entity);
 
-        runTaskWithDuration(4, 20 * 15, () -> {
+        runTaskWithDuration(4, 20 * 23, () -> {
             ParticleSpawner.displayParticles(world, Particle.LARGE_SMOKE, loc, 220, 3, 5, 3, 0, 200);
             ParticleSpawner.displayParticles(world, Particle.FLAME, loc, 420, 3, 5, 3, 0, 200);
             ParticleSpawner.displayParticles(world, Particle.EXPLOSION, loc, 20, 3, 5, 3, 0, 200);

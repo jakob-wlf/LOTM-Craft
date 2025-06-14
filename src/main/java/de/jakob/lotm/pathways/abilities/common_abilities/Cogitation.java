@@ -19,7 +19,7 @@ public class Cogitation extends ToggleableAbility {
 
         customModelData = "cogitation_ability";
 
-        canBeUSedByNonPlayer = false;
+        canBeUsedByNonPlayer = false;
         canBeCopied = false;
     }
 

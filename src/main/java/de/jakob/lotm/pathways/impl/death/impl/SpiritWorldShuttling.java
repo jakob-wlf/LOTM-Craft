@@ -28,7 +28,7 @@ public class SpiritWorldShuttling extends ToggleableAbility implements Listener 
 
         LOTM.getInstance().registerListener(this);
 
-        canBeUSedByNonPlayer = false;
+        canBeUsedByNonPlayer = false;
         canBeCopied = false;
     }
 

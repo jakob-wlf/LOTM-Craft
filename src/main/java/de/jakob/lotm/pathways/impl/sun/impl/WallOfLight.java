@@ -28,7 +28,7 @@ public class WallOfLight extends Ability {
     public WallOfLight(Pathway pathway, int sequence, AbilityType abilityType, String name, Material material, String description, String id) {
         super(pathway, sequence, abilityType, name, material, description, id);
 
-        canBeUSedByNonPlayer = false;
+        canBeUsedByNonPlayer = false;
     }
 
     //TODO: Sounds

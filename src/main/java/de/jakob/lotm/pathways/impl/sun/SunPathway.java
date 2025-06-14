@@ -55,13 +55,13 @@ public class SunPathway extends Pathway {
                         },
                         2, new Ability[] {
                                 new WingsOfLight(this, 2, AbilityType.SEQUENCE_PROGRESSION, "Wings of Light", Material.FEATHER, "Create wings out of pure light, allowing you to fly.", "wings_of_light"),
-                                new SpearOfLight(this, 2, AbilityType.SEQUENCE_PROGRESSION, "Spear of Light", Material.SPECTRAL_ARROW, "Summon a spear made from pure sunlight that travels at liht speed and restrains targets with holy light.", "spear_of_lights"),
+                                new SpearOfLight(this, 2, AbilityType.SEQUENCE_PROGRESSION, "Spear of Light", Material.SPECTRAL_ARROW, "Summon a spear made from pure sunlight that travels at light speed and restrains targets with holy light.", "spear_of_light"),
                                 new OceanOfLight(this, 2, AbilityType.SEQUENCE_PROGRESSION, "Ocean of Light", Material.WHITE_CONCRETE, "Flood the area with holy light that purifies everything it touches.", "ocean_of_light"),
                                 new LawOfRadiance(this, 2, AbilityType.SEQUENCE_PROGRESSION, "Law of Radiance", Material.TOTEM_OF_UNDYING, "Emits a blinding divine radiance that suppresses the usage of all Beyonder abilities within its domain.", "law_of_radiance")
                         },
                         1, new Ability[] {
                                 new DivinePurification(this, 1, AbilityType.SEQUENCE_PROGRESSION, "Divine Purification", Material.GOLDEN_SWORD, "Create countless pillars of light around you, purifying everything.", "divine_purification"),
-                                new DivineKingdomOfBlazingLight(this, 1, AbilityType.SEQUENCE_PROGRESSION, "Divine Kingdom of Blazing Light", Material.GOLDEN_HORSE_ARMOR, "Manifest your Divine Kindom into the world. Inside you and yxour allies can not be harmed.", "divine_kingdom_of_blazing_light")
+                                new DivineKingdomOfBlazingLight(this, 1, AbilityType.SEQUENCE_PROGRESSION, "Divine Kingdom of Blazing Light", Material.GOLDEN_HORSE_ARMOR, "Manifest your Divine Kingdom into the world. Inside you and yxour allies can not be harmed.", "divine_kingdom_of_blazing_light")
                         }
                 )
         );

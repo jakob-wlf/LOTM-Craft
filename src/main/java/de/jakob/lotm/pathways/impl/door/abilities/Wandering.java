@@ -26,7 +26,7 @@ public class Wandering extends SelectableAbility {
     @Override
     protected void init() {
         canBeCopied = false;
-        canBeUSedByNonPlayer = false;
+        canBeUsedByNonPlayer = false;
     }
 
     @Override

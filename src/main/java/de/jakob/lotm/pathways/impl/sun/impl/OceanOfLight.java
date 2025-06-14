@@ -14,7 +14,6 @@ import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.block.Block;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -30,7 +29,7 @@ public class OceanOfLight extends Ability {
     public OceanOfLight(Pathway pathway, int sequence, AbilityType abilityType, String name, Material material, String description, String id) {
         super(pathway, sequence, abilityType, name, material, description, id);
 
-        canBeUSedByNonPlayer = false;
+        canBeUsedByNonPlayer = false;
     }
 
     @Override

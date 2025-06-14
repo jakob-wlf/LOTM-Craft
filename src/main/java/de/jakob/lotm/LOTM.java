@@ -9,6 +9,7 @@ import de.jakob.lotm.pathways.impl.abyss.AbyssPathway;
 import de.jakob.lotm.pathways.impl.chained.ChainedPathway;
 import de.jakob.lotm.pathways.impl.death.DeathPathway;
 import de.jakob.lotm.pathways.impl.door.DoorPathway;
+import de.jakob.lotm.pathways.impl.fool.FoolPathway;
 import de.jakob.lotm.pathways.impl.hermit.HermitPathway;
 import de.jakob.lotm.pathways.impl.hunter.RedPriestPathway;
 import de.jakob.lotm.pathways.impl.moon.MoonPathway;
@@ -78,7 +79,8 @@ public final class LOTM extends JavaPlugin {
             "belongs_to",
             "spirit",
             "dead",
-            "is_sealed"
+            "is_sealed",
+            "lotm_is_transformed"
     );
 
     @Getter
@@ -366,6 +368,7 @@ public final class LOTM extends JavaPlugin {
         pathways.put("sun", new SunPathway("Sun", "sun", "6", Color.fromRGB(255, 191, 71)));
         pathways.put("hermit", new HermitPathway("Hermit", "hermit", "d", Color.fromRGB(176, 81, 240)));
         pathways.put("chained", new ChainedPathway("Chained", "chained", "7", Color.fromRGB(203, 158, 217)));
+        pathways.put("fool", new FoolPathway("Fool", "fool", "d", Color.fromRGB(176, 81, 240)));
     }
 
     @Override

@@ -21,7 +21,10 @@ public class GazeOfPurification extends ToggleableAbility {
 
     public GazeOfPurification(Pathway pathway, int sequence, AbilityType abilityType, String name, Material material, String description, String id) {
         super(pathway, sequence, abilityType, name, material, description, id);
+    }
 
+    @Override
+    protected void init() {
         tickDelay = 6;
     }
 

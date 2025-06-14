@@ -93,7 +93,7 @@ public class Seal extends Ability {
             target.getWorld().playSound(target.getLocation(), Sound.BLOCK_PORTAL_TRAVEL, .15f, 1);
             target.getWorld().playSound(target.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1, 1);
 
-            Location endLocation = createLocationInEnd(random.nextDouble(800) + 347246, 200, random.nextDouble(800) - 323223);
+            Location endLocation = createLocationInEnd(random.nextDouble(10) + 347246, 200, random.nextDouble(10) - 323223);
 
             if(endLocation == null) {
                 return;

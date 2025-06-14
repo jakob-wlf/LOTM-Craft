@@ -29,6 +29,11 @@ public class SpearOfLight extends Ability {
     }
 
     @Override
+    protected void init() {
+        customModelData = id;
+    }
+
+    @Override
     public void useAbility(Beyonder beyonder) {
         if(!beyonder.removeSpirituality(375))
             return;

@@ -41,7 +41,7 @@ public abstract class Ability {
     protected String id;
 
     protected boolean canBeCopied = true;
-    protected boolean canBeUSedByNonPlayer = true;
+    protected boolean canBeUsedByNonPlayer = true;
     @Getter
     protected boolean hasHitAbility = false;
     protected boolean showAbilityIcon = true;
@@ -79,7 +79,7 @@ public abstract class Ability {
         this.description = description;
         this.id = id;
         this.canBeCopied = canBeCopied;
-        this.canBeUSedByNonPlayer = canBeUSedByNonPlayer;
+        this.canBeUsedByNonPlayer = canBeUSedByNonPlayer;
         this.showAbilityIcon = showAbilityIcon;
 
         init();
@@ -98,7 +98,7 @@ public abstract class Ability {
         this.description = ability.description;
         this.id = ability.id;
         this.canBeCopied = ability.canBeCopied;
-        this.canBeUSedByNonPlayer = ability.canBeUSedByNonPlayer;
+        this.canBeUsedByNonPlayer = ability.canBeUsedByNonPlayer;
         this.showAbilityIcon = ability.showAbilityIcon;
     }
 
@@ -512,7 +512,7 @@ public abstract class Ability {
     protected Vector getDirectionNormalized(LivingEntity entity, int maxMobDetectionDistance) {
         Location targetLoc = getTargetLocation(entity, maxMobDetectionDistance);
 
-        return targetLoc.toVector().subtract(entity.getLocation().toVector()).normalize();
+        return targetLoc.toVector().subtract(entity.getEyeLocation().toVector()).normalize();
     }
 
     protected void runTaskWithDuration(int period, double duration, Runnable task, Runnable onFinish) {
@@ -766,6 +766,25 @@ public abstract class Ability {
         return eyeLocation.add(direction.multiply(radius)).getBlock();
     }
 
+    @Nullable
+    protected Block getTargetBlockOfType(LivingEntity entity, double radius, Material blockType) {
+        Location eyeLocation = entity.getEyeLocation();
+        Vector direction = eyeLocation.getDirection().normalize();
+        Location distortionLoc = distortionLoc(entity, eyeLocation, radius * 2);
+        if(distortionLoc != null)
+            return distortionLoc.getBlock();
+
+        for (double i = 0; i <= radius; i+=.25) {
+            Location currentLocation = eyeLocation.clone().add(direction.clone().multiply(i));
+            Block block = currentLocation.getBlock();
+
+            if (block.getType() == blockType) {
+                return block;
+            }
+        }
+        return null;
+    }
+
     public Ability copy(AbilityType abilityType) {
         try {
             Ability ability = this.getClass().getDeclaredConstructor().newInstance();
@@ -892,7 +911,7 @@ public abstract class Ability {
     }
 
     public boolean canBeUSedByNonPlayer() {
-        return canBeUSedByNonPlayer;
+        return canBeUsedByNonPlayer;
     }
 
     public boolean showAbilityIcon() {
