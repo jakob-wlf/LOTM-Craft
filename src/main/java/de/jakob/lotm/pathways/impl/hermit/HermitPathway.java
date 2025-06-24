@@ -49,6 +49,11 @@ public class HermitPathway extends Pathway {
     }
 
     @Override
+    protected void initSequenceNames() {
+        sequenceNames = new String[]{"Hermit", "Knowledge Emperor", "Sage", "Clairvoyant", "Mysticologist", "Constellations Master", "Scrolls Professor", "Warlock", "Melee Scholar", "Mystery Pryer"};
+    }
+
+    @Override
     protected void initPotIngredients() {
 
     }

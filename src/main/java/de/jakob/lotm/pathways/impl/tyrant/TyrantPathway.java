@@ -66,6 +66,13 @@ public class TyrantPathway extends Pathway {
     }
 
     @Override
+    protected void initSequenceNames() {
+        sequenceNames = new String[]{
+                "Tyrant", "Thunder God", "Calamity", "Sea King", "Cataclysmic Interrer", "Ocean Songster", "Wind Blessed", "Seafarer", "Folk of Rage", "Sailor"
+        };
+    }
+
+    @Override
     protected void initPotIngredients() {
         potionIngredients.put(9, new ItemStack[] {
                 ItemsUtil.drownedLung(),

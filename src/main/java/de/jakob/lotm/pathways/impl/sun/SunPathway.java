@@ -68,6 +68,13 @@ public class SunPathway extends Pathway {
     }
 
     @Override
+    protected void initSequenceNames() {
+        sequenceNames = new String[]{
+                "Sun", "White Angel", "Lightseeker", "Justice Mentor", "Unshadowed", "Priest of Light", "Notary", "Solar High Priest", "Light Supplicant", "Bard"
+        };
+    }
+
+    @Override
     protected void initPotIngredients() {
     }
 

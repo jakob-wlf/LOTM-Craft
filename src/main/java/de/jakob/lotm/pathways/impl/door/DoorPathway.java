@@ -68,6 +68,13 @@ public class DoorPathway extends Pathway {
     }
 
     @Override
+    protected void initSequenceNames() {
+        sequenceNames = new String[]{
+                "Door", "Key of Stars", "Planeswalker", "Wanderer", "Secrets Sorcerer", "Traveler", "Scribe", "Astrologer", "Trickmaster", "Apprentice"
+        };
+    }
+
+    @Override
     protected void initPotIngredients() {
         potionIngredients.put(9, new ItemStack[] {
                 new ItemStack(Material.ENDER_PEARL),

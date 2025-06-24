@@ -65,6 +65,11 @@ public class DeathPathway extends Pathway {
     }
 
     @Override
+    protected void initSequenceNames() {
+        sequenceNames = new String[]{"Death", "Pale Emperor", "Death Consul", "Ferryman", "Undying", "Gatekeeper", "Spirit Guide", "Spirit Medium", "Gravedigger", "Corpse Collector"};
+    }
+
+    @Override
     protected void initPotIngredients() {
 
     }

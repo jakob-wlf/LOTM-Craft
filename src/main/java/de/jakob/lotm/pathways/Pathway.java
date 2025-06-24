@@ -37,6 +37,9 @@ public abstract class Pathway {
     @Getter
     protected HashMap<Integer, ItemStack[]> potionIngredients = new HashMap<>();
 
+    @Getter
+    protected String[] sequenceNames;
+
     public Pathway(String displayName, String name, String colorPrefix, Color color) {
         this.displayName = displayName;
         this.name = name;
@@ -47,6 +50,7 @@ public abstract class Pathway {
             potionIngredients.put(i, new ItemStack[]{});
         }
 
+        initSequenceNames();
         initPotions();
         initPotIngredients();
         initCharacteristics();
@@ -59,6 +63,7 @@ public abstract class Pathway {
     private void initPotions() {
         potions = new Potions(this);
     }
+    protected abstract void initSequenceNames();
 
     protected abstract void initPotIngredients();
 
@@ -74,7 +79,7 @@ public abstract class Pathway {
         ItemMeta itemMeta = head.getItemMeta();
         if(itemMeta == null)
             return head;
-        itemMeta.setDisplayName(getColorPrefix() + "§lBeyonder Characteristic");
+        itemMeta.setDisplayName(getColorPrefix() + "§lBeyonder Characteristic - " + sequenceNames[sequence]);
         itemMeta.setLore(List.of(
                 getColorPrefix() + "§l" + displayName + " Pathway",
                 getColorPrefix() + "§lSequence " + sequence)

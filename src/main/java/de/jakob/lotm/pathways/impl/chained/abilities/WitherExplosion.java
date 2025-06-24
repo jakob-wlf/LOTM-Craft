@@ -8,6 +8,8 @@ import de.jakob.lotm.util.minecraft.ParticleSpawner;
 import lombok.NoArgsConstructor;
 import org.bukkit.*;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 @NoArgsConstructor
 public class WitherExplosion extends Ability {
@@ -33,8 +35,12 @@ public class WitherExplosion extends Ability {
         world.playSound(targetLoc, Sound.ENTITY_DRAGON_FIREBALL_EXPLODE, 1, 1);
         world.playSound(targetLoc, Sound.ENTITY_GENERIC_EXPLODE, 1, 1);
 
-        ParticleSpawner.displayParticles(Particle.LARGE_SMOKE, targetLoc, 500, 1, 1, 1, 0.2, 180);
+        ParticleSpawner.displayParticles(Particle.LARGE_SMOKE, targetLoc, 300, 1, 1, 1, 0.2, 180);
         ParticleSpawner.displayParticles(Particle.EXPLOSION, targetLoc, 15, .25, .25, .25, 0, 180);
         ParticleSpawner.displayParticles(Particle.SOUL, targetLoc, 100, 1, 1, 1, 0.1, 180);
+
+        damageNearbyEntities(20, beyonder.getCurrentMultiplier(), entity, 5, targetLoc, world);
+        addPotionEffectToNearbyEntities(entity, 5, targetLoc, world, new PotionEffect(PotionEffectType.BLINDNESS, 20 * 3, 2, false, false, false),
+                new PotionEffect(PotionEffectType.SLOWNESS, 20 * 3, 5, false, false, false));
     }
 }

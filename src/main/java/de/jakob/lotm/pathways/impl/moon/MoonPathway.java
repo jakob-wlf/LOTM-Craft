@@ -55,6 +55,11 @@ public class MoonPathway extends Pathway {
     }
 
     @Override
+    protected void initSequenceNames() {
+        sequenceNames = new String[]{"Moon", "Beauty Goddess", "Life Giver", "High Summoner", "Shaman King", "Scarlet Scholar", "Potions Professor", "Vampire", "Beast Tamer", "Apothecary"};
+    }
+
+    @Override
     protected void initPotIngredients() {
 
     }

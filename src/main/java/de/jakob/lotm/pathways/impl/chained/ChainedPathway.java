@@ -32,9 +32,12 @@ public class ChainedPathway extends Pathway {
                 6, new Ability[] {
                         new ZombieTransformation(this, 6, AbilityType.SEQUENCE_PROGRESSION, "Zombie Transformation", Material.ROTTEN_FLESH, "Transform into a zombie, gaining enhanced abilities and strength.", "zombie_transformation"),
                         new IceManipulation(this, 6, AbilityType.SEQUENCE_PROGRESSION, "Ice Manipulation", Material.PACKED_ICE, "Manipulate ice to create walls and stun your enemies.", "ice_manipulation"),
-                        new WitherExplosion(this, 6, AbilityType.SEQUENCE_PROGRESSION, "Wither Explosion", Material.SOUL_SOIL, "Create a powerful explosion that damages and knocks back nearby entities.", "wither_explosion")
+                        new WitherExplosion(this, 6, AbilityType.SEQUENCE_PROGRESSION, "Wither Explosion", Material.SOUL_SAND, "Create a powerful explosion that damages and knocks back nearby entities.", "wither_explosion"),
+                        new ZombieSummoning(this, 6, AbilityType.SEQUENCE_PROGRESSION, "Zombie Summoning", Material.ZOMBIE_HORSE_SPAWN_EGG, "Summon a horde of zombies to fight for you.", "zombie_summoning")
                 },
                 5, new Ability[] {
+                        new WraithTransformation(this, 5, AbilityType.SEQUENCE_PROGRESSION, "Wraith Transformation", Material.GHAST_TEAR, "Transform into a wraith, gaining enhanced abilities, turning invisible and being able to fly.", "wraith_transformation"),
+                        new WraithShriek(this, 5, AbilityType.SEQUENCE_PROGRESSION, "Wraith Shriek", Material.SNOWBALL, "let out a sharp shriek, that damages your opponents.", "wraith_shriek")
                 },
                 4, new Ability[] {
                 },
@@ -45,6 +48,11 @@ public class ChainedPathway extends Pathway {
                 1, new Ability[] {
                 }
         ));
+    }
+
+    @Override
+    protected void initSequenceNames() {
+        sequenceNames = new String[]{ "Chained", "Abomination", "Ancient Bane", "Disciple of Silence", "Puppet", "Wraith", "Zombie", "Werewolf", "Lunatic", "Prisoner" };
     }
 
     @Override

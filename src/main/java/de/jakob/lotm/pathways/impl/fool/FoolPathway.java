@@ -48,6 +48,11 @@ public class FoolPathway extends Pathway {
     }
 
     @Override
+    protected void initSequenceNames() {
+        sequenceNames = new String[]{"Fool", "Attendant of Mysteries", "Miracle Invoker", "Scholar of Yore", "Bizarro Sorcerer", "Marionettist", "Faceless", "Magician", "Clown", "Seer"};
+    }
+
+    @Override
     protected void initPotIngredients() {
 
     }

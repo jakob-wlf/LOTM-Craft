@@ -78,15 +78,15 @@ public abstract class Beyonder implements Listener {
                 1, 2.8
         ));
         spiritualityLookup = new HashMap<>(Map.of(
-                        9, 120,
-                        8, 190,
-                        7, 400,
-                        6, 650,
-                        5, 1000,
-                        4, 2400,
-                        3, 3200,
-                        2, 5000,
-                        1, 8000
+                        9, 180,
+                        8, 200,
+                        7, 780,
+                        6, 1200,
+                        5, 1850,
+                        4, 3850,
+                        3, 5000,
+                        2, 9000,
+                        1, 15000
                 ));
         passiveEffects = new HashMap<>();
         multiplierModifiers = new ArrayList<>();

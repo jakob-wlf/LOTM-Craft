@@ -48,6 +48,11 @@ public class AbyssPathway extends Pathway {
     }
 
     @Override
+    protected void initSequenceNames() {
+        sequenceNames = new String[]{"Abyss", "Filthy Monarch", "Bloody Archduke", "Blatherer", "Demon", "Desire Apostle", "Devil", "Serial Killer", "Unwinged Angel", "Criminal"};
+    }
+
+    @Override
     protected void initPotIngredients() {
 
     }

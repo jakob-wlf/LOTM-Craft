@@ -54,6 +54,11 @@ public class TwilightGiantPathway extends Pathway {
     }
 
     @Override
+    protected void initSequenceNames() {
+        sequenceNames = new String[]{"Twilight Giant", "Hand of God", "Glory", "Silver Knight", "Demon Hunter", "Guardian", "Dawn Paladin", "Weapon Master", "Pugilist", "Warrior"};
+    }
+
+    @Override
     protected void initPotIngredients() {
 
     }

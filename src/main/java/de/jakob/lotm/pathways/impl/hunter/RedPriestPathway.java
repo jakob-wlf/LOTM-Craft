@@ -62,6 +62,13 @@ public class RedPriestPathway extends Pathway {
     }
 
     @Override
+    protected void initSequenceNames() {
+        sequenceNames = new String[]{
+                "Red Priest", "Conqueror", "Weather Warlock", "War Bishop", "Iron-Blooded Knight", "Reaper", "Conspirer", "Pyromaniac", "Provoker", "Hunter"
+        };
+    }
+
+    @Override
     public String getURL() {
         return "http://textures.minecraft.net/texture/cc7efd6c1e5c37408b79af5e9bfebd7a56ca5c970e7f861f1e555f4b5ef0f7c6";
     }
